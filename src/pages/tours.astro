@@ -2,16 +2,20 @@
 import Base from '../layouts/Base.astro';
 import Departures from '../components/Departures.astro';
 import Campaigns from '../components/Campaigns.astro';
+import { getPage } from '../lib/content';
+const P = await getPage('toursPage');
 ---
-<Base title="Tours and dates" description="Battlefield studies of the Italian Campaign: Cassino, Anzio and the Garigliano, Salerno, the Sangro, the Gothic Line and Rome to Bologna. 2027 dates and prices.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>Tours and dates</h1>
-    <p class="lede">Four- and five-day studies of single campaigns, and a nine-day tour following the Allied armies from Rome to Bologna. Prices are per person and exclude flights, so you can arrive early or stay on in Rome.</p>
+    <h1>{P.heading}</h1>
+    {P.lede && <p class="lede">{P.lede}</p>}
     <div style="margin-top:40px"><Departures /></div>
   </div></section>
-  <section class="band alt"><div class="wrap"><div class="section-head"><h2>Itineraries</h2></div><Campaigns /></div></section>
-  <section class="band"><div class="wrap split">
-    <div><h2>Your own dates</h2></div>
-    <div><p class="lede">Private groups, regimental associations and families can book any study on dates that suit them, or combine several campaigns into one longer tour.</p><a class="btn" href="/contact/?tour=Private%20group">Plan a private tour</a></div>
-  </div></section>
+  <section class="band alt"><div class="wrap"><div class="section-head"><h2>{P.itineraries_heading}</h2></div><Campaigns /></div></section>
+  {P.private_heading && (
+    <section class="band"><div class="wrap split">
+      <div><h2>{P.private_heading}</h2></div>
+      <div>{P.private_text && <p class="lede">{P.private_text}</p>}{P.private_button && <a class="btn" href="/contact/?tour=Private%20group">{P.private_button}</a>}</div>
+    </div></section>
+  )}
 </Base>

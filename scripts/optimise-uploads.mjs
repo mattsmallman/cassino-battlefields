@@ -6,6 +6,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 const src = 'public/img/library', out = 'public/img/u', metaFile = 'src/data/imagemeta.json';
 fs.mkdirSync(out, { recursive: true });
+fs.mkdirSync(path.dirname(metaFile), { recursive: true }); // src/data holds only generated files, so it is absent in a fresh clone
 const meta = {};
 for (const f of fs.readdirSync(src)) {
   if (!/\.(jpe?g|png|webp|tiff?|heic|avif)$/i.test(f)) continue;

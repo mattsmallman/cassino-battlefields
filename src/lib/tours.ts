@@ -19,6 +19,8 @@ export type Tour = {
   coords: string;
   itinerary: { n: number; items: string[] }[];
   images: { id: string; cap: string }[];
+  groupSize?: string; walking?: string; deposit?: string; included?: string[]; seo?: string;
+  map?: { bbox: [number, number, number, number]; route: boolean; places: { name: string; lat: number; lng: number; kind: 'airport' | 'base' | 'place'; label: 'right' | 'left' | 'below-right' | 'below-left' }[] };
 };
 
 export const gbp = (n: number) => '£' + n.toLocaleString('en-GB');

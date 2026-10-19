@@ -15,6 +15,15 @@
   "arrive": "Rome (Ciampino or Fiumicino)",
   "depart": "Rome",
   "base": "Cassino",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "En-suite hotel rooms with continental breakfast",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "/img/library/abbey-and-polish-cemetery-6a2141.webp",
   "hero_caption": "The Abbey from the Polish Cemetery",
   "itinerary": [
@@ -61,7 +70,45 @@
       "caption": "The 3rd Carpathian Infantry Division monument on Point 593 at Cassino"
     }
   ],
+  "map_area": {
+    "west": 11.75,
+    "south": 40.95,
+    "east": 14.35,
+    "north": 42.0
+  },
+  "map_places": [
+    {
+      "name": "Rome airports",
+      "lat": 41.8,
+      "lng": 12.42,
+      "kind": "airport",
+      "label": "left"
+    },
+    {
+      "name": "Cassino",
+      "lat": 41.488,
+      "lng": 13.831,
+      "kind": "base",
+      "label": "right"
+    },
+    {
+      "name": "Hitler Line",
+      "lat": 41.475,
+      "lng": 13.69,
+      "kind": "place",
+      "label": "below-left"
+    },
+    {
+      "name": "Velletri",
+      "lat": 41.687,
+      "lng": 12.777,
+      "kind": "place",
+      "label": "right"
+    }
+  ],
+  "map_route": false,
   "gallery": "cassino",
   "coords": "41°29′N 13°48′E",
+  "seo_description": "",
   "order": 1
 }

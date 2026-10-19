@@ -15,6 +15,15 @@
   "arrive": "Naples (Capodichino)",
   "depart": "Naples",
   "base": "Salerno",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "En-suite hotel rooms with continental breakfast",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "/img/library/panoramic-view-of-the-vi-us-corps-beaches-from-trentinara-in-dfd70f.webp",
   "hero_caption": "The VI (US) Corps beaches from Trentinara",
   "itinerary": [
@@ -49,7 +58,52 @@
     }
   ],
   "photos": [],
+  "map_area": {
+    "west": 14.1,
+    "south": 40.3,
+    "east": 15.3,
+    "north": 41.0
+  },
+  "map_places": [
+    {
+      "name": "Naples airport",
+      "lat": 40.886,
+      "lng": 14.291,
+      "kind": "airport",
+      "label": "left"
+    },
+    {
+      "name": "Salerno",
+      "lat": 40.68,
+      "lng": 14.768,
+      "kind": "base",
+      "label": "right"
+    },
+    {
+      "name": "Battipaglia",
+      "lat": 40.608,
+      "lng": 14.98,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Altavilla",
+      "lat": 40.534,
+      "lng": 15.133,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Paestum",
+      "lat": 40.422,
+      "lng": 15.006,
+      "kind": "place",
+      "label": "left"
+    }
+  ],
+  "map_route": false,
   "gallery": "salerno",
   "coords": "40°31′N 14°59′E",
+  "seo_description": "",
   "order": 5
 }

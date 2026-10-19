@@ -1,0 +1,12 @@
+{
+  "title": "Reading list",
+  "seo_description": "Frank de Planta’s reading lists for the Italian Campaign: general histories and memoirs, and regimental and corps histories.",
+  "heading": "Reading list",
+  "lede": "The books Frank recommends before you travel: {general} general histories and memoirs, and {regiments} regimental and corps histories for anyone following a particular unit.",
+  "search_label": "Search by title, author or regiment",
+  "search_placeholder": "e.g. Gurkha, Majdalany, Anzio",
+  "galleries": [
+    "general-reading-list",
+    "regiment-core"
+  ]
+}

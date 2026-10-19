@@ -33,6 +33,8 @@ export async function getTours(): Promise<Tour[]> {
       price: d.price_twin && d.price_single ? { twin: d.price_twin, single: d.price_single, basis: d.price_basis } : undefined,
       itinerary: d.itinerary.map((day, i) => ({ n: i + 1, items: day.stands })),
       images: d.photos.map(pic),
+      groupSize: d.group_size, walking: d.walking, deposit: d.deposit, included: d.included, seo: d.seo_description,
+      map: d.map_area ? { bbox: [d.map_area.west, d.map_area.south, d.map_area.east, d.map_area.north] as [number, number, number, number], route: d.map_route, places: d.map_places } : undefined,
     };
   });
 }
@@ -83,3 +85,19 @@ export async function getFaqs() {
   const d = (await getCollection('faqs'))[0].data;
   return { ...d, img: d.image ? { id: keyFor(d.image), cap: d.image_caption } : undefined };
 }
+
+// ---- Every other page and the shared wording
+type PageName = 'home' | 'toursPage' | 'military' | 'tracing' | 'testimonialsPage' | 'galleryPage' | 'reading' | 'contact' | 'notFound';
+export async function getPage<N extends PageName>(name: N) {
+  return (await getCollection(name))[0].data as Awaited<ReturnType<typeof getCollection<N>>>[number]['data'];
+}
+export async function getWording() { return (await getCollection('wording'))[0].data; }
+// Fill {tokens} in editable text, e.g. fill('Read all {count} testimonials', { count: 133 }).
+export const fill = (s: string | undefined, v: Record<string, string | number> = {}) =>
+  (s ?? '').replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
+// Testimonials chosen by file name in the CMS; missing ones are skipped.
+export async function getQuotesById(ids: string[]) {
+  const all = await getCollection('testimonials');
+  return ids.map((id) => all.find((e) => e.id === id)?.data).filter((x): x is NonNullable<typeof x> => !!x);
+}
+export const imageRef = (path: string, cap = '') => ({ id: keyFor(path), cap });

@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getPage } from '../lib/content';
+const P = await getPage('notFound');
 ---
-<Base title="Page not found" description="This page has moved or no longer exists.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>This page has moved</h1>
-    <p class="lede">The site has been rebuilt and some addresses have changed. Try the tours and dates, or get in touch.</p>
-    <p><a class="btn" href="/tours/">Tours and dates</a> <a class="btn ghost" href="/contact/">Contact</a></p>
+    <h1>{P.heading}</h1>
+    {P.text && <p class="lede">{P.text}</p>}
+    <p>{P.primary_label && <a class="btn" href={P.primary_link || '/'}>{P.primary_label}</a>} {P.secondary_label && <a class="btn ghost" href={P.secondary_link || '/contact/'}>{P.secondary_label}</a>}</p>
   </div></section>
 </Base>

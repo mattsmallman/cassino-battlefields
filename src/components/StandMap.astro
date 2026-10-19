@@ -1,27 +1,32 @@
 ---
+import { getWording } from '../lib/content';
+const W = (await getWording()).maps;
 // Interactive stand map: MapLibre + self-hosted PMTiles (vector basemap + terrain).
-interface Stand { id: string; day: number; name: string; lat: number; lng: number; text: string }
+interface Stand { day: number; name: string; lat: number; lng: number; text: string }
 interface Props { data: { status: string; note: string; outside?: string; stands: Stand[] }; tiles: string; terrain: string; bounds: [number, number, number, number]; title: string }
-const { data, tiles, terrain, bounds, title } = Astro.props;
+const { data: raw, tiles, terrain, bounds, title } = Astro.props;
+// Stands are identified by their position in the list.
+const data = { ...raw, stands: raw.stands.map((s, i) => ({ ...s, id: `s${i + 1}` })) };
 const days = [...new Set(data.stands.map((s) => s.day))];
+const dayLabel = (await getWording()).tour_page.day_label || 'Day';
 ---
 <section class="standmap" aria-labelledby="sm-h">
   <div class="sm-head">
     <h2 id="sm-h">{title}</h2>
-    {data.status === 'draft' && <p class="sm-draft">Draft: stand positions are approximate and awaiting Frank’s confirmation.</p>}
+    {data.status === 'draft' && <p class="sm-draft">{W.draft_notice}</p>}
   </div>
   <div class="sm-grid">
     <div class="sm-map" id="sm-map" data-tiles={tiles} data-terrain={terrain} data-bounds={JSON.stringify(bounds)} data-stands={JSON.stringify(data.stands)}>
-      <noscript><p>The interactive map needs JavaScript. The stands are listed alongside.</p></noscript>
+      <noscript><p>{W.no_js}</p></noscript>
       <div class="sm-controls">
-        <button type="button" data-view="3d" aria-pressed="true">3D terrain</button>
-        <button type="button" data-view="2d" aria-pressed="false">Flat map</button>
+        <button type="button" data-view="3d" aria-pressed="true">{W.view_3d}</button>
+        <button type="button" data-view="2d" aria-pressed="false">{W.view_flat}</button>
       </div>
     </div>
     <ol class="sm-list">
       {days.map((d) => (
         <li>
-          <h3>Day {d}</h3>
+          <h3>{dayLabel} {d}</h3>
           <ol>
             {data.stands.filter((s) => s.day === d).map((s) => (
               <li><button type="button" data-stand={s.id}><span class="sm-n">{data.stands.indexOf(s) + 1}</span><span><b>{s.name}</b>{s.text}</span></button></li>

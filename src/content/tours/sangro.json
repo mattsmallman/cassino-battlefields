@@ -15,11 +15,37 @@
   "arrive": "On booking",
   "depart": "On booking",
   "base": "",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "En-suite hotel rooms with continental breakfast",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "",
   "hero_caption": "",
   "itinerary": [],
   "photos": [],
+  "map_area": {
+    "west": 13.6,
+    "south": 41.8,
+    "east": 14.9,
+    "north": 42.6
+  },
+  "map_places": [
+    {
+      "name": "River Sangro",
+      "lat": 42.235,
+      "lng": 14.505,
+      "kind": "place",
+      "label": "right"
+    }
+  ],
+  "map_route": false,
   "gallery": "",
   "coords": "42°13′N 14°30′E",
+  "seo_description": "",
   "order": 4
 }

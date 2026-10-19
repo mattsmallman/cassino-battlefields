@@ -1,19 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
 import Enquiry from '../components/Enquiry.astro';
-import { getSettings } from '../lib/content';
+import { getSettings, getPage } from '../lib/content';
 const site = await getSettings();
+const P = await getPage('contact');
 ---
-<Base title="Contact and booking" description="Book a place or ask Frank de Planta a question about Cassino Battlefields tours. Phone, email and post details.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap split">
     <div>
-      <h1>Book or ask a question</h1>
-      {site.contact_intro && <p class="lede">{site.contact_intro}</p>}
-      <h3 style="margin-top:32px">Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      {site.phones.length > 0 && <><h3>Telephone</h3><p>{site.phones.map((p, i) => <>{i > 0 && <br />}<a href={p.href}>{p.number}</a>{p.label && <span class="muted"> ({p.label.toLowerCase()})</span>}</>)}</p></>}
-      {site.addressLines.length > 0 && <><h3>Post</h3><p>{site.addressLines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></>}
-      {site.facebook_url && <><h3>Facebook</h3><p><a href={site.facebook_url} rel="noopener">{site.facebook_label || 'Facebook'}</a></p></>}
+      <h1>{P.heading}</h1>
+      {P.intro && <p class="lede">{P.intro}</p>}
+      <h3 style="margin-top:32px">{P.email_label}</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      {site.phones.length > 0 && <><h3>{P.phone_label}</h3><p>{site.phones.map((p, i) => <>{i > 0 && <br />}<a href={p.href}>{p.number}</a>{p.label && <span class="muted"> ({p.label.toLowerCase()})</span>}</>)}</p></>}
+      {site.addressLines.length > 0 && <><h3>{P.post_label}</h3><p>{site.addressLines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></>}
+      {site.facebook_url && <><h3>{P.facebook_heading}</h3><p><a href={site.facebook_url} rel="noopener">{site.facebook_label || 'Facebook'}</a></p></>}
     </div>
-    <div><h2>Send an enquiry</h2><Enquiry /></div>
+    <div>{P.form_heading && <h2>{P.form_heading}</h2>}<Enquiry /></div>
   </div></section>
 </Base>

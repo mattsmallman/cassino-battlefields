@@ -4,7 +4,7 @@ import Img from '../components/Img.astro';
 import { getFaqs, md } from '../lib/content';
 const f = await getFaqs();
 ---
-<Base title="FAQs" description={f.seo_description}>
+<Base title={f.title || f.heading} description={f.seo_description}>
   <section class="band"><div class="wrap split">
     <div>
       <h1>{f.heading}</h1>

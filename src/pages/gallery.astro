@@ -1,23 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
 import Gallery from '../components/Gallery.astro';
-import { getGalleries } from '../lib/content';
+import { getGalleries, getPage, getWording, fill } from '../lib/content';
+const P = await getPage('galleryPage');
+const WG = (await getWording()).general;
+const N = P.initial_count;
 const { G: GG, sections } = await getGalleries();
 const G: any = GG;
 const sets = sections.map((s) => [s.slug, s.title] as const);
 ---
-<Base title="Gallery" description="Wartime photographs, maps and present-day views of the battlefields at Cassino, Anzio, Salerno and the Gothic Line.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>Gallery</h1>
-    <p class="lede">Wartime photographs and maps alongside the same ground today, many of them contributed by people who have toured with Frank.</p>
-    <nav class="chips" aria-label="Gallery sections">{sets.map(([k, n]) => <a href={`#${k}`}>{n}</a>)}</nav>
+    <h1>{P.heading}</h1>
+    {P.lede && <p class="lede">{P.lede}</p>}
+    <nav class="chips" aria-label={WG.aria_gallery_sections}>{sets.map(([k, n]) => <a href={`#${k}`}>{n}</a>)}</nav>
   </div></section>
   {sets.map(([k, n], i) => (
     <section class={`band${i % 2 ? '' : ' alt'}`} id={k}><div class="wrap">
-      <div class="section-head"><h2>{n}</h2><span class="muted">{(G as any)[k].length} photographs</span></div>
-      <Gallery items={(G as any)[k].slice(0, 24)} />
-      {(G as any)[k].length > 24 && (
-        <details class="more"><summary class="btn ghost">Show all {(G as any)[k].length} photographs</summary><Gallery items={(G as any)[k].slice(24)} /></details>
+      <div class="section-head"><h2>{n}</h2>{P.count_label && <span class="muted">{fill(P.count_label, { count: G[k].length })}</span>}</div>
+      <Gallery items={G[k].slice(0, N)} />
+      {G[k].length > N && (
+        <details class="more"><summary class="btn ghost">{fill(P.show_all_label, { count: G[k].length })}</summary><Gallery items={G[k].slice(N)} /></details>
       )}
     </div></section>
   ))}

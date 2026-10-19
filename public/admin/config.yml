@@ -26,273 +26,1547 @@ media_folder: public/img/library
 public_folder: /img/library
 
 collections:
-  # ---------------------------------------------------------------- Tours
+- name: tours
+  label: Tours, dates & prices
+  label_singular: Tour
+  description: One entry per tour. Change dates and prices here; past departures drop off the site automatically. New tours appear on the site
+    as soon as they are saved.
+  folder: src/content/tours
+  format: json
+  extension: json
+  create: true
+  delete: false
+  identifier_field: name
+  summary: '{{name}}: {{next_start}}'
+  sortable_fields:
+  - order
+  - name
+  fields:
+  - name: name
+    label: Tour name
+    widget: string
+  - name: short
+    label: One-line description
+    widget: string
+  - name: period
+    label: Period of the war
+    widget: string
+    hint: 'For example: January – May 1944'
+  - name: days
+    label: Length (days)
+    widget: number
+    value_type: int
+    min: 1
+    max: 21
+  - name: summary
+    label: Summary paragraph
+    widget: text
+  - name: next_label
+    label: Next departure – name shown
+    widget: string
+    required: false
+    hint: Leave blank to use the tour name
+  - name: next_start
+    label: Next departure – first day
+    widget: datetime
+    time_format: false
+    format: YYYY-MM-DD
+    required: false
+  - name: next_end
+    label: Next departure – last day
+    widget: datetime
+    time_format: false
+    format: YYYY-MM-DD
+    required: false
+  - name: next_note
+    label: Text when there is no date
+    widget: string
+    required: false
+    hint: 'For example: On request. Used only when no date is set.'
+  - name: price_twin
+    label: Price per person sharing (£)
+    widget: number
+    value_type: int
+    required: false
+  - name: price_single
+    label: Price per person in a single room (£)
+    widget: number
+    value_type: int
+    required: false
+  - name: price_basis
+    label: Board
+    widget: select
+    options:
+    - B&B
+    - half board
+    - full board
+    default: B&B
+  - name: excludes
+    label: Not included
+    widget: string
+  - name: arrive
+    label: Fly into
+    widget: string
+  - name: depart
+    label: Fly home from
+    widget: string
+  - name: base
+    label: Where you stay
+    widget: string
+    required: false
+  - name: group_size
+    label: Group size
+    widget: string
+    required: false
+    hint: 'For example: 8 to 50'
+  - name: walking
+    label: Walking
+    widget: string
+    required: false
+  - name: deposit
+    label: Deposit
+    widget: string
+    required: false
+    hint: 'For example: £80 per person'
+  - name: included
+    label: What’s included
+    widget: list
+    required: false
+    field:
+      name: item
+      label: Item
+      widget: string
+  - name: hero_image
+    label: Main photo
+    widget: image
+    required: false
+  - name: hero_caption
+    label: Main photo caption
+    widget: string
+    required: false
+  - name: itinerary
+    label: Day-by-day itinerary
+    label_singular: Day
+    widget: list
+    required: false
+    summary: '{{fields.stands}}'
+    fields:
+    - name: stands
+      label: Stands and visits
+      label_singular: Stand
+      widget: list
+      field:
+        name: stand
+        label: Stand
+        widget: text
+  - name: photos
+    label: Photos within the itinerary
+    label_singular: Photo
+    widget: list
+    required: false
+    summary: '{{fields.caption}}'
+    fields:
+    - name: image
+      label: Photo
+      widget: image
+    - name: caption
+      label: Caption
+      widget: string
+      required: false
+  - name: map_area
+    label: 'Overview map: area shown'
+    widget: object
+    required: false
+    collapsed: true
+    hint: The edges of the map in decimal degrees. In Google Maps, right-click a point to copy its coordinates.
+    fields:
+    - name: west
+      label: West edge (longitude)
+      widget: number
+      value_type: float
+    - name: south
+      label: South edge (latitude)
+      widget: number
+      value_type: float
+    - name: east
+      label: East edge (longitude)
+      widget: number
+      value_type: float
+    - name: north
+      label: North edge (latitude)
+      widget: number
+      value_type: float
+  - name: map_places
+    label: 'Overview map: places'
+    widget: list
+    required: false
+    label_singular: Place
+    summary: '{{fields.name}} ({{fields.kind}})'
+    fields:
+    - name: name
+      label: Name
+      widget: string
+    - name: lat
+      label: Latitude
+      widget: number
+      value_type: float
+    - name: lng
+      label: Longitude
+      widget: number
+      value_type: float
+    - name: kind
+      label: Type
+      widget: select
+      options:
+      - label: Airport
+        value: airport
+      - label: Where you stay
+        value: base
+      - label: Place studied
+        value: place
+      default: place
+    - name: label
+      label: Label position
+      widget: select
+      options:
+      - label: Right
+        value: right
+      - label: Left
+        value: left
+      - label: Below right
+        value: below-right
+      - label: Below left
+        value: below-left
+      default: right
+  - name: map_route
+    label: 'Overview map: join all places with the route line'
+    widget: boolean
+    default: false
+    required: false
+    hint: 'Off: the line joins only airports and where you stay.'
+  - name: gallery
+    label: Gallery shown on this tour page
+    widget: relation
+    collection: galleries
+    value_field: '{{slug}}'
+    search_fields:
+    - title
+    display_fields:
+    - title
+    required: false
+  - name: coords
+    label: Map reference shown on the photo
+    widget: string
+    hint: 'For example: 41°29′N 13°48′E'
+  - name: seo_description
+    label: Search engine description
+    widget: text
+    required: false
+    hint: Leave blank to generate one from the tour details.
+  - name: order
+    label: Position in tour lists
+    widget: number
+    value_type: int
+  slug: '{{fields.name}}'
+- name: testimonials
+  label: Testimonials
+  label_singular: Testimonial
+  description: Newest first is not automatic; use “Position” to choose where a quote appears.
+  folder: src/content/testimonials
+  format: json
+  extension: json
+  create: true
+  delete: true
+  slug: '{{fields.name}}'
+  identifier_field: name
+  summary: '{{name}}, {{from}}'
+  sortable_fields:
+  - order
+  - name
+  fields:
+  - name: quote
+    label: Quote
+    widget: text
+    hint: Without quotation marks; the site adds them.
+  - name: name
+    label: Name (with rank if military)
+    widget: string
+  - name: from
+    label: Unit or home town
+    widget: string
+    required: false
+  - name: military
+    label: From a military unit
+    widget: boolean
+    default: false
   - name: tours
-    label: Tours, dates & prices
-    label_singular: Tour
-    description: One entry per tour. Change dates and prices here; past departures drop off the site automatically.
-    folder: src/content/tours
-    format: json
-    extension: json
-    create: false
-    delete: false
-    identifier_field: name
-    summary: '{{name}}: {{next_start}}'
-    sortable_fields: [order, name]
+    label: Tours this quote is about
+    widget: relation
+    collection: tours
+    value_field: '{{slug}}'
+    search_fields:
+    - name
+    display_fields:
+    - name
+    multiple: true
+    required: false
+  - name: order
+    label: Position
+    widget: number
+    value_type: int
+    default: 999
+- name: galleries
+  label: Photo galleries
+  label_singular: Gallery
+  folder: src/content/galleries
+  format: json
+  extension: json
+  create: true
+  delete: false
+  identifier_field: title
+  summary: '{{title}}'
+  sortable_fields:
+  - order
+  - title
+  fields:
+  - name: title
+    label: Title
+    widget: string
+  - name: show_on_gallery_page
+    label: Show as a section on the Gallery page
+    widget: boolean
+    default: false
+  - name: order
+    label: Position on the Gallery page
+    widget: number
+    value_type: int
+    default: 99
+  - name: photos
+    label: Photos
+    label_singular: Photo
+    widget: list
+    summary: '{{fields.caption}}'
     fields:
-      - { name: name, label: Tour name, widget: string }
-      - { name: short, label: One-line description, widget: string }
-      - { name: period, label: Period of the war, widget: string, hint: 'For example: January – May 1944' }
-      - { name: days, label: Length (days), widget: number, value_type: int, min: 1, max: 21 }
-      - { name: summary, label: Summary paragraph, widget: text }
-
-      - { name: next_label, label: Next departure – name shown, widget: string, required: false, hint: 'Leave blank to use the tour name' }
-      - name: next_start
-        label: Next departure – first day
-        widget: datetime
-        time_format: false
-        format: YYYY-MM-DD
-        required: false
-      - name: next_end
-        label: Next departure – last day
-        widget: datetime
-        time_format: false
-        format: YYYY-MM-DD
-        required: false
-      - { name: next_note, label: Text when there is no date, widget: string, required: false, hint: 'For example: On request. Used only when no date is set.' }
-
-      - { name: price_twin, label: Price per person sharing (£), widget: number, value_type: int, required: false }
-      - { name: price_single, label: Price per person in a single room (£), widget: number, value_type: int, required: false }
-      - { name: price_basis, label: Board, widget: select, options: ['B&B', 'half board', 'full board'], default: 'B&B' }
-      - { name: excludes, label: Not included, widget: string }
-
-      - { name: arrive, label: Fly into, widget: string }
-      - { name: depart, label: Fly home from, widget: string }
-      - { name: base, label: Where you stay, widget: string, required: false }
-
-      - { name: hero_image, label: Main photo, widget: image, required: false }
-      - { name: hero_caption, label: Main photo caption, widget: string, required: false }
-
-      - name: itinerary
-        label: Day-by-day itinerary
-        label_singular: Day
-        widget: list
-        required: false
-        summary: '{{fields.stands}}'
-        fields:
-          - name: stands
-            label: Stands and visits
-            label_singular: Stand
-            widget: list
-            field: { name: stand, label: Stand, widget: text }
-
-      - name: photos
-        label: Photos within the itinerary
-        label_singular: Photo
-        widget: list
-        required: false
-        summary: '{{fields.caption}}'
-        fields:
-          - { name: image, label: Photo, widget: image }
-          - { name: caption, label: Caption, widget: string, required: false }
-
-      - { name: gallery, label: Gallery shown on this tour page, widget: relation, collection: galleries, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
-      - { name: coords, label: Map reference shown on the photo, widget: string, hint: 'For example: 41°29′N 13°48′E' }
-      - { name: order, label: Position in tour lists, widget: number, value_type: int }
-
-  # ---------------------------------------------------------------- Testimonials
-  - name: testimonials
-    label: Testimonials
-    label_singular: Testimonial
-    description: Newest first is not automatic; use “Position” to choose where a quote appears.
-    folder: src/content/testimonials
-    format: json
-    extension: json
-    create: true
-    delete: true
-    slug: '{{fields.name}}'
-    identifier_field: name
-    summary: '{{name}}, {{from}}'
-    sortable_fields: [order, name]
-    fields:
-      - { name: quote, label: Quote, widget: text, hint: 'Without quotation marks; the site adds them.' }
-      - { name: name, label: Name (with rank if military), widget: string }
-      - { name: from, label: Unit or home town, widget: string, required: false }
-      - { name: military, label: From a military unit, widget: boolean, default: false }
-      - name: tours
-        label: Tours this quote is about
-        widget: relation
-        collection: tours
-        value_field: '{{slug}}'
-        search_fields: [name]
-        display_fields: [name]
-        multiple: true
-        required: false
-      - { name: order, label: Position, widget: number, value_type: int, default: 999 }
-
-  # ---------------------------------------------------------------- Galleries
-  - name: galleries
-    label: Photo galleries
-    label_singular: Gallery
-    folder: src/content/galleries
-    format: json
-    extension: json
-    create: true
-    delete: false
-    identifier_field: title
-    summary: '{{title}}'
-    sortable_fields: [order, title]
-    fields:
-      - { name: title, label: Title, widget: string }
-      - { name: show_on_gallery_page, label: Show as a section on the Gallery page, widget: boolean, default: false }
-      - { name: order, label: Position on the Gallery page, widget: number, value_type: int, default: 99 }
-      - name: photos
-        label: Photos
-        label_singular: Photo
-        widget: list
-        summary: '{{fields.caption}}'
-        fields:
-          - { name: image, label: Photo, widget: image }
-          - { name: caption, label: Caption and credit, widget: string, required: false }
-
-  # ---------------------------------------------------------------- Reading lists
+    - name: image
+      label: Photo
+      widget: image
+    - name: caption
+      label: Caption and credit
+      widget: string
+      required: false
+- name: books
+  label: Reading lists
+  label_singular: Reading list
+  folder: src/content/books
+  format: json
+  extension: json
+  create: false
+  delete: false
+  identifier_field: title
+  fields:
+  - name: title
+    label: List title
+    widget: string
+  - name: order
+    label: Position
+    widget: number
+    value_type: int
   - name: books
-    label: Reading lists
-    label_singular: Reading list
-    folder: src/content/books
-    format: json
-    extension: json
-    create: false
-    delete: false
-    identifier_field: title
+    label: Books
+    label_singular: Book
+    widget: list
+    summary: '{{fields.title}} – {{fields.author}}'
     fields:
-      - { name: title, label: List title, widget: string }
-      - { name: order, label: Position, widget: number, value_type: int }
-      - name: books
-        label: Books
-        label_singular: Book
-        widget: list
-        summary: '{{fields.title}} – {{fields.author}}'
-        fields:
-          - { name: title, label: Title, widget: string }
-          - { name: author, label: Author, widget: string, required: false }
-
-  # ---------------------------------------------------------------- Stand maps
+    - name: title
+      label: Title
+      widget: string
+    - name: author
+      label: Author
+      widget: string
+      required: false
+- name: stands
+  label: Stand maps
+  label_singular: Stand map
+  description: Positions of each stand on the interactive tour maps.
+  folder: src/content/stands
+  format: json
+  extension: json
+  create: false
+  delete: false
+  identifier_field: status
+  summary: '{{slug}} ({{status}})'
+  fields:
+  - name: status
+    label: Status
+    widget: select
+    options:
+    - label: Draft – shows a warning on the page
+      value: draft
+    - label: Confirmed by Frank
+      value: confirmed
+  - name: note
+    label: Internal note
+    widget: text
+    required: false
+  - name: outside
+    label: Note below the map
+    widget: text
+    required: false
   - name: stands
-    label: Stand maps
-    label_singular: Stand map
-    description: Positions of each stand on the interactive tour maps.
-    folder: src/content/stands
-    format: json
-    extension: json
-    create: false
-    delete: false
-    identifier_field: status
-    summary: '{{slug}} ({{status}})'
+    label: Stands
+    label_singular: Stand
+    widget: list
+    summary: 'Day {{fields.day}}: {{fields.name}}'
     fields:
-      - name: status
-        label: Status
-        widget: select
-        options:
-          - { label: 'Draft – shows a warning on the page', value: draft }
-          - { label: 'Confirmed by Frank', value: confirmed }
-      - { name: note, label: Internal note, widget: text, required: false }
-      - { name: outside, label: Note below the map, widget: text, required: false }
-      - name: stands
-        label: Stands
-        label_singular: Stand
+    - name: day
+      label: Day
+      widget: number
+      value_type: int
+      min: 1
+    - name: name
+      label: Name
+      widget: string
+    - name: lat
+      label: Latitude
+      widget: number
+      value_type: float
+      hint: Decimal degrees, e.g. 41.4903. In Google Maps, right-click a spot to copy its coordinates.
+    - name: lng
+      label: Longitude
+      widget: number
+      value_type: float
+    - name: text
+      label: What is studied here
+      widget: text
+      required: false
+  - name: bounds
+    label: Map area (technical – do not change)
+    widget: list
+    field:
+      name: v
+      label: Value
+      widget: number
+      value_type: float
+  - name: tiles
+    label: Map tiles file (technical)
+    widget: string
+  - name: terrain
+    label: Terrain file (technical)
+    widget: string
+- name: pages
+  label: Pages
+  label_singular: Page
+  description: Text on every page of the site.
+  files:
+  - name: home
+    label: Home page
+    file: src/content/pages/home.json
+    format: json
+    fields:
+    - name: seo_description
+      label: Search engine description
+      widget: text
+    - name: hero_image
+      label: Main photo
+      widget: image
+    - name: hero_alt
+      label: Main photo description (for screen readers)
+      widget: string
+      required: false
+    - name: hero_place
+      label: Place name on the photo
+      widget: string
+      required: false
+    - name: hero_coords
+      label: Map reference on the photo
+      widget: string
+      required: false
+    - name: hero_heading
+      label: Headline
+      widget: string
+    - name: hero_text
+      label: Text under the headline
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: hero_primary_label
+      label: Main button label
+      widget: string
+      required: false
+    - name: hero_secondary_label
+      label: Second button label
+      widget: string
+      required: false
+    - name: departures_heading
+      label: Departures heading
+      widget: string
+    - name: departures_link_label
+      label: Departures link label
+      widget: string
+      required: false
+    - name: departures_note
+      label: Note under departures
+      widget: text
+      required: false
+    - name: approach_heading
+      label: Approach section heading
+      widget: string
+      required: false
+      hint: Leave blank to hide this section
+    - name: approach_lede
+      label: Approach opening paragraph
+      widget: text
+      required: false
+    - name: approach_body
+      label: Approach further text
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: campaigns_heading
+      label: Campaigns heading
+      widget: string
+      required: false
+    - name: quotes_heading
+      label: Testimonials heading
+      widget: string
+      required: false
+    - name: quotes_link_label
+      label: Testimonials link label
+      widget: string
+      required: false
+      hint: 'Words in {curly brackets} are filled in automatically: {count}'
+    - name: featured_quotes
+      label: Featured testimonials
+      widget: relation
+      collection: testimonials
+      value_field: '{{slug}}'
+      search_fields:
+      - name
+      - from
+      - quote
+      display_fields:
+      - name
+      - from
+      required: false
+      multiple: true
+      hint: Choose up to three.
+    - name: military_heading
+      label: Military section heading
+      widget: string
+      required: false
+      hint: Leave blank to hide this section
+    - name: military_text
+      label: Military section text
+      widget: text
+      required: false
+    - name: military_button
+      label: Military section button label
+      widget: string
+      required: false
+    - name: military_quote
+      label: Military section testimonial
+      widget: relation
+      collection: testimonials
+      value_field: '{{slug}}'
+      search_fields:
+      - name
+      - from
+      - quote
+      display_fields:
+      - name
+      - from
+      required: false
+    - name: books_heading
+      label: Guidebooks heading
+      widget: string
+      required: false
+    - name: books_intro
+      label: Guidebooks introduction
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: books
+      label: Guidebooks
+      widget: list
+      required: false
+      label_singular: Book
+      summary: '{{fields.title}}'
+      fields:
+      - name: image
+        label: Cover
+        widget: image
+      - name: title
+        label: Title
+        widget: string
+      - name: isbn
+        label: ISBN
+        widget: string
+        required: false
+    - name: books_isbn_label
+      label: Word shown before the ISBN
+      widget: string
+      required: false
+    - name: archive_heading
+      label: Photo strip heading
+      widget: string
+      required: false
+    - name: archive_link_label
+      label: Photo strip link label
+      widget: string
+      required: false
+    - name: archive_gallery
+      label: Photo strip gallery
+      widget: relation
+      collection: galleries
+      value_field: '{{slug}}'
+      search_fields:
+      - title
+      display_fields:
+      - title
+      required: false
+  - name: tours
+    label: Tours and dates page
+    file: src/content/pages/tours.json
+    format: json
+    fields:
+    - &id001
+      name: title
+      label: Browser tab title
+      widget: string
+      required: false
+      hint: Leave blank to use the heading
+    - &id002
+      name: seo_description
+      label: Search engine description
+      widget: text
+      hint: One or two sentences shown in Google results.
+    - name: heading
+      label: Heading
+      widget: string
+    - name: lede
+      label: Introduction
+      widget: text
+      required: false
+    - name: itineraries_heading
+      label: Itineraries heading
+      widget: string
+      required: false
+    - name: private_heading
+      label: Private tours heading
+      widget: string
+      required: false
+      hint: Leave blank to hide this section
+    - name: private_text
+      label: Private tours text
+      widget: text
+      required: false
+    - name: private_button
+      label: Private tours button label
+      widget: string
+      required: false
+  - name: military
+    label: Military battlefield studies page
+    file: src/content/pages/military.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: lede
+      label: Opening paragraph
+      widget: text
+      required: false
+    - name: body
+      label: Further text
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: image
+      label: Photo
+      widget: image
+    - name: image_caption
+      label: Photo caption
+      widget: string
+      required: false
+    - name: steps_heading
+      label: “How it works” heading
+      widget: string
+      required: false
+    - name: steps
+      label: “How it works” steps
+      widget: list
+      required: false
+      label_singular: Step
+      summary: '{{fields.title}}'
+      fields:
+      - name: title
+        label: Short title
+        widget: string
+        required: false
+      - name: text
+        label: Text
+        widget: text
+    - name: quotes_heading
+      label: Testimonials heading
+      widget: string
+      required: false
+    - name: quotes_link_label
+      label: Testimonials link label
+      widget: string
+      required: false
+      hint: 'Words in {curly brackets} are filled in automatically: {count}'
+    - name: featured_quotes
+      label: Featured testimonials
+      widget: relation
+      collection: testimonials
+      value_field: '{{slug}}'
+      search_fields:
+      - name
+      - from
+      - quote
+      display_fields:
+      - name
+      - from
+      required: false
+      multiple: true
+    - name: units_heading
+      label: Units list heading
+      widget: string
+      required: false
+    - name: units_count
+      label: Number of units to list
+      widget: number
+      value_type: int
+      min: 0
+      hint: Taken from testimonials marked as military. 0 hides the list.
+    - name: form_heading
+      label: Enquiry form heading
+      widget: string
+      required: false
+  - name: tracing
+    label: Tracing a relative page
+    file: src/content/pages/tracing.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: image
+      label: Photo
+      widget: image
+    - name: image_caption
+      label: Photo caption
+      widget: string
+      required: false
+    - name: lede
+      label: Opening paragraph
+      widget: text
+      required: false
+    - name: body
+      label: Further text
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: quote
+      label: Testimonial beside the text
+      widget: relation
+      collection: testimonials
+      value_field: '{{slug}}'
+      search_fields:
+      - name
+      - from
+      - quote
+      display_fields:
+      - name
+      - from
+      required: false
+    - name: helps_heading
+      label: “What helps” heading
+      widget: string
+      required: false
+    - name: helps
+      label: “What helps” text
+      widget: markdown
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+      required: false
+    - name: form_heading
+      label: Enquiry form heading
+      widget: string
+      required: false
+    - name: families_heading
+      label: Family testimonials heading
+      widget: string
+      required: false
+    - name: family_quotes
+      label: Family testimonials
+      widget: relation
+      collection: testimonials
+      value_field: '{{slug}}'
+      search_fields:
+      - name
+      - from
+      - quote
+      display_fields:
+      - name
+      - from
+      required: false
+      multiple: true
+  - name: testimonials
+    label: Testimonials page
+    file: src/content/pages/testimonials.json
+    format: json
+    fields:
+    - name: title
+      label: Browser tab title
+      widget: string
+      required: false
+    - name: seo_description
+      label: Search engine description
+      widget: text
+      hint: 'Words in {curly brackets} are filled in automatically: {count}, {military}'
+    - name: heading
+      label: Heading
+      widget: string
+    - name: lede
+      label: Introduction
+      widget: text
+      required: false
+      hint: 'Words in {curly brackets} are filled in automatically: {count} (all testimonials), {military} (from units)'
+    - name: gallery
+      label: Photo strip gallery
+      widget: relation
+      collection: galleries
+      value_field: '{{slug}}'
+      search_fields:
+      - title
+      display_fields:
+      - title
+      required: false
+    - name: filter_all
+      label: 'Filter button: all'
+      widget: string
+    - name: filter_military
+      label: 'Filter button: military'
+      widget: string
+    - name: filter_private
+      label: 'Filter button: private'
+      widget: string
+  - name: gallery
+    label: Gallery page
+    file: src/content/pages/gallery.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: lede
+      label: Introduction
+      widget: text
+      required: false
+    - name: count_label
+      label: Photo count label
+      widget: string
+      required: false
+      hint: 'Words in {curly brackets} are filled in automatically: {count}'
+    - name: show_all_label
+      label: “Show all” button label
+      widget: string
+      hint: 'Words in {curly brackets} are filled in automatically: {count}'
+    - name: initial_count
+      label: Photos shown before “Show all”
+      widget: number
+      value_type: int
+      min: 1
+  - name: reading
+    label: Reading list page
+    file: src/content/pages/reading.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: lede
+      label: Introduction
+      widget: text
+      required: false
+      hint: 'Words in {curly brackets} are filled in automatically: {general}, {regiments} (number of books in each list)'
+    - name: search_label
+      label: Search box label
+      widget: string
+    - name: search_placeholder
+      label: Search box example text
+      widget: string
+      required: false
+    - name: galleries
+      label: Photo strip galleries
+      widget: relation
+      collection: galleries
+      value_field: '{{slug}}'
+      search_fields:
+      - title
+      display_fields:
+      - title
+      required: false
+      multiple: true
+  - name: contact
+    label: Contact page
+    file: src/content/pages/contact.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: intro
+      label: Introduction
+      widget: text
+      required: false
+    - name: email_label
+      label: Email heading
+      widget: string
+    - name: phone_label
+      label: Telephone heading
+      widget: string
+    - name: post_label
+      label: Post heading
+      widget: string
+    - name: facebook_heading
+      label: Facebook heading
+      widget: string
+    - name: form_heading
+      label: Enquiry form heading
+      widget: string
+      required: false
+  - name: not-found
+    label: Page not found (404)
+    file: src/content/pages/not-found.json
+    format: json
+    fields:
+    - *id001
+    - *id002
+    - name: heading
+      label: Heading
+      widget: string
+    - name: text
+      label: Text
+      widget: text
+      required: false
+    - name: primary_label
+      label: First button label
+      widget: string
+      required: false
+    - name: primary_link
+      label: First button link
+      widget: string
+      required: false
+    - name: secondary_label
+      label: Second button label
+      widget: string
+      required: false
+    - name: secondary_link
+      label: Second button link
+      widget: string
+      required: false
+  - name: about
+    label: About Frank
+    file: src/content/pages/about.json
+    format: json
+    fields:
+    - name: title
+      label: Browser tab title
+      widget: string
+      required: false
+      hint: Leave blank for “About” plus the heading
+    - name: heading
+      label: Heading
+      widget: string
+    - name: seo_description
+      label: Search engine description
+      widget: text
+      hint: One or two sentences shown in Google results. Under 300 characters.
+    - name: lead_image
+      label: Main photo
+      widget: image
+    - name: lead_caption
+      label: Main photo caption
+      widget: string
+      required: false
+    - name: lede
+      label: Opening paragraph (shown larger)
+      widget: text
+    - name: body
+      label: Further text
+      widget: markdown
+      required: false
+      buttons:
+      - bold
+      - italic
+      - link
+      - bulleted-list
+      - numbered-list
+    - name: research
+      label: Research projects by year
+      label_singular: Project
+      widget: list
+      required: false
+      summary: '{{fields.year}}: {{fields.text}}'
+      fields:
+      - name: year
+        label: Year or years
+        widget: string
+        hint: 'For example: 2015–16'
+      - name: text
+        label: Project
+        widget: string
+        hint: Put a book or programme title between *asterisks* for italics.
+    - name: gallery_heading
+      label: Heading above the photos
+      widget: string
+      required: false
+    - name: gallery
+      label: Photo gallery shown at the bottom
+      widget: relation
+      collection: galleries
+      value_field: '{{slug}}'
+      search_fields:
+      - title
+      display_fields:
+      - title
+      required: false
+    - name: contact_button
+      label: Contact button label
+      widget: string
+      required: false
+  - name: faqs
+    label: FAQs
+    file: src/content/pages/faqs.json
+    format: json
+    fields:
+    - name: title
+      label: Browser tab title
+      widget: string
+      required: false
+    - name: heading
+      label: Heading
+      widget: string
+    - name: seo_description
+      label: Search engine description
+      widget: text
+    - name: image
+      label: Photo
+      widget: image
+      required: false
+    - name: image_caption
+      label: Photo caption
+      widget: string
+      required: false
+    - name: faqs
+      label: Questions
+      label_singular: Question
+      widget: list
+      summary: '{{fields.question}}'
+      fields:
+      - name: question
+        label: Question
+        widget: string
+      - name: answer
+        label: Answer
+        widget: markdown
+        hint: 'Lists, links and bold work as normal. The cancellation charges are a table: in the editor’s source view, keep each row on its own
+          line between | marks.'
+- name: settings
+  label: Site settings
+  description: Contact details, menu, and the wording used on every tour page, form and map.
+  files:
+  - name: site
+    label: Contact details and business information
+    file: src/content/settings/site.json
+    format: json
+    fields:
+    - name: business_name
+      label: Business name
+      widget: string
+    - name: home_title
+      label: Browser tab title on the home page
+      widget: string
+      required: false
+    - name: tagline
+      label: Tagline under the name
+      widget: string
+      required: false
+    - name: email
+      label: Enquiries email address
+      widget: string
+      hint: Enquiries from the website go to this address.
+    - name: phones
+      label: Phone numbers
+      label_singular: Phone number
+      widget: list
+      required: false
+      summary: '{{fields.label}}: {{fields.number}}'
+      fields:
+      - name: label
+        label: Label
+        widget: string
+        required: false
+        hint: 'For example: Office or Mobile'
+      - name: number
+        label: Number
+        widget: string
+        hint: International format, for example +44 (0)1347 811104
+    - name: address
+      label: Postal address
+      widget: text
+      required: false
+      hint: One line per line of the address.
+    - name: facebook_url
+      label: Facebook page link
+      widget: string
+      required: false
+    - name: facebook_label
+      label: Facebook link text
+      widget: string
+      required: false
+    - name: footer_blurb
+      label: One-line description in the footer
+      widget: string
+      required: false
+    - name: footer_note
+      label: Note at the very bottom of every page
+      widget: string
+      required: false
+    - name: company_name
+      label: Registered company name
+      widget: string
+    - name: company_number
+      label: Company number
+      widget: string
+      required: false
+    - name: navigation
+      label: Main menu
+      widget: list
+      label_singular: Menu item
+      summary: '{{fields.label}}'
+      fields:
+      - name: label
+        label: Label
+        widget: string
+      - name: link
+        label: Link
+        widget: string
+        hint: 'For example: /tours/'
+    - name: enquire_label
+      label: Menu button label
+      widget: string
+      required: false
+    - name: enquire_link
+      label: Menu button link
+      widget: string
+      required: false
+    - name: footer_contact_heading
+      label: 'Footer heading: contact'
+      widget: string
+      required: false
+    - name: footer_tours_heading
+      label: 'Footer heading: tours'
+      widget: string
+      required: false
+  - name: wording
+    label: Wording used across the site
+    file: src/content/settings/wording.json
+    format: json
+    fields:
+    - name: tour_page
+      label: Tour pages
+      widget: object
+      collapsed: true
+      fields:
+      - name: title_suffix
+        label: Words after the tour name in the browser tab
+        widget: string
+        required: false
+      - name: seo_template
+        label: Search engine description template
+        widget: text
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {days}, {period}, {short}, {tour}'
+      - name: stand_map_heading
+        label: Stand map heading
+        widget: string
+        required: false
+      - name: day_by_day_heading
+        label: Itinerary heading
+        widget: string
+        required: false
+      - name: day_label
+        label: Word before each day number
+        widget: string
+        required: false
+      - name: no_itinerary_text
+        label: Text when a tour has no itinerary
+        widget: string
+        required: false
+      - name: no_itinerary_link
+        label: Link text when a tour has no itinerary
+        widget: string
+        required: false
+      - name: included_heading
+        label: “What’s included” heading
+        widget: string
+        required: false
+      - name: not_included_heading
+        label: “Not included” heading
+        widget: string
+        required: false
+      - name: not_included_template
+        label: “Not included” sentence
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {excludes}'
+      - name: facts_label_dates
+        label: 'Key facts: next dates label'
+        widget: string
+        required: false
+      - name: facts_label_duration
+        label: 'Key facts: duration label'
+        widget: string
+        required: false
+      - name: facts_days
+        label: 'Key facts: duration value'
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {days}'
+      - name: facts_label_arrive
+        label: 'Key facts: fly into label'
+        widget: string
+        required: false
+      - name: facts_label_depart
+        label: 'Key facts: fly home label'
+        widget: string
+        required: false
+      - name: facts_label_base
+        label: 'Key facts: based in label'
+        widget: string
+        required: false
+      - name: facts_label_group
+        label: 'Key facts: group size label'
+        widget: string
+        required: false
+      - name: facts_label_walking
+        label: 'Key facts: walking label'
+        widget: string
+        required: false
+      - name: facts_label_deposit
+        label: 'Key facts: deposit label'
+        widget: string
+        required: false
+      - name: price_twin_label
+        label: Text under the sharing price
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {basis}'
+      - name: price_single_label
+        label: Single room price line
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {price}'
+      - name: no_price_text
+        label: Text when there is no price
+        widget: string
+        required: false
+      - name: book_label
+        label: Button when a date is set
+        widget: string
+        required: false
+      - name: register_label
+        label: Button when there is no date
+        widget: string
+        required: false
+      - name: reduced_price_note
+        label: Note under the button
+        widget: text
+        required: false
+      - name: quotes_heading
+        label: Testimonials heading
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {tour}'
+      - name: quotes_link_label
+        label: Testimonials link label
+        widget: string
+        required: false
+      - name: pictures_heading
+        label: Photo strip heading
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {tour}'
+      - name: pictures_link_label
+        label: Photo strip link label
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {tour}'
+    - name: departures
+      label: Departures table
+      widget: object
+      collapsed: true
+      fields:
+      - name: days
+        label: Length
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {days}'
+      - name: price
+        label: Price
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {price}'
+      - name: price_note
+        label: Text under the price
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {basis}'
+      - name: no_price
+        label: Text when there is no price
+        widget: string
+        required: false
+    - name: maps
+      label: Maps
+      widget: object
+      collapsed: true
+      fields:
+      - name: overview_legend_airport
+        label: 'Overview map key: airport'
+        widget: string
+        required: false
+      - name: overview_legend_base
+        label: 'Overview map key: where you stay'
+        widget: string
+        required: false
+      - name: overview_legend_place
+        label: 'Overview map key: places studied'
+        widget: string
+        required: false
+      - name: draft_notice
+        label: 'Stand map: draft warning'
+        widget: text
+        required: false
+      - name: view_3d
+        label: 'Stand map: 3D button'
+        widget: string
+        required: false
+      - name: view_flat
+        label: 'Stand map: flat button'
+        widget: string
+        required: false
+      - name: no_js
+        label: 'Stand map: message when JavaScript is off'
+        widget: string
+        required: false
+    - name: enquiry
+      label: Enquiry forms
+      widget: object
+      collapsed: true
+      fields:
+      - name: name
+        label: Name label
+        widget: string
+        required: false
+      - name: email
+        label: Email label
+        widget: string
+        required: false
+      - name: phone
+        label: Phone label
+        widget: string
+        required: false
+      - name: tour
+        label: Tour label
+        widget: string
+        required: false
+      - name: unit
+        label: Unit label (military form)
+        widget: string
+        required: false
+      - name: people
+        label: Number of people label
+        widget: string
+        required: false
+      - name: room
+        label: Room label
+        widget: string
+        required: false
+      - name: room_options
+        label: Room choices
         widget: list
-        summary: 'Day {{fields.day}}: {{fields.name}}'
-        fields:
-          - { name: day, label: Day, widget: number, value_type: int, min: 1 }
-          - { name: name, label: Name, widget: string }
-          - { name: lat, label: Latitude, widget: number, value_type: float, hint: 'Decimal degrees, e.g. 41.4903. In Google Maps, right-click a spot to copy its coordinates.' }
-          - { name: lng, label: Longitude, widget: number, value_type: float }
-          - { name: text, label: What is studied here, widget: text, required: false }
-      - name: bounds
-        label: Map area (technical – do not change)
+        field:
+          name: item
+          label: Option
+          widget: string
+      - name: extra_tour_options
+        label: Extra choices in the tour list
         widget: list
-        field: { name: v, label: Value, widget: number, value_type: float }
-      - { name: tiles, label: Map tiles file (technical), widget: string }
-      - { name: terrain, label: Terrain file (technical), widget: string }
-
-  # ---------------------------------------------------------------- Pages
-  - name: pages
-    label: Pages
-    label_singular: Page
-    description: The About and FAQs pages.
-    files:
-      - name: about
-        label: About Frank
-        file: src/content/pages/about.json
-        format: json
-        fields:
-          - { name: heading, label: Heading, widget: string }
-          - { name: seo_description, label: Search engine description, widget: text, hint: 'One or two sentences shown in Google results. Under 300 characters.' }
-          - { name: lead_image, label: Main photo, widget: image }
-          - { name: lead_caption, label: Main photo caption, widget: string, required: false }
-          - { name: lede, label: Opening paragraph (shown larger), widget: text }
-          - { name: body, label: Further text, widget: markdown, required: false, buttons: [bold, italic, link, bulleted-list, numbered-list] }
-          - name: research
-            label: Research projects by year
-            label_singular: Project
-            widget: list
-            required: false
-            summary: '{{fields.year}}: {{fields.text}}'
-            fields:
-              - { name: year, label: Year or years, widget: string, hint: 'For example: 2015–16' }
-              - { name: text, label: Project, widget: string, hint: 'Put a book or programme title between *asterisks* for italics.' }
-          - { name: gallery_heading, label: Heading above the photos, widget: string, required: false }
-          - { name: gallery, label: Photo gallery shown at the bottom, widget: relation, collection: galleries, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
-
-      - name: faqs
-        label: FAQs
-        file: src/content/pages/faqs.json
-        format: json
-        fields:
-          - { name: heading, label: Heading, widget: string }
-          - { name: seo_description, label: Search engine description, widget: text }
-          - { name: image, label: Photo, widget: image, required: false }
-          - { name: image_caption, label: Photo caption, widget: string, required: false }
-          - name: faqs
-            label: Questions
-            label_singular: Question
-            widget: list
-            summary: '{{fields.question}}'
-            fields:
-              - { name: question, label: Question, widget: string }
-              - name: answer
-                label: Answer
-                widget: markdown
-                hint: 'Lists, links and bold work as normal. The cancellation charges are a table: in the editor’s source view, keep each row on its own line between | marks.'
-
-  # ---------------------------------------------------------------- Settings
-  - name: settings
-    label: Site settings
-    description: Contact details and business information used in the header, footer, contact page and enquiry form.
-    files:
-      - name: site
-        label: Contact details and business information
-        file: src/content/settings/site.json
-        format: json
-        fields:
-          - { name: business_name, label: Business name, widget: string }
-          - { name: tagline, label: Tagline under the name, widget: string, required: false }
-          - { name: email, label: Enquiries email address, widget: string, hint: 'Enquiries from the website go to this address.' }
-          - name: phones
-            label: Phone numbers
-            label_singular: Phone number
-            widget: list
-            required: false
-            summary: '{{fields.label}}: {{fields.number}}'
-            fields:
-              - { name: label, label: Label, widget: string, required: false, hint: 'For example: Office or Mobile' }
-              - { name: number, label: Number, widget: string, hint: 'International format, for example +44 (0)1347 811104' }
-          - { name: address, label: Postal address, widget: text, required: false, hint: 'One line per line of the address.' }
-          - { name: facebook_url, label: Facebook page link, widget: string, required: false }
-          - { name: facebook_label, label: Facebook link text, widget: string, required: false }
-          - { name: contact_intro, label: Introduction on the contact page, widget: text, required: false }
-          - { name: footer_blurb, label: One-line description in the footer, widget: string, required: false }
-          - { name: footer_note, label: Note at the very bottom of every page, widget: string, required: false }
-          - { name: company_name, label: Registered company name, widget: string }
-          - { name: company_number, label: Company number, widget: string, required: false }
+        field:
+          name: item
+          label: Option
+          widget: string
+      - name: group_size
+        label: Group size label (military form)
+        widget: string
+        required: false
+      - name: preferred_dates
+        label: Preferred dates label (military form)
+        widget: string
+        required: false
+      - name: preferred_dates_placeholder
+        label: Preferred dates example
+        widget: string
+        required: false
+      - name: relative_name
+        label: Relative’s name label
+        widget: string
+        required: false
+      - name: relative_unit
+        label: Relative’s unit label
+        widget: string
+        required: false
+      - name: relative_unit_placeholder
+        label: Relative’s unit example
+        widget: string
+        required: false
+      - name: relative_details
+        label: Relative’s details label
+        widget: string
+        required: false
+      - name: message_tour
+        label: Message label (tour form)
+        widget: string
+        required: false
+      - name: message_military
+        label: Message label (military form)
+        widget: string
+        required: false
+      - name: message_relative
+        label: Message label (relative form)
+        widget: string
+        required: false
+      - name: submit
+        label: Send button
+        widget: string
+        required: false
+      - name: help
+        label: Help text under the button
+        widget: text
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {email}'
+      - name: error
+        label: Message when name or email is missing
+        widget: string
+        required: false
+      - name: sent
+        label: Message after sending
+        widget: text
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {email}'
+      - name: subject_tour
+        label: Email subject (tour form)
+        widget: string
+        required: false
+        hint: 'Words in {curly brackets} are filled in automatically: {tour}'
+      - name: subject_military
+        label: Email subject (military form)
+        widget: string
+        required: false
+      - name: subject_relative
+        label: Email subject (relative form)
+        widget: string
+        required: false
+    - name: general
+      label: General
+      widget: object
+      collapsed: true
+      fields:
+      - name: skip_link
+        label: “Skip to content” link (keyboard users)
+        widget: string
+        required: false
+      - name: menu_button
+        label: Menu button (phones)
+        widget: string
+        required: false
+      - name: lightbox_close
+        label: Photo viewer close button
+        widget: string
+        required: false
+      - name: footer_facebook
+        label: Footer Facebook link text
+        widget: string
+        required: false
+      - name: aria_main_nav
+        label: 'Screen reader: main menu'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.
+      - name: aria_photo_dialog
+        label: 'Screen reader: photo viewer'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.
+      - name: aria_key_facts
+        label: 'Screen reader: key facts box'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.
+      - name: aria_gallery_sections
+        label: 'Screen reader: gallery sections'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.
+      - name: aria_reading_lists
+        label: 'Screen reader: reading lists'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.
+      - name: aria_testimonial_filter
+        label: 'Screen reader: testimonial filter'
+        widget: string
+        required: false
+        hint: Read aloud by screen readers; not shown on the page.

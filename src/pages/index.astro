@@ -5,97 +5,100 @@ import Departures from '../components/Departures.astro';
 import Campaigns from '../components/Campaigns.astro';
 import Quote from '../components/Quote.astro';
 import Gallery from '../components/Gallery.astro';
-import { getTestimonials, getGalleries, picker } from '../lib/content';
+import { getTestimonials, getGalleries, getPage, getSettings, getQuotesById, fill, md, mdInline, imageRef } from '../lib/content';
+const P = await getPage('home');
+const site = await getSettings();
 const T = await getTestimonials();
 const { G } = await getGalleries();
-const pick = picker(T);
-let quotes = [pick('Bill Vodra'), pick('Lt Col Guy Stone WG'), pick('Steve Deput')].filter((x) => !!x) as typeof T;
-if (quotes.length < 3) quotes = T.filter((q) => q.quote.length < 400).slice(0, 3);
-const unitQuote = pick('Maj Fletch Fletcher') ?? T.find((q) => q.military);
-import meta from '../data/imagemeta.json';
-const bookImg = (k: string) => Object.keys(meta).find((x) => x.startsWith('u/' + k))!;
-const pubs = [
-  { img: bookImg('book-salerno'), t: 'From the Salerno Landings to San Pietro Infine', isbn: '978-1-53618-572-0' },
-  { img: bookImg('book-cassino'), t: 'Breaking the Gustav and Hitler Lines', isbn: '978-1-53619-076-2' },
-  { img: bookImg('book-anzio'), t: 'From the Anzio Landings to Rome', isbn: '978-1-53619-077-9' },
-];
-const strip = (G.home ?? []).filter((g) => !g.id.includes('book-') && !g.id.includes('mcs-logo'));
+const quotes = await getQuotesById(P.featured_quotes);
+const [unitQuote] = P.military_quote ? await getQuotesById([P.military_quote]) : [];
+const hero = imageRef(P.hero_image, P.hero_alt);
+const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
 ---
-<Base title="Cassino Battlefields" description="Small-group battlefield studies of the Italian Campaign 1943–45 at Cassino, Anzio, Salerno, the Sangro and the Gothic Line, led by former infantry officer and author Frank de Planta." image="the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b">
+<Base title={site.business_name} description={P.seo_description} image={hero.id}>
   <section class="hero mapframe">
-    <Img id="the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b" alt="The Abbey of Monte Cassino above the Liri valley" sizes="100vw" eager />
-    <span class="coord tl"><span class="place">Monte Cassino</span>41°29′N 13°48′E</span>
+    <Img id={hero.id} alt={hero.cap} sizes="100vw" eager />
+    {(P.hero_place || P.hero_coords) && <span class="coord tl">{P.hero_place && <span class="place">{P.hero_place}</span>}{P.hero_coords}</span>}
     <div class="wrap">
-      <h1>Stand on the ground and understand the battle.</h1>
-      <p>Battlefield studies of the Italian Campaign at Cassino, Anzio, Salerno, the Sangro and the Gothic Line. Led in person by Frank de Planta, former Royal Anglian officer and author of <em>A Walking Tour of Italy’s WWII Battlefields</em>.</p>
-      <div class="actions"><a class="btn" href="#departures">See 2027 dates</a><a class="btn ghost" href="/contact/">Ask Frank a question</a></div>
+      <h1>{P.hero_heading}</h1>
+      {P.hero_text && <p set:html={mdInline(P.hero_text)} />}
+      <div class="actions">{P.hero_primary_label && <a class="btn" href="#departures">{P.hero_primary_label}</a>}{P.hero_secondary_label && <a class="btn ghost" href="/contact/">{P.hero_secondary_label}</a>}</div>
     </div>
   </section>
 
   <section class="band" id="departures">
     <div class="wrap">
-      <div class="section-head"><h2>Next departures</h2><a href="/tours/">All tours and itineraries</a></div>
+      <div class="section-head"><h2>{P.departures_heading}</h2>{P.departures_link_label && <a href="/tours/">{P.departures_link_label}</a>}</div>
       <Departures />
-      <p class="muted" style="margin-top:16px;font-size:1rem">Prices exclude flights. Single rooms are available on every tour. A £80 deposit holds your place.</p>
+      {P.departures_note && <p class="muted" style="margin-top:16px;font-size:1rem">{P.departures_note}</p>}
     </div>
   </section>
 
-  <section class="band alt">
-    <div class="wrap split">
-      <div>
-        <h2>Studied the way soldiers study a battle</h2>
+  {P.approach_heading && (
+    <section class="band alt">
+      <div class="wrap split">
+        <div>
+          <h2>{P.approach_heading}</h2>
+        </div>
+        <div>
+          {P.approach_lede && <p class="lede">{P.approach_lede}</p>}
+          {P.approach_body && <Fragment set:html={md(P.approach_body)} />}
+        </div>
       </div>
-      <div>
-        <p class="lede">Each day is built around a series of stands: places with a clear view of the ground where Frank explains what each side planned, what happened, and why.</p>
-        <p>The detail goes down to battalion, brigade, division and corps level, so you see how a decision at corps headquarters played out for the men on Snakeshead Ridge or in the Anzio wadis. Groups are kept small, the pace is unhurried, and the minibus stays with you all day.</p>
-        <p>Many guests come because a father or grandfather served in Italy. Tell Frank the unit and he will build the relevant actions, cemeteries and memorials into your tour. <a href="/tracing-a-relative/">Tracing a relative</a></p>
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <section class="band">
     <div class="wrap">
-      <div class="section-head"><h2>The campaigns</h2></div>
+      <div class="section-head"><h2>{P.campaigns_heading}</h2></div>
       <Campaigns />
     </div>
   </section>
 
-  <section class="band dark">
-    <div class="wrap">
-      <div class="section-head"><h2>What guests say</h2><a href="/testimonials/" style="color:#fff">Read all {T.length} testimonials</a></div>
-      <div class="quotes3">{quotes.map((q) => <Quote t={q} max={330} />)}</div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap split">
-      <div>
-        <h2>For units and military groups</h2>
-        <p>Frank has led battlefield studies for Army Headquarters, NATO’s Joint Force Command Naples, the Royal Gurkha Rifles, the Royal Artillery and many more. Each is built around the training objectives you set.</p>
-        <a class="btn ghost" href="/military-battlefield-studies/">Military battlefield studies</a>
+  {quotes.length > 0 && (
+    <section class="band dark">
+      <div class="wrap">
+        <div class="section-head"><h2>{P.quotes_heading}</h2>{P.quotes_link_label && <a href="/testimonials/" style="color:#fff">{fill(P.quotes_link_label, { count: T.length })}</a>}</div>
+        <div class="quotes3">{quotes.map((q) => <Quote t={q} max={330} />)}</div>
       </div>
-      <div>
-        {unitQuote && <Quote t={unitQuote} max={420} />}
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <section class="band alt">
-    <div class="wrap">
-      <div class="section-head"><h2>The guidebooks</h2></div>
-      <p class="lede" style="margin-bottom:32px">Frank’s three-volume <em>A Walking Tour of Italy’s WWII Battlefields</em> (Nova Science Publishers) takes you from the Salerno landings to the fall of Rome, stand by stand.</p>
-      <div class="books-pub">
-        {pubs.map((b) => (
-          <div><Img id={b.img} alt={`Book cover: ${b.t}`} sizes="(max-width: 700px) 50vw, 25vw" /><h3>{b.t}</h3><p>ISBN {b.isbn}</p></div>
-        ))}
+  {P.military_heading && (
+    <section class="band">
+      <div class="wrap split">
+        <div>
+          <h2>{P.military_heading}</h2>
+          {P.military_text && <p>{P.military_text}</p>}
+          {P.military_button && <a class="btn ghost" href="/military-battlefield-studies/">{P.military_button}</a>}
+        </div>
+        <div>
+          {unitQuote && <Quote t={unitQuote} max={420} />}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <section class="band">
-    <div class="wrap">
-      <div class="section-head"><h2>From the archive and the field</h2><a href="/gallery/">Full gallery</a></div>
-      <Gallery items={strip} strip />
-    </div>
-  </section>
+  {P.books.length > 0 && (
+    <section class="band alt">
+      <div class="wrap">
+        <div class="section-head"><h2>{P.books_heading}</h2></div>
+        {P.books_intro && <p class="lede" style="margin-bottom:32px" set:html={mdInline(P.books_intro)} />}
+        <div class="books-pub">
+          {P.books.map((b) => (
+            <div><Img id={imageRef(b.image).id} alt={`Book cover: ${b.title}`} sizes="(max-width: 700px) 50vw, 25vw" /><h3>{b.title}</h3>{b.isbn && <p>{P.books_isbn_label} {b.isbn}</p>}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {strip.length > 0 && (
+    <section class="band">
+      <div class="wrap">
+        <div class="section-head"><h2>{P.archive_heading}</h2>{P.archive_link_label && <a href="/gallery/">{P.archive_link_label}</a>}</div>
+        <Gallery items={strip} strip />
+      </div>
+    </section>
+  )}
 </Base>

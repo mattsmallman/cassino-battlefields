@@ -1,0 +1,10 @@
+{
+  "title": "Page not found",
+  "seo_description": "This page has moved or no longer exists.",
+  "heading": "This page has moved",
+  "text": "The site has been rebuilt and some addresses have changed. Try the tours and dates, or get in touch.",
+  "primary_label": "Tours and dates",
+  "primary_link": "/tours/",
+  "secondary_label": "Contact",
+  "secondary_link": "/contact/"
+}

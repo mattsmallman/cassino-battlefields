@@ -7,7 +7,7 @@ const a = await getAbout();
 const { G } = await getGalleries();
 const rest = a.gallery ? G[a.gallery] ?? [] : [];
 ---
-<Base title={`About ${a.heading}`} description={a.seo_description} image={a.lead.id}>
+<Base title={a.title || `About ${a.heading}`} description={a.seo_description} image={a.lead.id}>
   <section class="band"><div class="wrap split">
     <figure><Img id={a.lead.id} alt={a.lead.cap} sizes="(max-width: 860px) 100vw, 40vw" eager /><figcaption>{a.lead.cap}</figcaption></figure>
     <div>
@@ -17,7 +17,7 @@ const rest = a.gallery ? G[a.gallery] ?? [] : [];
       {a.research.length > 0 && (
         <ul>{a.research.map((r) => <li><b>{r.year}</b> <Fragment set:html={mdInline(r.text)} /></li>)}</ul>
       )}
-      <a class="btn" href="/contact/">Contact Frank</a>
+      {a.contact_button && <a class="btn" href="/contact/">{a.contact_button}</a>}
     </div>
   </div></section>
   {rest.length > 0 && (

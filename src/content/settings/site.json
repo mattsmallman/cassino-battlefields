@@ -1,5 +1,6 @@
 {
   "business_name": "Cassino Battlefields",
+  "home_title": "Cassino Battlefields – WWII battlefield studies in Italy",
   "tagline": "Explaining the past today",
   "email": "enquiries@cassinobattlefields.co.uk",
   "phones": [
@@ -15,9 +16,38 @@
   "address": "West Winds, The Gowans\nSutton on the Forest\nYork YO61 1DL",
   "facebook_url": "https://www.facebook.com/frank.deplanta",
   "facebook_label": "Frank de Planta",
-  "contact_intro": "Tell Frank which tour you’re interested in and he’ll send a booking form, or answer any question about the battles, the itinerary or a relative who served.",
   "footer_blurb": "Battlefield studies of the Italian Campaign, 1943–45, led by Frank de Planta.",
   "footer_note": "Payments are held in a trust account until after your tour.",
   "company_name": "Cassino Battlefields Limited",
-  "company_number": "8056935"
+  "company_number": "8056935",
+  "navigation": [
+    {
+      "label": "Tours",
+      "link": "/tours/"
+    },
+    {
+      "label": "About Frank",
+      "link": "/about/"
+    },
+    {
+      "label": "Testimonials",
+      "link": "/testimonials/"
+    },
+    {
+      "label": "Gallery",
+      "link": "/gallery/"
+    },
+    {
+      "label": "Reading",
+      "link": "/reading-list/"
+    },
+    {
+      "label": "FAQs",
+      "link": "/faqs/"
+    }
+  ],
+  "enquire_label": "Enquire",
+  "enquire_link": "/contact/",
+  "footer_contact_heading": "Get in touch",
+  "footer_tours_heading": "Tours"
 }

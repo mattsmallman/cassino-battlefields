@@ -27,24 +27,37 @@ Things worth trying:
 - **Pages → FAQs:** add a question or reword an answer. The cancellation charges are a table; edit it in the editor's source view so the rows stay intact.
 - **Photo galleries → Cassino:** drag photos to reorder them, edit a caption, or upload a new photo. Every photo, old and new, lives once in the photo library (`public/img/library/`). The next `npm run dev` or build makes web-sized versions of it; until then the original is shown.
 - **Stand maps → cassino:** change a stand's latitude and longitude, or set the status to "Confirmed by Frank" to remove the draft warning from the Cassino page.
+- **Pages → Home page:** change the headline, or pick different featured testimonials from the list.
+- **Tours → New:** create a tour with a date and two map places. It gets its own page, appears in "Next departures" and joins the footer menu.
+- **Site settings → Wording:** change "Book a place" (Tour pages group). Every tour page's button changes.
 - **Safety net:** in the raw file, set a price to some text, or an end date before the start date, then run `npm run build`. It fails with a message naming the field.
 
 Run `git restore src/content public/img/library && git clean -fd public/img/library` to throw away test edits.
 
-## What can and can't be edited
+## What can be edited
 
-| Editable in the CMS | Still needs a developer |
+Every word on the site comes from an editable content file. Nothing a visitor reads is fixed in the code. The editor's sections are:
+
+| Section | What's in it |
 | --- | --- |
-| Tour names, summaries, dates, prices, board, airports, base | Adding a brand-new tour (needs an overview-map entry in `src/lib/places.ts`) |
-| Day-by-day itineraries and the photos within them | Page layouts, and the Home, Military and Tracing-a-relative page text |
-| Testimonials (add, edit, delete, reorder, tag by tour) | Navigation menu |
-| Galleries (photos, captions, order, which appear on the Gallery page) | Map tiles for a new area (see NOTES.md) |
-| Reading lists | |
-| Stand positions and draft/confirmed status | |
-| **About** page: heading, photo, text, research projects by year, gallery | |
-| **FAQs**: questions and answers (with links, lists and tables), photo | |
-| **Site settings**: email, phone numbers, address, Facebook, tagline, footer text, company details. These feed the header, footer, contact page and enquiry form | |
+| **Tours, dates & prices** | Names, summaries, dates, prices, board, airports, base, group size, walking, deposit, "What's included", day-by-day itinerary and photos, overview-map area and places. **New tours** can be created here and appear on the site, in the departures table and in the footer without any code change |
+| **Testimonials** | Add, edit, delete, reorder, tag by tour or as military |
+| **Photo galleries** | Photos, captions, order, which appear on the Gallery page |
+| **Reading lists** | Books and authors |
+| **Stand maps** | Stand positions and draft/confirmed status |
+| **Pages** | Home, Tours and dates, Military studies, Tracing a relative, Testimonials, Gallery, Reading list, Contact, About, FAQs and "Page not found": every heading, paragraph, button label, photo and search-engine description. Featured testimonials are chosen from a list by name |
+| **Site settings → Contact details** | Email, phone numbers, address, Facebook, tagline, main menu, footer text, company details |
+| **Site settings → Wording** | Text used across many pages: tour-page labels and key facts, the departures table, map labels, enquiry-form labels and messages, and screen-reader labels |
 
+Some text contains words in curly brackets, such as `Read all {count} testimonials` or `{days} days`. The site fills these in automatically, and each field's hint lists the ones available.
+
+What still needs a developer:
+
+- the design and layout (colours, fonts, page structure, which sections a page has);
+- the map credit line, which OpenStreetMap's licence requires;
+- the 3D stand map for a new area, which needs map tiles and terrain cut for that area (see NOTES.md);
+- the enquiry forms' structure (adding or removing a field; the labels are editable);
+- form handling, sign-in and hosting.
 
 ## Going live
 

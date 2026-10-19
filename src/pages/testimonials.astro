@@ -1,20 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getTestimonials, getGalleries } from '../lib/content';
+import { getTestimonials, getGalleries, getPage, getWording, fill } from '../lib/content';
+const P = await getPage('testimonialsPage');
+const WG = (await getWording()).general;
 const T = await getTestimonials();
 const { G } = await getGalleries();
 import Gallery from '../components/Gallery.astro';
 const mil = T.filter((t) => t.military).length;
 ---
-<Base title="Testimonials" description={`${T.length} testimonials from serving soldiers, veterans, families and historians who have toured the Italian battlefields with Frank de Planta.`}>
+<Base title={P.title || P.heading} description={fill(P.seo_description, { count: T.length, military: mil })}>
   <section class="band"><div class="wrap">
-    <h1>What guests say</h1>
-    <p class="lede">{T.length} accounts from people who have walked the ground with Frank: {mil} from serving units, the rest from families, veterans and enthusiasts.</p>
-    <div style="margin:32px 0 40px"><Gallery items={G.testimonials ?? []} strip /></div>
-    <div class="chips" role="group" aria-label="Filter testimonials">
-      <button type="button" data-f="all" aria-pressed="true">All</button>
-      <button type="button" data-f="mil" aria-pressed="false">Military units</button>
-      <button type="button" data-f="civ" aria-pressed="false">Private guests</button>
+    <h1>{P.heading}</h1>
+    {P.lede && <p class="lede">{fill(P.lede, { count: T.length, military: mil })}</p>}
+    {P.gallery && (G[P.gallery] ?? []).length > 0 && <div style="margin:32px 0 40px"><Gallery items={G[P.gallery]} strip /></div>}
+    <div class="chips" role="group" aria-label={WG.aria_testimonial_filter}>
+      <button type="button" data-f="all" aria-pressed="true">{P.filter_all}</button>
+      <button type="button" data-f="mil" aria-pressed="false">{P.filter_military}</button>
+      <button type="button" data-f="civ" aria-pressed="false">{P.filter_private}</button>
     </div>
     <div class="tcols">
       {T.map((t) => (

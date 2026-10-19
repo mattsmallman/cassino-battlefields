@@ -3,39 +3,31 @@ import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Quote from '../components/Quote.astro';
 import Enquiry from '../components/Enquiry.astro';
-import { getTestimonials, getGalleries, picker } from '../lib/content';
-const T = await getTestimonials();
-const { G } = await getGalleries();
-const pick = picker(T);
-const sally = pick('Sally Low');
-const fam = T.filter((t) => /father|grandfather|uncle|grandad|dad\b/i.test(t.quote) && t.quote.length < 520).slice(0, 3);
-const grave = (G.home ?? []).find((g) => g.id.includes('lt-gh-wright')) ?? (G.home ?? [])[0];
+import { getPage, getQuotesById, md, imageRef } from '../lib/content';
+const P = await getPage('tracing');
+const [quote] = P.quote ? await getQuotesById([P.quote]) : [];
+const fam = await getQuotesById(P.family_quotes);
+const img = imageRef(P.image, P.image_caption);
 ---
-<Base title="Tracing a relative" description="Follow the footsteps of a father, grandfather or uncle who fought in Italy. Frank de Planta builds their unit’s actions, cemeteries and memorials into your tour.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap split">
-    <figure><Img id={grave.id} alt={grave.cap} sizes="(max-width: 860px) 100vw, 40vw" eager /><figcaption>{grave.cap}</figcaption></figure>
+    <figure><Img id={img.id} alt={img.cap} sizes="(max-width: 860px) 100vw, 40vw" eager /><figcaption>{img.cap}</figcaption></figure>
     <div>
-      <h1>Following a relative’s war</h1>
-      <p class="lede">Many people come on a tour because someone in their family served in Italy. With a name and a unit, Frank can usually place them on the battlefield.</p>
-      <p>He works through the war diaries and regimental histories, then builds the right actions into your tour, along with the cemetery or memorial where your relative is remembered. On a scheduled tour this happens alongside the main study. On a private tour, it can be the whole point.</p>
-      {sally && <Quote t={sally} />}
+      <h1>{P.heading}</h1>
+      {P.lede && <p class="lede">{P.lede}</p>}
+      {P.body && <Fragment set:html={md(P.body)} />}
+      {quote && <Quote t={quote} />}
     </div>
   </div></section>
   <section class="band alt"><div class="wrap split">
     <div>
-      <h2>What helps Frank most</h2>
-      <ul>
-        <li>Full name, rank and service number</li>
-        <li>Regiment and battalion, or the corps and unit</li>
-        <li>Dates and places mentioned in letters, photographs or medal records</li>
-        <li>For those who died, the cemetery or memorial (the <a href="https://www.cwgc.org/find-records/find-war-dead/" rel="noopener">CWGC database</a> will show this)</li>
-      </ul>
-      <p>Don’t worry if you only have some of this. Send what you know.</p>
+      <h2>{P.helps_heading}</h2>
+      {P.helps && <Fragment set:html={md(P.helps)} />}
     </div>
-    <div><h2>Tell Frank about them</h2><Enquiry kind="relative" /></div>
+    <div><h2>{P.form_heading}</h2><Enquiry kind="relative" /></div>
   </div></section>
   {fam.length > 0 && (
-    <section class="band dark"><div class="wrap"><div class="section-head"><h2>Families who have made the journey</h2></div>
+    <section class="band dark"><div class="wrap"><div class="section-head"><h2>{P.families_heading}</h2></div>
       <div class="quotes3">{fam.map((q) => <Quote t={q} />)}</div></div></section>
   )}
 </Base>

@@ -1,7 +1,8 @@
 ---
 import Img from './Img.astro';
-import { getTours } from '../lib/content';
+import { getTours, getWording, fill } from '../lib/content';
 const tours = await getTours();
+const W = (await getWording()).departures;
 ---
 <div class="campaigns">
   {tours.map((t) => (
@@ -11,7 +12,7 @@ const tours = await getTours();
       ) : (
         <div class="ph blank"><span>{t.name.replace(/^The /, '')}</span><span class="coord">{t.coords}</span></div>
       )}
-      <div class="period">{t.period}<span class="days">{t.days} days</span></div>
+      <div class="period">{t.period}<span class="days">{fill(W.days, { days: t.days })}</span></div>
       <h3>{t.name}</h3>
       <p>{t.short}</p>
     </a>

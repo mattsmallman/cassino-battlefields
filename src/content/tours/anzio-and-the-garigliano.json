@@ -15,6 +15,15 @@
   "arrive": "Rome (Ciampino or Fiumicino)",
   "depart": "Rome",
   "base": "",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "En-suite hotel rooms with continental breakfast",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "/img/library/anzio-3-us-inf-div-ashore-at-anzio-a7e2d5.webp",
   "hero_caption": "3 US Infantry Division coming ashore at Anzio",
   "itinerary": [
@@ -66,7 +75,59 @@
       "caption": "Private James Ashby. 10th Battalion Berkshire Regiment. Killed in Action on 25 February 1944. Buried in the Beachhead CWGC Cemetery at Anzio. Kimmo Veikkolainen"
     }
   ],
+  "map_area": {
+    "west": 11.75,
+    "south": 40.95,
+    "east": 14.2,
+    "north": 42.0
+  },
+  "map_places": [
+    {
+      "name": "Rome airports",
+      "lat": 41.8,
+      "lng": 12.42,
+      "kind": "airport",
+      "label": "left"
+    },
+    {
+      "name": "Cassino",
+      "lat": 41.488,
+      "lng": 13.831,
+      "kind": "base",
+      "label": "right"
+    },
+    {
+      "name": "Anzio",
+      "lat": 41.447,
+      "lng": 12.627,
+      "kind": "place",
+      "label": "left"
+    },
+    {
+      "name": "Campoleone",
+      "lat": 41.648,
+      "lng": 12.665,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Cisterna",
+      "lat": 41.591,
+      "lng": 12.828,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Minturno",
+      "lat": 41.263,
+      "lng": 13.746,
+      "kind": "place",
+      "label": "left"
+    }
+  ],
+  "map_route": false,
   "gallery": "anzio",
   "coords": "41°27′N 12°37′E",
+  "seo_description": "",
   "order": 2
 }

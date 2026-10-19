@@ -15,6 +15,15 @@
   "arrive": "Ancona",
   "depart": "Ancona",
   "base": "Montefabbri, near Rimini",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "En-suite hotel rooms with continental breakfast",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "/img/library/view-of-monte-pulito-from-san-marino-nov-17-922507.webp",
   "hero_caption": "Monte Pulito from San Marino",
   "itinerary": [
@@ -81,7 +90,59 @@
       "caption": "View of Tavoleto from Gemmano"
     }
   ],
+  "map_area": {
+    "west": 12.2,
+    "south": 43.5,
+    "east": 13.6,
+    "north": 44.2
+  },
+  "map_places": [
+    {
+      "name": "Ancona airport",
+      "lat": 43.616,
+      "lng": 13.362,
+      "kind": "airport",
+      "label": "left"
+    },
+    {
+      "name": "Montefabbri",
+      "lat": 43.83,
+      "lng": 12.73,
+      "kind": "base",
+      "label": "right"
+    },
+    {
+      "name": "Rimini",
+      "lat": 44.06,
+      "lng": 12.568,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "San Marino",
+      "lat": 43.936,
+      "lng": 12.447,
+      "kind": "place",
+      "label": "left"
+    },
+    {
+      "name": "Gemmano",
+      "lat": 43.905,
+      "lng": 12.582,
+      "kind": "place",
+      "label": "below-right"
+    },
+    {
+      "name": "Coriano",
+      "lat": 43.968,
+      "lng": 12.6,
+      "kind": "place",
+      "label": "right"
+    }
+  ],
+  "map_route": false,
   "gallery": "gothic-line",
   "coords": "43°56′N 12°27′E",
+  "seo_description": "",
   "order": 3
 }

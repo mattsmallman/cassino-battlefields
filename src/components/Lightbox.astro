@@ -1,5 +1,9 @@
-<dialog class="lb" id="lb" aria-label="Photo">
-  <button type="button" data-close>Close</button>
+---
+import { getWording } from '../lib/content';
+const W = (await getWording()).general;
+---
+<dialog class="lb" id="lb" aria-label={W.aria_photo_dialog}>
+  <button type="button" data-close>{W.lightbox_close || 'Close'}</button>
   <img alt="" />
   <p></p>
 </dialog>

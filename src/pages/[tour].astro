@@ -4,8 +4,7 @@ import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
 import Quote from '../components/Quote.astro';
 import { gbp } from '../lib/tours';
-import { getTours, getGalleries, getTestimonials, getStands } from '../lib/content';
-import { overview } from '../lib/places';
+import { getTours, getGalleries, getTestimonials, getStands, getWording, fill } from '../lib/content';
 import OverviewMap from '../components/OverviewMap.astro';
 import StandMap from '../components/StandMap.astro';
 export async function getStaticPaths() { return (await getTours()).map((t) => ({ params: { tour: t.slug } })); }
@@ -13,7 +12,10 @@ const t = (await getTours()).find((x) => x.slug === Astro.params.tour)!;
 const { G } = await getGalleries();
 const T = await getTestimonials();
 const stands = await getStands(t.slug);
-const hasOverview = !!overview[t.slug];
+const WD = await getWording();
+const W = WD.tour_page;
+const WGen = WD.general;
+const short = t.name.replace(/^The /, '');
 const gal = t.gallery ? G[t.gallery] ?? [] : [];
 const used = new Set([t.hero, ...t.images.map((i) => i.id)]);
 const strip = gal.filter((g) => !used.has(g.id)).slice(0, 10);
@@ -24,7 +26,7 @@ t.images.forEach((im, k) => { if (!perDay.length) return; const d = Math.min(per
 const byDay = (i: number) => perDay[i] ?? [];
 const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
 ---
-<Base title={`${t.name} battlefield tour`} description={`${t.name}, ${t.period}: a ${t.days}-day battlefield study led by Frank de Planta. ${t.short}.`} image={t.hero}>
+<Base title={`${t.name} ${W.title_suffix}`.trim()} description={t.seo || fill(W.seo_template, { tour: t.name, period: t.period, days: t.days, short: t.short })} image={t.hero}>
   {t.hero ? (
     <section class="hero short mapframe">
       <Img id={t.hero} alt={t.heroCap || t.name} sizes="100vw" eager />
@@ -43,17 +45,17 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
     <div class="wrap tour-grid">
       <div>
         <p class="lede">{t.summary}</p>
-        {hasOverview && <OverviewMap slug={t.slug} name={t.name} />}
+        {t.map && t.map.places.length > 0 && <OverviewMap map={t.map} name={t.name} />}
         {stands && stands.stands.length > 0 && (
-          <StandMap data={stands} tiles={stands.tiles} terrain={stands.terrain} bounds={stands.bounds} title="The stands on the ground" />
+          <StandMap data={stands} tiles={stands.tiles} terrain={stands.terrain} bounds={stands.bounds} title={W.stand_map_heading} />
         )}
         {t.itinerary.length > 0 ? (
           <>
-            <h2 style="margin-top:48px">Day by day</h2>
+            <h2 style="margin-top:48px">{W.day_by_day_heading}</h2>
             <ol class="days">
               {t.itinerary.map((d, i) => (
                 <li class="day">
-                  <div class="dn">Day <b>{d.n}</b></div>
+                  <div class="dn">{W.day_label} <b>{d.n}</b></div>
                   <div>
                     <ul class="stands">{d.items.map((s) => <li>{s}</li>)}</ul>
                     {byDay(i).map((im) => (
@@ -65,52 +67,51 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
             </ol>
           </>
         ) : (
-          <p>Frank will send the full itinerary with your booking form. <a href={enquire}>Ask for the itinerary</a></p>
+          <p>{W.no_itinerary_text} <a href={enquire}>{W.no_itinerary_link}</a></p>
         )}
-        <h2 style="margin-top:48px">What’s included</h2>
-        <ul>
-          <li>Minibus or coach from the airport, staying with the group throughout</li>
-          <li>{t.price?.basis === 'half board' ? 'Hotel accommodation with breakfast and evening meal' : 'En-suite hotel rooms with continental breakfast'}</li>
-          <li>A briefing pack for each room booked, covering the background to the battles</li>
-          <li>Frank de Planta as your guide on every day of the study</li>
-        </ul>
-        <h3>Not included</h3>
-        <p>{t.excludes}, and travel insurance (which you must have to travel).</p>
+        {t.included && t.included.length > 0 && (
+          <>
+            <h2 style="margin-top:48px">{W.included_heading}</h2>
+            <ul>{t.included.map((x) => <li>{x}</li>)}</ul>
+          </>
+        )}
+        <h3>{W.not_included_heading}</h3>
+        <p>{fill(W.not_included_template, { excludes: t.excludes })}</p>
       </div>
-      <aside class="facts" aria-label="Key facts">
+      <aside class="facts" aria-label={WGen.aria_key_facts}>
         <dl>
-          {t.next && <><dt>Next dates</dt><dd>{t.next.dates}</dd></>}
-          <dt>Duration</dt><dd>{t.days} days</dd>
-          <dt>Fly into</dt><dd>{t.arrive}</dd>
-          {t.depart !== t.arrive.split(' ')[0] && <><dt>Fly home from</dt><dd>{t.depart}</dd></>}
-          {t.base && <><dt>Based in</dt><dd>{t.base}</dd></>}
-          <dt>Group size</dt><dd>8 to 50</dd>
-          <dt>Walking</dt><dd>Light; the minibus is always close by</dd>
-          <dt>Deposit</dt><dd>£80 per person</dd>
+          {t.next && <><dt>{W.facts_label_dates}</dt><dd>{t.next.dates}</dd></>}
+          <dt>{W.facts_label_duration}</dt><dd>{fill(W.facts_days, { days: t.days })}</dd>
+          <dt>{W.facts_label_arrive}</dt><dd>{t.arrive}</dd>
+          {t.depart !== t.arrive.split(' ')[0] && <><dt>{W.facts_label_depart}</dt><dd>{t.depart}</dd></>}
+          {t.base && <><dt>{W.facts_label_base}</dt><dd>{t.base}</dd></>}
+          {t.groupSize && <><dt>{W.facts_label_group}</dt><dd>{t.groupSize}</dd></>}
+          {t.walking && <><dt>{W.facts_label_walking}</dt><dd>{t.walking}</dd></>}
+          {t.deposit && <><dt>{W.facts_label_deposit}</dt><dd>{t.deposit}</dd></>}
         </dl>
         {t.price ? (
           <>
             <div class="price">{gbp(t.price.twin)}</div>
-            <div>per person sharing a twin or double, {t.price.basis}</div>
-            <div style="margin:6px 0 18px" class="muted">{gbp(t.price.single)} in a single room</div>
+            <div>{fill(W.price_twin_label, { basis: t.price.basis })}</div>
+            <div style="margin:6px 0 18px" class="muted">{fill(W.price_single_label, { price: gbp(t.price.single) })}</div>
           </>
-        ) : <p style="margin-bottom:18px">Dates and prices on request</p>}
-        <a class="btn" href={enquire}>{t.next?.start ? 'Book a place' : 'Register interest'}</a>
-        <p class="note">Already in Italy, or travelling with your own transport? Ask about the reduced price.</p>
+        ) : <p style="margin-bottom:18px">{W.no_price_text}</p>}
+        <a class="btn" href={enquire}>{t.next?.start ? W.book_label : W.register_label}</a>
+        {W.reduced_price_note && <p class="note">{W.reduced_price_note}</p>}
       </aside>
     </div>
   </section>
 
   {quotes.length > 0 && (
     <section class="band dark">
-      <div class="wrap"><div class="section-head"><h2>From past {t.name.replace(/^The /, '')} groups</h2><a href="/testimonials/" style="color:#fff">All testimonials</a></div>
+      <div class="wrap"><div class="section-head"><h2>{fill(W.quotes_heading, { tour: short })}</h2><a href="/testimonials/" style="color:#fff">{W.quotes_link_label}</a></div>
       <div class="quotes3">{quotes.map((q) => <Quote t={q} />)}</div></div>
     </section>
   )}
 
   {strip.length > 0 && (
     <section class="band">
-      <div class="wrap"><div class="section-head"><h2>{t.name} in pictures</h2><a href={`/gallery/#${t.gallery}`}>Full {t.name.replace(/^The /, '')} gallery</a></div>
+      <div class="wrap"><div class="section-head"><h2>{fill(W.pictures_heading, { tour: t.name })}</h2><a href={`/gallery/#${t.gallery}`}>{fill(W.pictures_link_label, { tour: short })}</a></div>
       <Gallery items={strip} strip /></div>
     </section>
   )}

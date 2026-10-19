@@ -1,18 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getBooks, getGalleries } from '../lib/content';
+import { getBooks, getGalleries, getPage, getWording, fill } from '../lib/content';
+const P = await getPage('reading');
+const WG = (await getWording()).general;
 const lists = await getBooks();
 const { G } = await getGalleries();
-const total = (s: string) => lists.find((l) => l.slug === s)?.books.length ?? 0;
+const photos = P.galleries.flatMap((g) => G[g] ?? []);
 import Gallery from '../components/Gallery.astro';
 ---
-<Base title="Reading list" description="Frank de Planta’s reading lists for the Italian Campaign: general histories and memoirs, and regimental and corps histories.">
+<Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>Reading list</h1>
-    <p class="lede">The books Frank recommends before you travel: {total('general')} general histories and memoirs, and {total('regiments')} regimental and corps histories for anyone following a particular unit.</p>
-    <div class="field" style="max-width:420px"><label for="q">Search by title, author or regiment</label><input id="q" type="search" placeholder="e.g. Gurkha, Majdalany, Anzio" autocomplete="off" /></div>
-    <div style="margin:32px 0 32px"><Gallery items={[...(G['general-reading-list'] ?? []), ...(G['regiment-core'] ?? [])]} strip /></div>
-    <nav class="chips" aria-label="Lists">{lists.map((l) => <a href={`#${l.slug}`}>{l.title}</a>)}</nav>
+    <h1>{P.heading}</h1>
+    {P.lede && <p class="lede">{fill(P.lede, Object.fromEntries(lists.map((l) => [l.slug, l.books.length])))}</p>}
+    <div class="field" style="max-width:420px"><label for="q">{P.search_label}</label><input id="q" type="search" placeholder={P.search_placeholder} autocomplete="off" /></div>
+    {photos.length > 0 && <div style="margin:32px 0 32px"><Gallery items={photos} strip /></div>}
+    <nav class="chips" aria-label={WG.aria_reading_lists}>{lists.map((l) => <a href={`#${l.slug}`}>{l.title}</a>)}</nav>
   </div></section>
   {lists.map((l, i) => (
     <section class={`band${i % 2 ? '' : ' alt'}`} id={l.slug}><div class="wrap">

@@ -1,4 +1,5 @@
 {
+  "title": "",
   "heading": "Frank de Planta",
   "seo_description": "Frank de Planta, former Royal Anglian Regiment officer and author of A Walking Tour of Italy’s WWII Battlefields, has led battlefield studies of the Italian Campaign for more than fifteen years.",
   "lead_image": "/img/library/frank-de-planta-on-point-593-with-47-regt-ra-2-35e85c.webp",
@@ -48,5 +49,6 @@
     }
   ],
   "gallery_heading": "On the ground",
-  "gallery": "about"
+  "gallery": "about",
+  "contact_button": "Contact Frank"
 }

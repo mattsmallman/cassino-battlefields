@@ -15,6 +15,15 @@
   "arrive": "Rome (Ciampino or Fiumicino)",
   "depart": "Bologna",
   "base": "",
+  "group_size": "8 to 50",
+  "walking": "Light; the minibus is always close by",
+  "deposit": "£80 per person",
+  "included": [
+    "Minibus or coach from the airport, staying with the group throughout",
+    "Hotel accommodation with breakfast and evening meal",
+    "A briefing pack for each room booked, covering the background to the battles",
+    "Frank de Planta as your guide on every day of the study"
+  ],
   "hero_image": "/img/library/aerial-photo-of-san-marino-2-794798.webp",
   "hero_caption": "San Marino from the air",
   "itinerary": [
@@ -105,7 +114,73 @@
     }
   ],
   "photos": [],
+  "map_area": {
+    "west": 10.9,
+    "south": 41.6,
+    "east": 13.0,
+    "north": 44.9
+  },
+  "map_places": [
+    {
+      "name": "Rome",
+      "lat": 41.8,
+      "lng": 12.42,
+      "kind": "airport",
+      "label": "left"
+    },
+    {
+      "name": "Orvieto",
+      "lat": 42.718,
+      "lng": 12.111,
+      "kind": "place",
+      "label": "left"
+    },
+    {
+      "name": "Arezzo",
+      "lat": 43.463,
+      "lng": 11.88,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Florence",
+      "lat": 43.77,
+      "lng": 11.255,
+      "kind": "place",
+      "label": "left"
+    },
+    {
+      "name": "Futa Pass",
+      "lat": 44.08,
+      "lng": 11.28,
+      "kind": "place",
+      "label": "left"
+    },
+    {
+      "name": "Rimini",
+      "lat": 44.06,
+      "lng": 12.568,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Argenta",
+      "lat": 44.61,
+      "lng": 11.84,
+      "kind": "place",
+      "label": "right"
+    },
+    {
+      "name": "Bologna",
+      "lat": 44.535,
+      "lng": 11.29,
+      "kind": "airport",
+      "label": "left"
+    }
+  ],
+  "map_route": true,
   "gallery": "",
   "coords": "44°29′N 11°20′E",
+  "seo_description": "",
   "order": 6
 }

@@ -1,0 +1,10 @@
+{
+  "title": "Testimonials",
+  "seo_description": "{count} testimonials from serving soldiers, veterans, families and historians who have toured the Italian battlefields with Frank de Planta.",
+  "heading": "What guests say",
+  "lede": "{count} accounts from people who have walked the ground with Frank: {military} from serving units, the rest from families, veterans and enthusiasts.",
+  "gallery": "testimonials",
+  "filter_all": "All",
+  "filter_military": "Military units",
+  "filter_private": "Private guests"
+}
