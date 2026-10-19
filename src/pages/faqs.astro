@@ -1,18 +1,20 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import { getFaqs, md } from '../lib/content';
 const f = await getFaqs();
+const c = (f: string, fmt?: any, v?: any) => cms('pages:faqs', f, fmt, v);
 ---
 <Base title={f.title || f.heading} description={f.seo_description}>
   <section class="band"><div class="wrap split">
     <div>
-      <h1>{f.heading}</h1>
-      {f.img && <figure style="margin-top:24px"><Img id={f.img.id} alt={f.img.cap} sizes="(max-width: 860px) 100vw, 40vw" /><figcaption>{f.img.cap}</figcaption></figure>}
+      <h1 {...c('heading')}>{f.heading}</h1>
+      {f.img && <figure style="margin-top:24px"><Img id={f.img.id} alt={f.img.cap} sizes="(max-width: 860px) 100vw, 40vw" cms={c('image', 'img')} /><figcaption {...c('image_caption')}>{f.img.cap}</figcaption></figure>}
     </div>
     <div class="faq">
       {f.faqs.map((q, i) => (
-        <details open={i === 0}><summary>{q.question}</summary><div class="a" set:html={md(q.answer)} /></details>
+        <details open={i === 0}><summary {...c(`faqs.${i}.question`)}>{q.question}</summary><div class="a" {...c(`faqs.${i}.answer`, 'md')} set:html={md(q.answer)} /></details>
       ))}
     </div>
   </div></section>

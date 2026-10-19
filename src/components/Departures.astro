@@ -1,14 +1,15 @@
 ---
 import { upcoming, gbp } from '../lib/tours';
 import { getTours, getWording, fill } from '../lib/content';
+import { cms } from '../lib/cms';
 const list = upcoming(await getTours());
 const W = (await getWording()).departures;
 ---
 <div class="departures">
   {list.map((t) => (
     <a class="dep" href={`/${t.slug}/`}>
-      <span class="when">{t.next!.dates}</span>
-      <span class="what">{t.next!.label}<small>{t.short}, {t.period}</small></span>
+      <span class="when" {...cms(`tours:${t.slug}`, 'next', 'dates')}>{t.next!.dates}</span>
+      <span class="what"><span {...cms(`tours:${t.slug}`, 'next_label')}>{t.next!.label}</span><small><span {...cms(`tours:${t.slug}`, 'short')}>{t.short}</span>, <span {...cms(`tours:${t.slug}`, 'period')}>{t.period}</span></small></span>
       <span class="len">{fill(W.days, { days: t.days })}</span>
       <span class="cost">{t.price ? <>{fill(W.price, { price: gbp(t.price.twin) })}<small>{fill(W.price_note, { basis: t.price.basis })}</small></> : W.no_price}</span>
     </a>

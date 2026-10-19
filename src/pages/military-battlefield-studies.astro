@@ -1,10 +1,12 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Quote from '../components/Quote.astro';
 import Enquiry from '../components/Enquiry.astro';
 import { getTestimonials, getPage, getQuotesById, fill, md, imageRef } from '../lib/content';
 const P = await getPage('military');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:military', f, fmt, v);
 const T = await getTestimonials();
 const mil = T.filter((t) => t.military);
 const feature = await getQuotesById(P.featured_quotes);
@@ -14,19 +16,19 @@ const photo = imageRef(P.image, P.image_caption);
 <Base title={P.title || P.heading} description={P.seo_description} image={photo.id}>
   <section class="band"><div class="wrap split">
     <div>
-      <h1>{P.heading}</h1>
-      {P.lede && <p class="lede">{P.lede}</p>}
-      {P.body && <Fragment set:html={md(P.body)} />}
+      <h1 {...c('heading')}>{P.heading}</h1>
+      {P.lede && <p class="lede" {...c('lede')}>{P.lede}</p>}
+      {P.body && <div {...c('body', 'md')} set:html={md(P.body)} />}
     </div>
-    <figure><Img id={photo.id} alt={photo.cap} sizes="(max-width: 860px) 100vw, 55vw" eager /><figcaption>{photo.cap}</figcaption></figure>
+    <figure><Img id={photo.id} alt={photo.cap} sizes="(max-width: 860px) 100vw, 55vw" eager cms={c('image', 'img')} /><figcaption {...c('image_caption')}>{photo.cap}</figcaption></figure>
   </div></section>
 
   {P.steps.length > 0 && (
     <section class="band alt"><div class="wrap split">
-      <div><h2>{P.steps_heading}</h2></div>
+      <div><h2 {...c('steps_heading')}>{P.steps_heading}</h2></div>
       <div>
         <ul class="stands" style="margin-top:6px">
-          {P.steps.map((s) => <li>{s.title && <><b>{s.title}</b> </>}{s.text}</li>)}
+          {P.steps.map((s, i) => <li>{s.title && <><b {...c(`steps.${i}.title`)}>{s.title}</b> </>}<span {...c(`steps.${i}.text`)}>{s.text}</span></li>)}
         </ul>
       </div>
     </div></section>
@@ -34,7 +36,7 @@ const photo = imageRef(P.image, P.image_caption);
 
   {feature.length > 0 && (
     <section class="band dark"><div class="wrap">
-      <div class="section-head"><h2>{P.quotes_heading}</h2>{P.quotes_link_label && <a href="/testimonials/" style="color:#fff">{fill(P.quotes_link_label, { count: mil.length })}</a>}</div>
+      <div class="section-head"><h2 {...c('quotes_heading')}>{P.quotes_heading}</h2>{P.quotes_link_label && <a href="/testimonials/" style="color:#fff" {...c('quotes_link_label', 'text', { count: mil.length })}>{fill(P.quotes_link_label, { count: mil.length })}</a>}</div>
       <div class="quotes3">{feature.map((q) => <Quote t={q} max={480} />)}</div>
     </div></section>
   )}
@@ -42,10 +44,10 @@ const photo = imageRef(P.image, P.image_caption);
   <section class="band"><div class="wrap split">
     <div>
       {P.units_count > 0 && <>
-        <h2>{P.units_heading}</h2>
+        <h2 {...c('units_heading')}>{P.units_heading}</h2>
         <ul class="books" style="columns:1">{units.slice(0, P.units_count).map((u) => <li>{u}</li>)}</ul>
       </>}
     </div>
-    <div><h2>{P.form_heading}</h2><Enquiry kind="military" /></div>
+    <div><h2 {...c('form_heading')}>{P.form_heading}</h2><Enquiry kind="military" /></div>
   </div></section>
 </Base>

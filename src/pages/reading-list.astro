@@ -1,7 +1,9 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import { getBooks, getGalleries, getPage, getWording, fill } from '../lib/content';
 const P = await getPage('reading');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:reading', f, fmt, v);
 const WG = (await getWording()).general;
 const lists = await getBooks();
 const { G } = await getGalleries();
@@ -10,16 +12,16 @@ import Gallery from '../components/Gallery.astro';
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>{P.heading}</h1>
-    {P.lede && <p class="lede">{fill(P.lede, Object.fromEntries(lists.map((l) => [l.slug, l.books.length])))}</p>}
-    <div class="field" style="max-width:420px"><label for="q">{P.search_label}</label><input id="q" type="search" placeholder={P.search_placeholder} autocomplete="off" /></div>
+    <h1 {...c('heading')}>{P.heading}</h1>
+    {P.lede && <p class="lede" {...c('lede', 'text', Object.fromEntries(lists.map((l) => [l.slug, l.books.length])))}>{fill(P.lede, Object.fromEntries(lists.map((l) => [l.slug, l.books.length])))}</p>}
+    <div class="field" style="max-width:420px"><label for="q" {...c('search_label')}>{P.search_label}</label><input id="q" type="search" placeholder={P.search_placeholder} autocomplete="off" /></div>
     {photos.length > 0 && <div style="margin:32px 0 32px"><Gallery items={photos} strip /></div>}
     <nav class="chips" aria-label={WG.aria_reading_lists}>{lists.map((l) => <a href={`#${l.slug}`}>{l.title}</a>)}</nav>
   </div></section>
   {lists.map((l, i) => (
     <section class={`band${i % 2 ? '' : ' alt'}`} id={l.slug}><div class="wrap">
-      <h2>{l.title}</h2>
-      <ul class="books">{l.books.map((b) => <li><cite>{b.title}</cite><span class="by">{b.author}</span></li>)}</ul>
+      <h2 {...cms(`books:${l.slug}`, 'title')}>{l.title}</h2>
+      <ul class="books">{l.books.map((b, i) => <li><cite {...cms(`books:${l.slug}`, `books.${i}.title`)}>{b.title}</cite><span class="by" {...cms(`books:${l.slug}`, `books.${i}.author`)}>{b.author}</span></li>)}</ul>
     </div></section>
   ))}
   <script>

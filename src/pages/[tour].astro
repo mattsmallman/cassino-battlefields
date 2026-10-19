@@ -4,6 +4,7 @@ import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
 import Quote from '../components/Quote.astro';
 import { gbp } from '../lib/tours';
+import { cms } from '../lib/cms';
 import { getTours, getGalleries, getTestimonials, getStands, getWording, fill } from '../lib/content';
 import OverviewMap from '../components/OverviewMap.astro';
 import StandMap from '../components/StandMap.astro';
@@ -16,6 +17,8 @@ const WD = await getWording();
 const W = WD.tour_page;
 const WGen = WD.general;
 const short = t.name.replace(/^The /, '');
+const T_ = `tours:${t.slug}`, WT = 'settings:wording';
+const wt = (k: string, vars?: Record<string, string | number>) => cms(WT, `tour_page.${k}`, 'text', vars);
 const gal = t.gallery ? G[t.gallery] ?? [] : [];
 const used = new Set([t.hero, ...t.images.map((i) => i.id)]);
 const strip = gal.filter((g) => !used.has(g.id)).slice(0, 10);
@@ -29,37 +32,37 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
 <Base title={`${t.name} ${W.title_suffix}`.trim()} description={t.seo || fill(W.seo_template, { tour: t.name, period: t.period, days: t.days, short: t.short })} image={t.hero}>
   {t.hero ? (
     <section class="hero short mapframe">
-      <Img id={t.hero} alt={t.heroCap || t.name} sizes="100vw" eager />
-      <span class="coord tl">{t.coords}</span>
-      {t.heroCap && <span class="coord br">{t.heroCap}</span>}
-      <div class="wrap"><p class="period">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
+      <Img id={t.hero} alt={t.heroCap || t.name} sizes="100vw" eager cms={cms(T_, 'hero_image', 'img')} />
+      <span class="coord tl" {...cms(T_, 'coords')}>{t.coords}</span>
+      {t.heroCap && <span class="coord br" {...cms(T_, 'hero_caption')}>{t.heroCap}</span>}
+      <div class="wrap"><p class="period" {...cms(T_, 'period')}>{t.period}</p><h1 {...cms(T_, 'name')}>{t.name}</h1><p {...cms(T_, 'short')}>{t.short}</p></div>
     </section>
   ) : (
     <section class="hero plain mapframe">
-      <span class="coord tl">{t.coords}</span>
-      <div class="wrap"><p class="period">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
+      <span class="coord tl" {...cms(T_, 'coords')}>{t.coords}</span>
+      <div class="wrap"><p class="period" {...cms(T_, 'period')}>{t.period}</p><h1 {...cms(T_, 'name')}>{t.name}</h1><p {...cms(T_, 'short')}>{t.short}</p></div>
     </section>
   )}
 
   <section class="band">
     <div class="wrap tour-grid">
       <div>
-        <p class="lede">{t.summary}</p>
+        <p class="lede" {...cms(T_, 'summary')}>{t.summary}</p>
         {t.map && t.map.places.length > 0 && <OverviewMap map={t.map} name={t.name} />}
         {stands && stands.stands.length > 0 && (
           <StandMap data={stands} tiles={stands.tiles} terrain={stands.terrain} bounds={stands.bounds} title={W.stand_map_heading} />
         )}
         {t.itinerary.length > 0 ? (
           <>
-            <h2 style="margin-top:48px">{W.day_by_day_heading}</h2>
+            <h2 style="margin-top:48px" {...wt('day_by_day_heading')}>{W.day_by_day_heading}</h2>
             <ol class="days">
               {t.itinerary.map((d, i) => (
                 <li class="day">
-                  <div class="dn">{W.day_label} <b>{d.n}</b></div>
+                  <div class="dn"><span {...wt('day_label')}>{W.day_label}</span> <b>{d.n}</b></div>
                   <div>
-                    <ul class="stands">{d.items.map((s) => <li>{s}</li>)}</ul>
+                    <ul class="stands">{d.items.map((s, j) => <li {...cms(T_, `itinerary.${i}.stands.${j}`)}>{s}</li>)}</ul>
                     {byDay(i).map((im) => (
-                      <figure class="inline-fig"><Img id={im.id} alt={im.cap} sizes="(max-width: 960px) 100vw, 60vw" /><figcaption>{im.cap}</figcaption></figure>
+                      <figure class="inline-fig"><Img id={im.id} alt={im.cap} sizes="(max-width: 960px) 100vw, 60vw" cms={cms(T_, `photos.${im.idx}.image`, 'img')} /><figcaption {...cms(T_, `photos.${im.idx}.caption`)}>{im.cap}</figcaption></figure>
                     ))}
                   </div>
                 </li>
@@ -67,52 +70,52 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
             </ol>
           </>
         ) : (
-          <p>{W.no_itinerary_text} <a href={enquire}>{W.no_itinerary_link}</a></p>
+          <p><span {...wt('no_itinerary_text')}>{W.no_itinerary_text}</span> <a href={enquire} {...wt('no_itinerary_link')}>{W.no_itinerary_link}</a></p>
         )}
         {t.included && t.included.length > 0 && (
           <>
-            <h2 style="margin-top:48px">{W.included_heading}</h2>
-            <ul>{t.included.map((x) => <li>{x}</li>)}</ul>
+            <h2 style="margin-top:48px" {...wt('included_heading')}>{W.included_heading}</h2>
+            <ul>{t.included.map((x, i) => <li {...cms(T_, `included.${i}`)}>{x}</li>)}</ul>
           </>
         )}
-        <h3>{W.not_included_heading}</h3>
-        <p>{fill(W.not_included_template, { excludes: t.excludes })}</p>
+        <h3 {...wt('not_included_heading')}>{W.not_included_heading}</h3>
+        <p {...wt('not_included_template', { excludes: t.excludes })}>{fill(W.not_included_template, { excludes: t.excludes })}</p>
       </div>
       <aside class="facts" aria-label={WGen.aria_key_facts}>
         <dl>
-          {t.next && <><dt>{W.facts_label_dates}</dt><dd>{t.next.dates}</dd></>}
-          <dt>{W.facts_label_duration}</dt><dd>{fill(W.facts_days, { days: t.days })}</dd>
-          <dt>{W.facts_label_arrive}</dt><dd>{t.arrive}</dd>
-          {t.depart !== t.arrive.split(' ')[0] && <><dt>{W.facts_label_depart}</dt><dd>{t.depart}</dd></>}
-          {t.base && <><dt>{W.facts_label_base}</dt><dd>{t.base}</dd></>}
-          {t.groupSize && <><dt>{W.facts_label_group}</dt><dd>{t.groupSize}</dd></>}
-          {t.walking && <><dt>{W.facts_label_walking}</dt><dd>{t.walking}</dd></>}
-          {t.deposit && <><dt>{W.facts_label_deposit}</dt><dd>{t.deposit}</dd></>}
+          {t.next && <><dt {...wt('facts_label_dates')}>{W.facts_label_dates}</dt><dd {...cms(T_, 'next', 'dates')}>{t.next.dates}</dd></>}
+          <dt {...wt('facts_label_duration')}>{W.facts_label_duration}</dt><dd {...wt('facts_days', { days: t.days })}>{fill(W.facts_days, { days: t.days })}</dd>
+          <dt {...wt('facts_label_arrive')}>{W.facts_label_arrive}</dt><dd {...cms(T_, 'arrive')}>{t.arrive}</dd>
+          {t.depart !== t.arrive.split(' ')[0] && <><dt {...wt('facts_label_depart')}>{W.facts_label_depart}</dt><dd {...cms(T_, 'depart')}>{t.depart}</dd></>}
+          {t.base && <><dt {...wt('facts_label_base')}>{W.facts_label_base}</dt><dd {...cms(T_, 'base')}>{t.base}</dd></>}
+          {t.groupSize && <><dt {...wt('facts_label_group')}>{W.facts_label_group}</dt><dd {...cms(T_, 'group_size')}>{t.groupSize}</dd></>}
+          {t.walking && <><dt {...wt('facts_label_walking')}>{W.facts_label_walking}</dt><dd {...cms(T_, 'walking')}>{t.walking}</dd></>}
+          {t.deposit && <><dt {...wt('facts_label_deposit')}>{W.facts_label_deposit}</dt><dd {...cms(T_, 'deposit')}>{t.deposit}</dd></>}
         </dl>
         {t.price ? (
           <>
-            <div class="price">{gbp(t.price.twin)}</div>
-            <div>{fill(W.price_twin_label, { basis: t.price.basis })}</div>
-            <div style="margin:6px 0 18px" class="muted">{fill(W.price_single_label, { price: gbp(t.price.single) })}</div>
+            <div class="price" {...cms(T_, 'price_twin', 'gbp')}>{gbp(t.price.twin)}</div>
+            <div {...wt('price_twin_label', { basis: t.price.basis })}>{fill(W.price_twin_label, { basis: t.price.basis })}</div>
+            <div style="margin:6px 0 18px" class="muted" {...wt('price_single_label', { price: gbp(t.price.single) })}>{fill(W.price_single_label, { price: gbp(t.price.single) })}</div>
           </>
-        ) : <p style="margin-bottom:18px">{W.no_price_text}</p>}
-        <a class="btn" href={enquire}>{t.next?.start ? W.book_label : W.register_label}</a>
-        {W.reduced_price_note && <p class="note">{W.reduced_price_note}</p>}
+        ) : <p style="margin-bottom:18px" {...wt('no_price_text')}>{W.no_price_text}</p>}
+        <a class="btn" href={enquire} {...wt(t.next?.start ? 'book_label' : 'register_label')}>{t.next?.start ? W.book_label : W.register_label}</a>
+        {W.reduced_price_note && <p class="note" {...wt('reduced_price_note')}>{W.reduced_price_note}</p>}
       </aside>
     </div>
   </section>
 
   {quotes.length > 0 && (
     <section class="band dark">
-      <div class="wrap"><div class="section-head"><h2>{fill(W.quotes_heading, { tour: short })}</h2><a href="/testimonials/" style="color:#fff">{W.quotes_link_label}</a></div>
+      <div class="wrap"><div class="section-head"><h2 {...wt('quotes_heading', { tour: short })}>{fill(W.quotes_heading, { tour: short })}</h2><a href="/testimonials/" style="color:#fff" {...wt('quotes_link_label')}>{W.quotes_link_label}</a></div>
       <div class="quotes3">{quotes.map((q) => <Quote t={q} />)}</div></div>
     </section>
   )}
 
   {strip.length > 0 && (
     <section class="band">
-      <div class="wrap"><div class="section-head"><h2>{fill(W.pictures_heading, { tour: t.name })}</h2><a href={`/gallery/#${t.gallery}`}>{fill(W.pictures_link_label, { tour: short })}</a></div>
-      <Gallery items={strip} strip /></div>
+      <div class="wrap"><div class="section-head"><h2 {...wt('pictures_heading', { tour: t.name })}>{fill(W.pictures_heading, { tour: t.name })}</h2><a href={`/gallery/#${t.gallery}`} {...wt('pictures_link_label', { tour: short })}>{fill(W.pictures_link_label, { tour: short })}</a></div>
+      <Gallery items={strip} strip source={t.gallery ? `galleries:${t.gallery}` : undefined} /></div>
     </section>
   )}
 </Base>

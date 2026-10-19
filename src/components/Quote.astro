@@ -1,7 +1,9 @@
 ---
-interface Props { t: { quote: string; name: string; from: string }; max?: number }
+import { cms } from '../lib/cms';
+import { trimQuote } from '../lib/format';
+interface Props { t: { id?: string; quote: string; name: string; from: string }; max?: number }
 const { t, max } = Astro.props;
-let q = t.quote;
-if (max && q.length > max) { const cut = q.slice(0, max); q = cut.slice(0, cut.lastIndexOf('. ') + 1) || cut + '…'; }
+const src = t.id ? `testimonials:${t.id}` : '';
+const b = (f: string, fmt: 'text' | 'quote' = 'text', vars?: Record<string, number>) => (src ? cms(src, f, fmt, vars) : {});
 ---
-<blockquote class="pull"><p>‘{q}’</p><footer><b>{t.name}</b>{t.from && <>, {t.from}</>}</footer></blockquote>
+<blockquote class="pull"><p {...b('quote', 'quote', max ? { max } : undefined)}>‘{trimQuote(t.quote, max)}’</p><footer><b {...b('name')}>{t.name}</b>{t.from && <>, <span {...b('from')}>{t.from}</span></>}</footer></blockquote>

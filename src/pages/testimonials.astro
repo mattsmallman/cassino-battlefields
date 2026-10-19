@@ -1,7 +1,9 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import { getTestimonials, getGalleries, getPage, getWording, fill } from '../lib/content';
 const P = await getPage('testimonialsPage');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:testimonials', f, fmt, v);
 const WG = (await getWording()).general;
 const T = await getTestimonials();
 const { G } = await getGalleries();
@@ -10,17 +12,17 @@ const mil = T.filter((t) => t.military).length;
 ---
 <Base title={P.title || P.heading} description={fill(P.seo_description, { count: T.length, military: mil })}>
   <section class="band"><div class="wrap">
-    <h1>{P.heading}</h1>
-    {P.lede && <p class="lede">{fill(P.lede, { count: T.length, military: mil })}</p>}
-    {P.gallery && (G[P.gallery] ?? []).length > 0 && <div style="margin:32px 0 40px"><Gallery items={G[P.gallery]} strip /></div>}
+    <h1 {...c('heading')}>{P.heading}</h1>
+    {P.lede && <p class="lede" {...c('lede', 'text', { count: T.length, military: mil })}>{fill(P.lede, { count: T.length, military: mil })}</p>}
+    {P.gallery && (G[P.gallery] ?? []).length > 0 && <div style="margin:32px 0 40px"><Gallery items={G[P.gallery]} strip source={`galleries:${P.gallery}`} /></div>}
     <div class="chips" role="group" aria-label={WG.aria_testimonial_filter}>
-      <button type="button" data-f="all" aria-pressed="true">{P.filter_all}</button>
-      <button type="button" data-f="mil" aria-pressed="false">{P.filter_military}</button>
-      <button type="button" data-f="civ" aria-pressed="false">{P.filter_private}</button>
+      <button type="button" data-f="all" aria-pressed="true" {...c('filter_all')}>{P.filter_all}</button>
+      <button type="button" data-f="mil" aria-pressed="false" {...c('filter_military')}>{P.filter_military}</button>
+      <button type="button" data-f="civ" aria-pressed="false" {...c('filter_private')}>{P.filter_private}</button>
     </div>
     <div class="tcols">
       {T.map((t) => (
-        <blockquote data-k={t.military ? 'mil' : 'civ'}><p>‘{t.quote}’</p><footer><b>{t.name}</b>{t.from}</footer></blockquote>
+        <blockquote data-k={t.military ? 'mil' : 'civ'}><p {...cms(`testimonials:${t.id}`, 'quote', 'quote')}>‘{t.quote}’</p><footer><b {...cms(`testimonials:${t.id}`, 'name')}>{t.name}</b><span {...cms(`testimonials:${t.id}`, 'from')}>{t.from}</span></footer></blockquote>
       ))}
     </div>
   </div></section>

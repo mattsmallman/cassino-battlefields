@@ -1,15 +1,17 @@
 ---
 import Img from './Img.astro';
 import { metaFor } from '../lib/images';
-interface Props { items: { id: string; cap: string }[]; strip?: boolean }
-const { items, strip = false } = Astro.props;
+import { cms } from '../lib/cms';
+interface Props { items: { id: string; cap: string; idx?: number }[]; strip?: boolean; source?: string }
+const { items, strip = false, source } = Astro.props;
+const bind = (i: { idx?: number }, f: string, fmt: 'text' | 'img' = 'text') => (source && i.idx !== undefined ? cms(source, `photos.${i.idx}.${f}`, fmt) : {});
 const big = (id: string) => { const m = metaFor(id); return m ? `/img/${id}-${m.sizes[m.sizes.length - 1]}.webp` : id; };
 ---
 <div class={strip ? 'strip' : 'gal'}>
   {items.map((i) => (
     <a href={big(i.id)} data-lb data-cap={i.cap}>
-      <Img id={i.id} alt={i.cap} sizes={strip ? '(max-width: 700px) 80vw, 30vw' : '(max-width: 700px) 100vw, 33vw'} />
-      {i.cap && <span>{i.cap}</span>}
+      <Img id={i.id} alt={i.cap} sizes={strip ? '(max-width: 700px) 80vw, 30vw' : '(max-width: 700px) 100vw, 33vw'} cms={bind(i, 'image', 'img')} />
+      {i.cap && <span {...bind(i, 'caption')}>{i.cap}</span>}
     </a>
   ))}
 </div>

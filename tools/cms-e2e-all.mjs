@@ -27,7 +27,7 @@ await p.goto('http://127.0.0.1:4400/admin/index.html', { waitUntil: 'networkidle
 await p.getByText('Work with Local Repository').click(); await p.waitForTimeout(4000);
 const base = p.url().split('#')[0];
 const read = (rel) => p.evaluate(async (rel) => { let d = await navigator.storage.getDirectory(); const parts = rel.split('/'); for (const x of parts.slice(0, -1)) d = await d.getDirectoryHandle(x); return await (await (await d.getFileHandle(parts.at(-1))).getFile()).text(); }, rel);
-const forms = ['pages/entries/home', 'pages/entries/tours', 'pages/entries/military', 'pages/entries/tracing', 'pages/entries/testimonials', 'pages/entries/gallery', 'pages/entries/reading', 'pages/entries/contact', 'pages/entries/not-found', 'pages/entries/about', 'pages/entries/faqs', 'settings/entries/site', 'settings/entries/wording', 'tours/entries/cassino'];
+const forms = ['pages/entries/home', 'pages/entries/tours_page', 'pages/entries/military', 'pages/entries/tracing', 'pages/entries/testimonials_page', 'pages/entries/gallery', 'pages/entries/reading', 'pages/entries/contact', 'pages/entries/not-found', 'pages/entries/about', 'pages/entries/faqs', 'settings/entries/site', 'settings/entries/wording', 'tours/entries/cassino'];
 const open = async (f) => {
   await p.goto(base + '#/collections/' + f.split('/')[0]); await p.waitForTimeout(800);
   await p.goto(base + '#/collections/' + f);

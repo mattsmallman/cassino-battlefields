@@ -1,21 +1,23 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Departures from '../components/Departures.astro';
 import Campaigns from '../components/Campaigns.astro';
 import { getPage } from '../lib/content';
 const P = await getPage('toursPage');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:tours', f, fmt, v);
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>{P.heading}</h1>
-    {P.lede && <p class="lede">{P.lede}</p>}
+    <h1 {...c('heading')}>{P.heading}</h1>
+    {P.lede && <p class="lede" {...c('lede')}>{P.lede}</p>}
     <div style="margin-top:40px"><Departures /></div>
   </div></section>
-  <section class="band alt"><div class="wrap"><div class="section-head"><h2>{P.itineraries_heading}</h2></div><Campaigns /></div></section>
+  <section class="band alt"><div class="wrap"><div class="section-head"><h2 {...c('itineraries_heading')}>{P.itineraries_heading}</h2></div><Campaigns /></div></section>
   {P.private_heading && (
     <section class="band"><div class="wrap split">
-      <div><h2>{P.private_heading}</h2></div>
-      <div>{P.private_text && <p class="lede">{P.private_text}</p>}{P.private_button && <a class="btn" href="/contact/?tour=Private%20group">{P.private_button}</a>}</div>
+      <div><h2 {...c('private_heading')}>{P.private_heading}</h2></div>
+      <div>{P.private_text && <p class="lede" {...c('private_text')}>{P.private_text}</p>}{P.private_button && <a class="btn" href="/contact/?tour=Private%20group" {...c('private_button')}>{P.private_button}</a>}</div>
     </div></section>
   )}
 </Base>

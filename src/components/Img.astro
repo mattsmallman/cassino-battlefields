@@ -1,7 +1,7 @@
 ---
 import { metaFor } from '../lib/images';
-interface Props { id: string; alt: string; sizes?: string; eager?: boolean; class?: string; }
-const { id, alt, sizes = '(max-width: 800px) 100vw, 50vw', eager = false, class: cls } = Astro.props;
+interface Props { id: string; alt: string; sizes?: string; eager?: boolean; class?: string; cms?: Record<string, string> }
+const { id, alt, sizes = '(max-width: 800px) 100vw, 50vw', eager = false, class: cls, cms = {} } = Astro.props;
 const m = metaFor(id);
 let src: string, srcset: string | undefined, w: number | undefined, h: number | undefined;
 if (m) {
@@ -14,4 +14,4 @@ if (m) {
 }
 ---
 <img src={src} srcset={srcset} sizes={srcset ? sizes : undefined} width={w} height={h} alt={alt} class={cls}
-  loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+  loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" {...cms} />

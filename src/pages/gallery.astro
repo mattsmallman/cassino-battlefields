@@ -1,26 +1,28 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Gallery from '../components/Gallery.astro';
 import { getGalleries, getPage, getWording, fill } from '../lib/content';
 const P = await getPage('galleryPage');
 const WG = (await getWording()).general;
 const N = P.initial_count;
+const c = (f: string, fmt?: any, v?: any) => cms('pages:gallery', f, fmt, v);
 const { G: GG, sections } = await getGalleries();
 const G: any = GG;
 const sets = sections.map((s) => [s.slug, s.title] as const);
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>{P.heading}</h1>
-    {P.lede && <p class="lede">{P.lede}</p>}
+    <h1 {...c('heading')}>{P.heading}</h1>
+    {P.lede && <p class="lede" {...c('lede')}>{P.lede}</p>}
     <nav class="chips" aria-label={WG.aria_gallery_sections}>{sets.map(([k, n]) => <a href={`#${k}`}>{n}</a>)}</nav>
   </div></section>
   {sets.map(([k, n], i) => (
     <section class={`band${i % 2 ? '' : ' alt'}`} id={k}><div class="wrap">
-      <div class="section-head"><h2>{n}</h2>{P.count_label && <span class="muted">{fill(P.count_label, { count: G[k].length })}</span>}</div>
-      <Gallery items={G[k].slice(0, N)} />
+      <div class="section-head"><h2 {...cms(`galleries:${k}`, 'title')}>{n}</h2>{P.count_label && <span class="muted" {...c('count_label', 'text', { count: G[k].length })}>{fill(P.count_label, { count: G[k].length })}</span>}</div>
+      <Gallery items={G[k].slice(0, N)} source={`galleries:${k}`} />
       {G[k].length > N && (
-        <details class="more"><summary class="btn ghost">{fill(P.show_all_label, { count: G[k].length })}</summary><Gallery items={G[k].slice(N)} /></details>
+        <details class="more"><summary class="btn ghost" {...c('show_all_label', 'text', { count: G[k].length })}>{fill(P.show_all_label, { count: G[k].length })}</summary><Gallery items={G[k].slice(N)} source={`galleries:${k}`} /></details>
       )}
     </div></section>
   ))}

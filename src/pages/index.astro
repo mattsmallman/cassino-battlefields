@@ -1,4 +1,5 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Departures from '../components/Departures.astro';
@@ -7,6 +8,7 @@ import Quote from '../components/Quote.astro';
 import Gallery from '../components/Gallery.astro';
 import { getTestimonials, getGalleries, getPage, getSettings, getQuotesById, fill, md, mdInline, imageRef } from '../lib/content';
 const P = await getPage('home');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:home', f, fmt, v);
 const site = await getSettings();
 const T = await getTestimonials();
 const { G } = await getGalleries();
@@ -17,20 +19,20 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
 ---
 <Base title={site.business_name} description={P.seo_description} image={hero.id}>
   <section class="hero mapframe">
-    <Img id={hero.id} alt={hero.cap} sizes="100vw" eager />
-    {(P.hero_place || P.hero_coords) && <span class="coord tl">{P.hero_place && <span class="place">{P.hero_place}</span>}{P.hero_coords}</span>}
+    <Img id={hero.id} alt={hero.cap} sizes="100vw" eager cms={c('hero_image', 'img')} />
+    {(P.hero_place || P.hero_coords) && <span class="coord tl">{P.hero_place && <span class="place" {...c('hero_place')}>{P.hero_place}</span>}<span {...c('hero_coords')}>{P.hero_coords}</span></span>}
     <div class="wrap">
-      <h1>{P.hero_heading}</h1>
-      {P.hero_text && <p set:html={mdInline(P.hero_text)} />}
-      <div class="actions">{P.hero_primary_label && <a class="btn" href="#departures">{P.hero_primary_label}</a>}{P.hero_secondary_label && <a class="btn ghost" href="/contact/">{P.hero_secondary_label}</a>}</div>
+      <h1 {...c('hero_heading')}>{P.hero_heading}</h1>
+      {P.hero_text && <p {...c('hero_text', 'mdinline')} set:html={mdInline(P.hero_text)} />}
+      <div class="actions">{P.hero_primary_label && <a class="btn" href="#departures" {...c('hero_primary_label')}>{P.hero_primary_label}</a>}{P.hero_secondary_label && <a class="btn ghost" href="/contact/" {...c('hero_secondary_label')}>{P.hero_secondary_label}</a>}</div>
     </div>
   </section>
 
   <section class="band" id="departures">
     <div class="wrap">
-      <div class="section-head"><h2>{P.departures_heading}</h2>{P.departures_link_label && <a href="/tours/">{P.departures_link_label}</a>}</div>
+      <div class="section-head"><h2 {...c('departures_heading')}>{P.departures_heading}</h2>{P.departures_link_label && <a href="/tours/" {...c('departures_link_label')}>{P.departures_link_label}</a>}</div>
       <Departures />
-      {P.departures_note && <p class="muted" style="margin-top:16px;font-size:1rem">{P.departures_note}</p>}
+      {P.departures_note && <p class="muted" style="margin-top:16px;font-size:1rem" {...c('departures_note')}>{P.departures_note}</p>}
     </div>
   </section>
 
@@ -38,11 +40,11 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
     <section class="band alt">
       <div class="wrap split">
         <div>
-          <h2>{P.approach_heading}</h2>
+          <h2 {...c('approach_heading')}>{P.approach_heading}</h2>
         </div>
         <div>
-          {P.approach_lede && <p class="lede">{P.approach_lede}</p>}
-          {P.approach_body && <Fragment set:html={md(P.approach_body)} />}
+          {P.approach_lede && <p class="lede" {...c('approach_lede')}>{P.approach_lede}</p>}
+          {P.approach_body && <div {...c('approach_body', 'md')} set:html={md(P.approach_body)} />}
         </div>
       </div>
     </section>
@@ -50,7 +52,7 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
 
   <section class="band">
     <div class="wrap">
-      <div class="section-head"><h2>{P.campaigns_heading}</h2></div>
+      <div class="section-head"><h2 {...c('campaigns_heading')}>{P.campaigns_heading}</h2></div>
       <Campaigns />
     </div>
   </section>
@@ -58,7 +60,7 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
   {quotes.length > 0 && (
     <section class="band dark">
       <div class="wrap">
-        <div class="section-head"><h2>{P.quotes_heading}</h2>{P.quotes_link_label && <a href="/testimonials/" style="color:#fff">{fill(P.quotes_link_label, { count: T.length })}</a>}</div>
+        <div class="section-head"><h2 {...c('quotes_heading')}>{P.quotes_heading}</h2>{P.quotes_link_label && <a href="/testimonials/" style="color:#fff" {...c('quotes_link_label', 'text', { count: T.length })}>{fill(P.quotes_link_label, { count: T.length })}</a>}</div>
         <div class="quotes3">{quotes.map((q) => <Quote t={q} max={330} />)}</div>
       </div>
     </section>
@@ -68,9 +70,9 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
     <section class="band">
       <div class="wrap split">
         <div>
-          <h2>{P.military_heading}</h2>
-          {P.military_text && <p>{P.military_text}</p>}
-          {P.military_button && <a class="btn ghost" href="/military-battlefield-studies/">{P.military_button}</a>}
+          <h2 {...c('military_heading')}>{P.military_heading}</h2>
+          {P.military_text && <p {...c('military_text')}>{P.military_text}</p>}
+          {P.military_button && <a class="btn ghost" href="/military-battlefield-studies/" {...c('military_button')}>{P.military_button}</a>}
         </div>
         <div>
           {unitQuote && <Quote t={unitQuote} max={420} />}
@@ -82,11 +84,11 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
   {P.books.length > 0 && (
     <section class="band alt">
       <div class="wrap">
-        <div class="section-head"><h2>{P.books_heading}</h2></div>
-        {P.books_intro && <p class="lede" style="margin-bottom:32px" set:html={mdInline(P.books_intro)} />}
+        <div class="section-head"><h2 {...c('books_heading')}>{P.books_heading}</h2></div>
+        {P.books_intro && <p class="lede" style="margin-bottom:32px" {...c('books_intro', 'mdinline')} set:html={mdInline(P.books_intro)} />}
         <div class="books-pub">
-          {P.books.map((b) => (
-            <div><Img id={imageRef(b.image).id} alt={`Book cover: ${b.title}`} sizes="(max-width: 700px) 50vw, 25vw" /><h3>{b.title}</h3>{b.isbn && <p>{P.books_isbn_label} {b.isbn}</p>}</div>
+          {P.books.map((b, i) => (
+            <div><Img id={imageRef(b.image).id} alt={`Book cover: ${b.title}`} sizes="(max-width: 700px) 50vw, 25vw" cms={c(`books.${i}.image`, 'img')} /><h3 {...c(`books.${i}.title`)}>{b.title}</h3>{b.isbn && <p><span {...c('books_isbn_label')}>{P.books_isbn_label}</span> <span {...c(`books.${i}.isbn`)}>{b.isbn}</span></p>}</div>
           ))}
         </div>
       </div>
@@ -96,8 +98,8 @@ const strip = P.archive_gallery ? G[P.archive_gallery] ?? [] : [];
   {strip.length > 0 && (
     <section class="band">
       <div class="wrap">
-        <div class="section-head"><h2>{P.archive_heading}</h2>{P.archive_link_label && <a href="/gallery/">{P.archive_link_label}</a>}</div>
-        <Gallery items={strip} strip />
+        <div class="section-head"><h2 {...c('archive_heading')}>{P.archive_heading}</h2>{P.archive_link_label && <a href="/gallery/" {...c('archive_link_label')}>{P.archive_link_label}</a>}</div>
+        <Gallery items={strip} strip source={P.archive_gallery ? `galleries:${P.archive_gallery}` : undefined} />
       </div>
     </section>
   )}

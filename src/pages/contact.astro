@@ -1,20 +1,22 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Enquiry from '../components/Enquiry.astro';
 import { getSettings, getPage } from '../lib/content';
 const site = await getSettings();
 const P = await getPage('contact');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:contact', f, fmt, v);
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap split">
     <div>
-      <h1>{P.heading}</h1>
-      {P.intro && <p class="lede">{P.intro}</p>}
-      <h3 style="margin-top:32px">{P.email_label}</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      {site.phones.length > 0 && <><h3>{P.phone_label}</h3><p>{site.phones.map((p, i) => <>{i > 0 && <br />}<a href={p.href}>{p.number}</a>{p.label && <span class="muted"> ({p.label.toLowerCase()})</span>}</>)}</p></>}
-      {site.addressLines.length > 0 && <><h3>{P.post_label}</h3><p>{site.addressLines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></>}
-      {site.facebook_url && <><h3>{P.facebook_heading}</h3><p><a href={site.facebook_url} rel="noopener">{site.facebook_label || 'Facebook'}</a></p></>}
+      <h1 {...c('heading')}>{P.heading}</h1>
+      {P.intro && <p class="lede" {...c('intro')}>{P.intro}</p>}
+      <h3 style="margin-top:32px" {...c('email_label')}>{P.email_label}</h3><p><a href={`mailto:${site.email}`} {...cms('settings:site', 'email')}>{site.email}</a></p>
+      {site.phones.length > 0 && <><h3 {...c('phone_label')}>{P.phone_label}</h3><p>{site.phones.map((p, i) => <>{i > 0 && <br />}<a href={p.href} {...cms('settings:site', `phones.${i}.number`)}>{p.number}</a>{p.label && <span class="muted"> ({p.label.toLowerCase()})</span>}</>)}</p></>}
+      {site.addressLines.length > 0 && <><h3 {...c('post_label')}>{P.post_label}</h3><p>{site.addressLines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></>}
+      {site.facebook_url && <><h3 {...c('facebook_heading')}>{P.facebook_heading}</h3><p><a href={site.facebook_url} rel="noopener"><span {...cms('settings:site', 'facebook_label')}>{site.facebook_label || 'Facebook'}</span></a></p></>}
     </div>
-    <div>{P.form_heading && <h2>{P.form_heading}</h2>}<Enquiry /></div>
+    <div>{P.form_heading && <h2 {...c('form_heading')}>{P.form_heading}</h2>}<Enquiry /></div>
   </div></section>
 </Base>

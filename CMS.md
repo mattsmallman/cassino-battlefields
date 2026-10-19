@@ -27,12 +27,35 @@ Things worth trying:
 - **Pages → FAQs:** add a question or reword an answer. The cancellation charges are a table; edit it in the editor's source view so the rows stay intact.
 - **Photo galleries → Cassino:** drag photos to reorder them, edit a caption, or upload a new photo. Every photo, old and new, lives once in the photo library (`public/img/library/`). The next `npm run dev` or build makes web-sized versions of it; until then the original is shown.
 - **Stand maps → cassino:** change a stand's latitude and longitude, or set the status to "Confirmed by Frank" to remove the draft warning from the Cassino page.
+- **Watch the preview:** edit Cassino's price or dates and see them change on the real page as you type.
 - **Pages → Home page:** change the headline, or pick different featured testimonials from the list.
 - **Tours → New:** create a tour with a date and two map places. It gets its own page, appears in "Next departures" and joins the footer menu.
 - **Site settings → Wording:** change "Book a place" (Tour pages group). Every tour page's button changes.
 - **Safety net:** in the raw file, set a price to some text, or an end date before the start date, then run `npm run build`. It fails with a message naming the field.
 
 Run `git restore src/content public/img/library && git clean -fd public/img/library` to throw away test edits.
+
+## The preview pane shows the real site
+
+The right-hand pane loads the actual page for the entry being edited, with the site's own layout, fonts and photos:
+
+| Editing | Preview shows |
+| --- | --- |
+| A tour or its stand map | That tour's page |
+| A page (Home, FAQs, About …) | That page |
+| A testimonial | The Testimonials page |
+| A gallery | The page it appears on (Home, About, Testimonials, Reading list) or the Gallery page |
+| A reading list | The Reading list page |
+| Site settings → Contact details | The Contact page (header and footer included) |
+| Site settings → Wording | The Cassino tour page, where most of the wording appears |
+
+**Text updates as you type:** headings, paragraphs, prices, dates, captions, itinerary stands, testimonials, button labels and contact details, formatted exactly as the site formats them. The preview scrolls to whatever changed and highlights it briefly.
+
+**After saving:** adding, removing or reordering items, choosing a different photo or gallery, and anything that changes which sections appear. Locally the dev server rebuilds within a second or two, so the preview refreshes almost at once. On the live site it's the next rebuild. A banner at the top of the preview says this.
+
+How it works: `public/admin/preview.js` registers the preview for every collection and loads the page with `?cms-preview`. That loads `src/lib/preview-bridge.ts`, which visitors never download. The editor posts each change to the draft into the page, and the bridge updates every element marked with `data-cms="<collection>:<entry>|<field>"`, using the same formatting code as the build (`src/lib/format.ts`). Templates add these markers with the `cms()` helper in `src/lib/cms.ts`. A new field shown on the site needs a marker to update live; without one it still appears after saving.
+
+Chrome logs a notice that the editor's preview frame allows both scripts and same-origin access. That frame belongs to Sveltia and only ever shows this site's own pages, so it's expected.
 
 ## What can be edited
 

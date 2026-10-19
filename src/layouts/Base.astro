@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Lightbox from '../components/Lightbox.astro';
 import { getSettings, getTours, getWording } from '../lib/content';
 import { metaFor } from '../lib/images';
+import { cms } from '../lib/cms';
+const S = (f: string) => cms('settings:site', f);
 const site = await getSettings();
 const footTours = await getTours();
 interface Props { title: string; description: string; image?: string; }
@@ -35,16 +37,16 @@ const noindex = import.meta.env.PUBLIC_NOINDEX === '1';
   <slot name="head" />
 </head>
 <body>
-  <a class="skip" href="#main">{G.skip_link}</a>
+  <a class="skip" href="#main" {...cms('settings:wording', 'general.skip_link')}>{G.skip_link}</a>
   <header class="site-head">
     <div class="wrap">
-      <a class="brand" href="/"><b>{site.business_name}</b>{site.tagline && <span>{site.tagline}</span>}</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">{G.menu_button}</button>
+      <a class="brand" href="/"><b {...S('business_name')}>{site.business_name}</b>{site.tagline && <span {...S('tagline')}>{site.tagline}</span>}</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" {...cms('settings:wording', 'general.menu_button')}>{G.menu_button}</button>
       <nav class="nav" id="nav" aria-label={G.aria_main_nav}>
-        {nav.map(([href, label]) => (
-          <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>
+        {nav.map(([href, label], i) => (
+          <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined} {...S(`navigation.${i}.label`)}>{label}</a>
         ))}
-        {site.enquire_label && <a class="btn" href={site.enquire_link || '/contact/'}>{site.enquire_label}</a>}
+        {site.enquire_label && <a class="btn" href={site.enquire_link || '/contact/'} {...S('enquire_label')}>{site.enquire_label}</a>}
       </nav>
     </div>
   </header>
@@ -53,22 +55,22 @@ const noindex = import.meta.env.PUBLIC_NOINDEX === '1';
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <h4>{site.business_name}</h4>
-          {site.footer_blurb && <p>{site.footer_blurb}</p>}
+          <h4 {...S('business_name')}>{site.business_name}</h4>
+          {site.footer_blurb && <p {...S('footer_blurb')}>{site.footer_blurb}</p>}
           {site.addressLines.length > 0 && <p>{site.addressLines.join(', ')}</p>}
         </div>
         <div>
-          <h4>{site.footer_contact_heading}</h4>
+          <h4 {...S('footer_contact_heading')}>{site.footer_contact_heading}</h4>
           <ul>
-            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><a href={`mailto:${site.email}`} {...S('email')}>{site.email}</a></li>
             {site.phones.map((p) => <li><a href={p.href}>{p.short}</a></li>)}
             {site.facebook_url && <li><a href={site.facebook_url} rel="noopener">{G.footer_facebook}</a></li>}
           </ul>
         </div>
         <div>
-          <h4>{site.footer_tours_heading}</h4>
+          <h4 {...S('footer_tours_heading')}>{site.footer_tours_heading}</h4>
           <ul>
-            {footTours.map((t) => <li><a href={`/${t.slug}/`}>{t.name}</a></li>)}
+            {footTours.map((t) => <li><a href={`/${t.slug}/`} {...cms(`tours:${t.slug}`, 'name')}>{t.name}</a></li>)}
           </ul>
         </div>
       </div>
@@ -76,6 +78,10 @@ const noindex = import.meta.env.PUBLIC_NOINDEX === '1';
     </div>
   </footer>
   <Lightbox />
+  <script>
+    // Inside the site editor's preview: load the live-preview bridge.
+    if (new URLSearchParams(location.search).has('cms-preview')) import('../lib/preview-bridge');
+  </script>
   <script>
     const b = document.querySelector('.menu-toggle')!; const n = document.getElementById('nav')!;
     b.addEventListener('click', () => { const o = n.classList.toggle('open'); b.setAttribute('aria-expanded', String(o)); });

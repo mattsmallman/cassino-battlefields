@@ -639,7 +639,7 @@ collections:
       display_fields:
       - title
       required: false
-  - name: tours
+  - name: tours_page
     label: Tours and dates page
     file: src/content/pages/tours.json
     format: json
@@ -845,7 +845,7 @@ collections:
       - from
       required: false
       multiple: true
-  - name: testimonials
+  - name: testimonials_page
     label: Testimonials page
     file: src/content/pages/testimonials.json
     format: json

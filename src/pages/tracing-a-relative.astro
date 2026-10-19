@@ -1,33 +1,35 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Quote from '../components/Quote.astro';
 import Enquiry from '../components/Enquiry.astro';
 import { getPage, getQuotesById, md, imageRef } from '../lib/content';
 const P = await getPage('tracing');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:tracing', f, fmt, v);
 const [quote] = P.quote ? await getQuotesById([P.quote]) : [];
 const fam = await getQuotesById(P.family_quotes);
 const img = imageRef(P.image, P.image_caption);
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap split">
-    <figure><Img id={img.id} alt={img.cap} sizes="(max-width: 860px) 100vw, 40vw" eager /><figcaption>{img.cap}</figcaption></figure>
+    <figure><Img id={img.id} alt={img.cap} sizes="(max-width: 860px) 100vw, 40vw" eager cms={c('image', 'img')} /><figcaption {...c('image_caption')}>{img.cap}</figcaption></figure>
     <div>
-      <h1>{P.heading}</h1>
-      {P.lede && <p class="lede">{P.lede}</p>}
-      {P.body && <Fragment set:html={md(P.body)} />}
+      <h1 {...c('heading')}>{P.heading}</h1>
+      {P.lede && <p class="lede" {...c('lede')}>{P.lede}</p>}
+      {P.body && <div {...c('body', 'md')} set:html={md(P.body)} />}
       {quote && <Quote t={quote} />}
     </div>
   </div></section>
   <section class="band alt"><div class="wrap split">
     <div>
-      <h2>{P.helps_heading}</h2>
-      {P.helps && <Fragment set:html={md(P.helps)} />}
+      <h2 {...c('helps_heading')}>{P.helps_heading}</h2>
+      {P.helps && <div {...c('helps', 'md')} set:html={md(P.helps)} />}
     </div>
-    <div><h2>{P.form_heading}</h2><Enquiry kind="relative" /></div>
+    <div><h2 {...c('form_heading')}>{P.form_heading}</h2><Enquiry kind="relative" /></div>
   </div></section>
   {fam.length > 0 && (
-    <section class="band dark"><div class="wrap"><div class="section-head"><h2>{P.families_heading}</h2></div>
+    <section class="band dark"><div class="wrap"><div class="section-head"><h2 {...c('families_heading')}>{P.families_heading}</h2></div>
       <div class="quotes3">{fam.map((q) => <Quote t={q} />)}</div></div></section>
   )}
 </Base>

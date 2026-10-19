@@ -4,17 +4,9 @@ import { marked } from 'marked';
 import { keyFor } from './images';
 import type { Tour } from './tours';
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-export function dateRange(start: string, end: string): string {
-  if (!start) return '';
-  const [y1, m1, d1] = start.split('-').map(Number);
-  if (!end || end === start) return `${d1} ${MONTHS[m1 - 1]} ${y1}`;
-  const [y2, m2, d2] = end.split('-').map(Number);
-  if (y1 !== y2) return `${d1} ${MONTHS[m1 - 1]} ${y1} – ${d2} ${MONTHS[m2 - 1]} ${y2}`;
-  if (m1 !== m2) return `${d1} ${MONTHS[m1 - 1]} – ${d2} ${MONTHS[m2 - 1]} ${y2}`;
-  return `${d1}–${d2} ${MONTHS[m1 - 1]} ${y1}`;
-}
-const pic = (p: { image: string; caption: string }) => ({ id: keyFor(p.image), cap: p.caption });
+import { dateRange, fill } from './format';
+export { dateRange, fill };
+const pic = (p: { image: string; caption: string }, idx: number) => ({ id: keyFor(p.image), cap: p.caption, idx });
 
 export async function getTours(): Promise<Tour[]> {
   const today = new Date().toISOString().slice(0, 10);
@@ -40,7 +32,7 @@ export async function getTours(): Promise<Tour[]> {
 }
 
 export async function getTestimonials() {
-  return (await getCollection('testimonials')).map((e) => e.data).sort((a, b) => a.order - b.order);
+  return (await getCollection('testimonials')).map((e) => ({ id: e.id, ...e.data })).sort((a, b) => a.order - b.order);
 }
 
 export async function getGalleries() {
@@ -92,12 +84,9 @@ export async function getPage<N extends PageName>(name: N) {
   return (await getCollection(name))[0].data as Awaited<ReturnType<typeof getCollection<N>>>[number]['data'];
 }
 export async function getWording() { return (await getCollection('wording'))[0].data; }
-// Fill {tokens} in editable text, e.g. fill('Read all {count} testimonials', { count: 133 }).
-export const fill = (s: string | undefined, v: Record<string, string | number> = {}) =>
-  (s ?? '').replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
 // Testimonials chosen by file name in the CMS; missing ones are skipped.
 export async function getQuotesById(ids: string[]) {
   const all = await getCollection('testimonials');
-  return ids.map((id) => all.find((e) => e.id === id)?.data).filter((x): x is NonNullable<typeof x> => !!x);
+  return ids.map((id) => { const e = all.find((x) => x.id === id); return e ? { id: e.id, ...e.data } : undefined; }).filter((x): x is NonNullable<typeof x> => !!x);
 }
 export const imageRef = (path: string, cap = '') => ({ id: keyFor(path), cap });

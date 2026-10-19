@@ -1,12 +1,14 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import { getPage } from '../lib/content';
 const P = await getPage('notFound');
+const c = (f: string, fmt?: any, v?: any) => cms('pages:not-found', f, fmt, v);
 ---
 <Base title={P.title || P.heading} description={P.seo_description}>
   <section class="band"><div class="wrap">
-    <h1>{P.heading}</h1>
-    {P.text && <p class="lede">{P.text}</p>}
+    <h1 {...c('heading')}>{P.heading}</h1>
+    {P.text && <p class="lede" {...c('text')}>{P.text}</p>}
     <p>{P.primary_label && <a class="btn" href={P.primary_link || '/'}>{P.primary_label}</a>} {P.secondary_label && <a class="btn ghost" href={P.secondary_link || '/contact/'}>{P.secondary_label}</a>}</p>
   </div></section>
 </Base>

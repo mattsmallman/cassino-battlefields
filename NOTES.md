@@ -23,6 +23,7 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
   - Every tour page has a build-time SVG overview map.
   - Cassino has an interactive 3D stand map using self-hosted tiles and terrain, with no third-party requests.
 - **Site editor (Sveltia CMS) built and tested locally.** Content now lives in `src/content/` and is checked at build time. Tested end to end: a date change, a price change and a new testimonial all saved and showed on the rebuilt site, and an invalid price failed the build. See [CMS.md](CMS.md).
+- **Real-site previews.** The editor's preview pane shows the actual page being edited. Text updates live as you type, with structural changes after saving. Checked with pixel comparisons: the markers this adds change nothing visible on the public site.
 - **Everything editable.** Every page's text, the menu, the shared wording (tour-page labels, form labels, map labels), featured testimonials and per-tour facts now come from content files with editor forms. New tours, including their overview maps, can be created in the editor. A page-by-page comparison showed the site unchanged by the move.
 - **Two build fixes.** A fresh clone failed to build because `src/data/` (which only holds generated files) didn't exist. The home-page hero photo was broken in the previous commit. Both fixed, and every image reference on every page is now checked.
 - **Stand map fix.** Clicking a stand in the list always flew to the first stand after the CMS move (the stands had lost their IDs). Fixed.
@@ -72,7 +73,6 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
 - **Editor follow-ups:**
   - a map pin-picker for stand positions in place of typing latitude and longitude;
   - an icon/type field on itinerary stands, when iconography is done;
-  - a preview template so the editor's preview pane looks like the real page.
 - **Enquiry form.** At the moment it opens the visitor's email app with the details pre-filled. It needs a real handler, for example a small endpoint sending through SES with the domain verified, plus spam protection such as Cloudflare Turnstile.
 - **Newsletter or register-interest capture** is not built.
 

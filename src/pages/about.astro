@@ -1,26 +1,28 @@
 ---
+import { cms } from '../lib/cms';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
 import { getGalleries, getAbout, md, mdInline } from '../lib/content';
 const a = await getAbout();
+const c = (f: string, fmt?: any, v?: any) => cms('pages:about', f, fmt, v);
 const { G } = await getGalleries();
 const rest = a.gallery ? G[a.gallery] ?? [] : [];
 ---
 <Base title={a.title || `About ${a.heading}`} description={a.seo_description} image={a.lead.id}>
   <section class="band"><div class="wrap split">
-    <figure><Img id={a.lead.id} alt={a.lead.cap} sizes="(max-width: 860px) 100vw, 40vw" eager /><figcaption>{a.lead.cap}</figcaption></figure>
+    <figure><Img id={a.lead.id} alt={a.lead.cap} sizes="(max-width: 860px) 100vw, 40vw" eager cms={c('lead_image', 'img')} /><figcaption {...c('lead_caption')}>{a.lead.cap}</figcaption></figure>
     <div>
-      <h1>{a.heading}</h1>
-      <p class="lede">{a.lede}</p>
-      {a.body && <Fragment set:html={md(a.body)} />}
+      <h1 {...c('heading')}>{a.heading}</h1>
+      <p class="lede" {...c('lede')}>{a.lede}</p>
+      {a.body && <div {...c('body', 'md')} set:html={md(a.body)} />}
       {a.research.length > 0 && (
-        <ul>{a.research.map((r) => <li><b>{r.year}</b> <Fragment set:html={mdInline(r.text)} /></li>)}</ul>
+        <ul>{a.research.map((r, i) => <li><b {...c(`research.${i}.year`)}>{r.year}</b> <span {...c(`research.${i}.text`, 'mdinline')} set:html={mdInline(r.text)} /></li>)}</ul>
       )}
-      {a.contact_button && <a class="btn" href="/contact/">{a.contact_button}</a>}
+      {a.contact_button && <a class="btn" href="/contact/" {...c('contact_button')}>{a.contact_button}</a>}
     </div>
   </div></section>
   {rest.length > 0 && (
-    <section class="band alt"><div class="wrap"><div class="section-head"><h2>{a.gallery_heading || 'Photographs'}</h2></div><Gallery items={rest} /></div></section>
+    <section class="band alt"><div class="wrap"><div class="section-head"><h2 {...c('gallery_heading')}>{a.gallery_heading || 'Photographs'}</h2></div><Gallery items={rest} source={a.gallery ? `galleries:${a.gallery}` : undefined} /></div></section>
   )}
 </Base>
