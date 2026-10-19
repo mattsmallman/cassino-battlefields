@@ -10,7 +10,7 @@ import { tours } from '../lib/tours';
       ) : (
         <div class="ph blank"><span>{t.name.replace(/^The /, '')}</span><span class="coord">{t.coords}</span></div>
       )}
-      <div class="period">{t.period} · {t.days} days</div>
+      <div class="period">{t.period}<span class="days">{t.days} days</span></div>
       <h3>{t.name}</h3>
       <p>{t.short}</p>
     </a>

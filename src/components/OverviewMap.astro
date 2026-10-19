@@ -1,0 +1,70 @@
+---
+// Build-time SVG: Italy locator plus a regional map with the tour's places.
+import { feature } from 'topojson-client';
+import { geoMercator, geoPath } from 'd3-geo';
+import world from 'world-atlas/countries-10m.json';
+import { overview } from '../lib/places';
+interface Props { slug: string; name: string }
+const { slug, name } = Astro.props;
+const o = overview[slug];
+const countries = feature(world as any, (world as any).objects.countries) as any;
+const near = countries.features.filter((f: any) => ['380', '674', '336', '250', '756', '705', '191', '008', '470'].includes(String(f.id)));
+const italy = countries.features.find((f: any) => String(f.id) === '380');
+const W = 640, H = 460;
+const [w, s, e, n] = o.bbox;
+const box = { type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[w, s], [w, n], [e, n], [e, s], [w, s]]] } } as any;
+const proj = geoMercator().fitExtent([[0, 0], [W, H]], box);
+const path = geoPath(proj);
+const pts = o.places.map((p) => ({ ...p, xy: proj([p.lng, p.lat])! }));
+const route = pts.filter((p) => p.kind !== 'place' || slug === 'rome-to-bologna');
+// locator
+const LW = 150, LH = 190;
+const lproj = geoMercator().fitExtent([[6, 6], [LW - 6, LH - 6]], italy);
+const lpath = geoPath(lproj);
+const [lx0, ly0] = lproj([w, n])!; const [lx1, ly1] = lproj([e, s])!;
+const ticks = Array.from({ length: 9 }, (_, i) => i);
+---
+<figure class="ovmap">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Map of the ${name} tour area`}>
+    <rect width={W} height={H} class="sea" />
+    {near.map((f: any) => <path d={path(f)} class={String(f.id) === '380' ? 'land' : 'land other'} />)}
+    {ticks.map((i) => <><line x1={(W / 8) * i} y1="0" x2={(W / 8) * i} y2="7" class="tick" /><line x1={(W / 8) * i} y1={H} x2={(W / 8) * i} y2={H - 7} class="tick" /><line y1={(H / 8) * i} x1="0" y2={(H / 8) * i} x2="7" class="tick" /><line y1={(H / 8) * i} x1={W} y2={(H / 8) * i} x2={W - 7} class="tick" /></>)}
+    {route.length > 1 && <polyline points={route.map((p) => p.xy.join(',')).join(' ')} class="route" />}
+    {pts.map((p) => (
+      <g transform={`translate(${p.xy[0]},${p.xy[1]})`} class={`pt ${p.kind}`}>
+        {p.kind === 'airport' ? <rect x="-5" y="-5" width="10" height="10" /> : p.kind === 'base' ? <circle r="7" /> : <circle r="4.5" />}
+        <text x={p.dx ?? 10} y={(p.dy ?? 0) + 5} text-anchor={p.anchor ?? 'start'}>{p.name}</text>
+      </g>
+    ))}
+    <g transform={`translate(${W - LW - 14},14)`} class="locator">
+      <rect width={LW} height={LH} />
+      <path d={lpath(italy)} />
+      <rect x={lx0} y={ly0} width={Math.max(4, lx1 - lx0)} height={Math.max(4, ly1 - ly0)} class="area" />
+    </g>
+  </svg>
+  <figcaption>
+    <span><svg width="12" height="12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" class="k-air" /></svg> Airport</span>
+    <span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" class="k-base" /></svg> Where you stay</span>
+    <span><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="4.5" class="k-place" /></svg> Places studied</span>
+  </figcaption>
+</figure>
+<style>
+  .ovmap { margin: 0 0 8px; }
+  .ovmap > svg { width: 100%; height: auto; display: block; border: 1px solid var(--rule); }
+  .sea { fill: #dfe5e3; }
+  .land { fill: var(--paper); stroke: #9aa39b; stroke-width: 0.8; }
+  .land.other { fill: #e9eae4; }
+  .tick { stroke: var(--ink); stroke-width: 1; }
+  .route { fill: none; stroke: var(--poppy); stroke-width: 2; stroke-dasharray: 6 5; }
+  .pt text { font-family: var(--sans); font-size: 15px; font-weight: 600; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; }
+  .pt.airport rect, .k-air { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+  .pt.base circle, .k-base { fill: var(--poppy); stroke: #fff; stroke-width: 2; }
+  .pt.place circle, .k-place { fill: var(--ink); }
+  .locator > rect { fill: #dfe5e3; stroke: var(--ink); stroke-width: 1; }
+  .locator path { fill: var(--paper); stroke: #9aa39b; stroke-width: 0.6; }
+  .locator .area { fill: none; stroke: var(--poppy); stroke-width: 2; }
+  @media (max-width: 700px) { .pt text { font-size: 26px; stroke-width: 6px; } .pt circle { transform: scale(1.5); } .pt rect { transform: scale(1.5); } }
+  .ovmap figcaption { display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--sans); font-style: normal; font-size: 0.95rem; color: var(--ink-2); }
+  .ovmap figcaption span { display: inline-flex; align-items: center; gap: 6px; }
+  .ovmap figcaption svg { flex: none; }
+</style>

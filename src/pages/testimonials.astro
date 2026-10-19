@@ -1,12 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import T from '../data/testimonials.json';
+import G from '../data/galleries.json';
+import Gallery from '../components/Gallery.astro';
 const mil = T.filter((t) => t.military).length;
 ---
 <Base title="Testimonials" description={`${T.length} testimonials from serving soldiers, veterans, families and historians who have toured the Italian battlefields with Frank de Planta.`}>
   <section class="band"><div class="wrap">
     <h1>What guests say</h1>
     <p class="lede">{T.length} accounts from people who have walked the ground with Frank: {mil} from serving units, the rest from families, veterans and enthusiasts.</p>
+    <div style="margin:32px 0 40px"><Gallery items={G.testimonials} strip /></div>
     <div class="chips" role="group" aria-label="Filter testimonials">
       <button type="button" data-f="all" aria-pressed="true">All</button>
       <button type="button" data-f="mil" aria-pressed="false">Military units</button>

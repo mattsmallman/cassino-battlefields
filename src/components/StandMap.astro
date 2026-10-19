@@ -1,0 +1,128 @@
+---
+// Interactive stand map: MapLibre + self-hosted PMTiles (vector basemap + terrain).
+interface Stand { id: string; day: number; name: string; lat: number; lng: number; text: string }
+interface Props { data: { status: string; note: string; outside?: string; stands: Stand[] }; tiles: string; terrain: string; bounds: [number, number, number, number]; title: string }
+const { data, tiles, terrain, bounds, title } = Astro.props;
+const days = [...new Set(data.stands.map((s) => s.day))];
+---
+<section class="standmap" aria-labelledby="sm-h">
+  <div class="sm-head">
+    <h2 id="sm-h">{title}</h2>
+    {data.status === 'draft' && <p class="sm-draft">Draft: stand positions are approximate and awaiting Frank’s confirmation.</p>}
+  </div>
+  <div class="sm-grid">
+    <div class="sm-map" id="sm-map" data-tiles={tiles} data-terrain={terrain} data-bounds={JSON.stringify(bounds)} data-stands={JSON.stringify(data.stands)}>
+      <noscript><p>The interactive map needs JavaScript. The stands are listed alongside.</p></noscript>
+      <div class="sm-controls">
+        <button type="button" data-view="3d" aria-pressed="true">3D terrain</button>
+        <button type="button" data-view="2d" aria-pressed="false">Flat map</button>
+      </div>
+    </div>
+    <ol class="sm-list">
+      {days.map((d) => (
+        <li>
+          <h3>Day {d}</h3>
+          <ol>
+            {data.stands.filter((s) => s.day === d).map((s) => (
+              <li><button type="button" data-stand={s.id}><span class="sm-n">{data.stands.indexOf(s) + 1}</span><span><b>{s.name}</b>{s.text}</span></button></li>
+            ))}
+          </ol>
+        </li>
+      ))}
+    </ol>
+  </div>
+  {data.outside && <p class="sm-note">{data.outside}</p>}
+  <p class="sm-attrib">Map data © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap contributors</a>, <a href="https://protomaps.com" rel="noopener">Protomaps</a>. Terrain: Mapzen and AWS Terrain Tiles.</p>
+</section>
+
+<script>
+  import * as maplibregl from 'maplibre-gl';
+  import 'maplibre-gl/dist/maplibre-gl.css';
+  import { Protocol } from 'pmtiles';
+  import { layers, namedFlavor } from '@protomaps/basemaps';
+
+  const el = document.getElementById('sm-map') as HTMLElement | null;
+  if (el) {
+    const stands = JSON.parse(el.dataset.stands!) as { id: string; day: number; name: string; lat: number; lng: number; text: string }[];
+    const b = JSON.parse(el.dataset.bounds!) as [number, number, number, number];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    maplibregl.setWorkerUrl(location.origin + '/maps/lib/maplibre-gl-worker.mjs');
+    const proto = new Protocol();
+    maplibregl.addProtocol('pmtiles', proto.tile);
+    const flavor = { ...namedFlavor('light'), background: '#f3f3ef', earth: '#f3f3ef', water: '#c9d6d3', park_a: '#e2e6da', park_b: '#e2e6da', wood_a: '#dfe4d6', wood_b: '#dfe4d6', scrub_a: '#e6e8de', scrub_b: '#e6e8de', buildings: '#dcddd6' } as any;
+    const base = layers('osm', flavor, { lang: 'en' }).filter((l: any) => l.id !== 'pois' && !String(l.id).startsWith('pois'));
+    const firstLabel = base.findIndex((l: any) => l.type === 'symbol');
+    const hill = { id: 'hillshade', type: 'hillshade', source: 'dem', paint: { 'hillshade-shadow-color': '#47524b', 'hillshade-highlight-color': '#ffffff', 'hillshade-exaggeration': 0.45 } } as any;
+    const style: any = {
+      version: 8,
+      glyphs: location.origin + '/maps/glyphs/{fontstack}/{range}.pbf',
+      sources: {
+        osm: { type: 'vector', url: 'pmtiles://' + location.origin + el.dataset.tiles, attribution: '' },
+        dem: { type: 'raster-dem', url: 'pmtiles://' + location.origin + el.dataset.terrain, encoding: 'terrarium', tileSize: 256 },
+      },
+      layers: [...base.slice(0, firstLabel), hill, ...base.slice(firstLabel)],
+    };
+    const map = new maplibregl.Map({
+      container: el, style, bounds: [[b[0], b[1]], [b[2], b[3]]], maxBounds: [[b[0] - 0.05, b[1] - 0.05], [b[2] + 0.05, b[3] + 0.05]],
+      fitBoundsOptions: { padding: 30 }, pitch: 55, bearing: -20, maxPitch: 75, attributionControl: false, cooperativeGestures: true,
+    });
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+    map.on('load', () => {
+      map.setTerrain({ source: 'dem', exaggeration: 1.4 });
+      const focus = stands.filter((s) => s.lng > 13.75);
+      const lb = new maplibregl.LngLatBounds(); focus.forEach((s) => lb.extend([s.lng, s.lat]));
+      map.fitBounds(lb, { padding: 60, pitch: 55, bearing: -20, duration: 0 });
+    });
+    const markers = new Map<string, maplibregl.Marker>();
+    stands.forEach((s, i) => {
+      const m = document.createElement('button');
+      m.type = 'button'; m.className = 'sm-marker'; m.textContent = String(i + 1); m.setAttribute('aria-label', `Stand ${i + 1}: ${s.name}`);
+      m.dataset.day = String(s.day);
+      const pop = new maplibregl.Popup({ offset: 18, closeButton: true, maxWidth: '280px' }).setHTML(`<b>Day ${s.day}: ${s.name}</b><br>${s.text}`);
+      markers.set(s.id, new maplibregl.Marker({ element: m }).setLngLat([s.lng, s.lat]).setPopup(pop).addTo(map));
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-stand]').forEach((btn) => btn.addEventListener('click', () => {
+      const s = stands.find((x) => x.id === btn.dataset.stand)!; const mk = markers.get(s.id)!;
+      map.flyTo({ center: [s.lng, s.lat], zoom: 14, duration: reduce ? 0 : 1600, essential: true });
+      markers.forEach((x) => x.getPopup()?.isOpen() && x.togglePopup());
+      setTimeout(() => mk.togglePopup(), reduce ? 0 : 1600);
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+    }));
+    document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((btn) => btn.addEventListener('click', () => {
+      const three = btn.dataset.view === '3d';
+      document.querySelectorAll('[data-view]').forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
+      map.setTerrain(three ? { source: 'dem', exaggeration: 1.4 } : null);
+      map.easeTo({ pitch: three ? 55 : 0, bearing: three ? -20 : 0, duration: reduce ? 0 : 800 });
+    }));
+  }
+</script>
+
+<style is:global>
+  .standmap { margin-top: 56px; }
+  .sm-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 16px; }
+  .sm-head h2 { margin: 0; }
+  .sm-draft { margin: 0; font-family: var(--sans); font-size: 0.95rem; color: var(--poppy); }
+  .sm-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .sm-map { position: relative; height: min(68vh, 560px); min-height: 380px; border: 1px solid var(--rule); background: #e7e8e1; }
+  .sm-controls { position: absolute; z-index: 3; top: 10px; left: 10px; display: flex; }
+  .sm-controls button { font-family: var(--sans); font-size: 0.95rem; min-height: 40px; padding: 8px 12px; background: #fff; color: var(--ink); border: 1.5px solid var(--ink); cursor: pointer; }
+  .sm-controls button + button { border-left: 0; }
+  .sm-controls button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .sm-marker { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; background: var(--ink); color: #fff; font: 700 14px/1 var(--sans); cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.35); padding: 0; }
+  .sm-marker[data-day='2'] { background: var(--poppy); }
+  .sm-marker[data-day='3'] { background: #735a22; }
+  .sm-marker:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .sm-list, .sm-list ol { list-style: none; margin: 0; padding: 0; }
+  .sm-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 28px; }
+  .sm-list h3 { font-size: 1.1rem; margin: 8px 0 6px; }
+  .sm-list button { display: grid; grid-template-columns: 30px 1fr; gap: 10px; text-align: left; width: 100%; background: none; border: 0; border-top: 1px solid var(--rule); padding: 10px 0; font: inherit; font-size: 0.98rem; color: var(--ink); cursor: pointer; min-height: 44px; }
+  .sm-list button:hover b { color: var(--poppy); }
+  .sm-list b { display: block; font-family: var(--sans); font-weight: 650; }
+  .sm-n { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font: 700 13px/1 var(--sans); margin-top: 2px; }
+  .sm-note, .sm-attrib { font-size: 0.95rem; color: var(--ink-2); margin-top: 12px; }
+  .sm-attrib a { color: inherit; }
+  .maplibregl-popup-content { font-family: var(--serif); font-size: 15px; line-height: 1.45; padding: 12px 28px 12px 14px; border-radius: 2px; }
+  .maplibregl-popup-content b { font-family: var(--sans); }
+  .maplibregl-popup-close-button { font-size: 20px; width: 28px; height: 28px; }
+</style>

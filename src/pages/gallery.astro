@@ -15,7 +15,10 @@ const sets = [
   {sets.map(([k, n], i) => (
     <section class={`band${i % 2 ? '' : ' alt'}`} id={k}><div class="wrap">
       <div class="section-head"><h2>{n}</h2><span class="muted">{(G as any)[k].length} photographs</span></div>
-      <Gallery items={(G as any)[k]} />
+      <Gallery items={(G as any)[k].slice(0, 24)} />
+      {(G as any)[k].length > 24 && (
+        <details class="more"><summary class="btn ghost">Show all {(G as any)[k].length} photographs</summary><Gallery items={(G as any)[k].slice(24)} /></details>
+      )}
     </div></section>
   ))}
 </Base>

@@ -4,6 +4,9 @@ import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
 import Quote from '../components/Quote.astro';
 import { tours, gbp } from '../lib/tours';
+import OverviewMap from '../components/OverviewMap.astro';
+import StandMap from '../components/StandMap.astro';
+import standsCassino from '../data/stands-cassino.json';
 import G from '../data/galleries.json';
 import T from '../data/testimonials.json';
 export function getStaticPaths() { return tours.map((t) => ({ params: { tour: t.slug } })); }
@@ -24,12 +27,12 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
       <Img id={t.hero} alt={t.heroCap || t.name} sizes="100vw" eager />
       <span class="coord tl">{t.coords}</span>
       {t.heroCap && <span class="coord br">{t.heroCap}</span>}
-      <div class="wrap"><p style="font-family:var(--sans);font-weight:600;margin:0 0 8px">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
+      <div class="wrap"><p class="period">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
     </section>
   ) : (
     <section class="hero plain mapframe">
       <span class="coord tl">{t.coords}</span>
-      <div class="wrap"><p style="font-family:var(--sans);font-weight:600;margin:0 0 8px">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
+      <div class="wrap"><p class="period">{t.period}</p><h1>{t.name}</h1><p>{t.short}</p></div>
     </section>
   )}
 
@@ -37,6 +40,10 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
     <div class="wrap tour-grid">
       <div>
         <p class="lede">{t.summary}</p>
+        <OverviewMap slug={t.slug} name={t.name} />
+        {t.slug === 'cassino' && (
+          <StandMap data={standsCassino} tiles="/maps/cassino.pmtiles" terrain="/maps/cassino-terrain.pmtiles" bounds={[13.55, 41.33, 14.02, 41.66]} title="The stands on the ground" />
+        )}
         {t.itinerary.length > 0 ? (
           <>
             <h2 style="margin-top:48px">Day by day</h2>

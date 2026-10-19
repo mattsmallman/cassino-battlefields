@@ -2,11 +2,24 @@
   "name": "cassino-battlefields",
   "type": "module",
   "private": true,
-  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "scripts": {
+    "dev": "npm run copy-maplibre && astro dev",
+    "build": "npm run copy-maplibre && astro build",
+    "preview": "astro preview",
+    "copy-maplibre": "mkdir -p public/maps/lib && cp node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs public/maps/lib/"
+  },
   "dependencies": {
-    "astro": "^5.14.0",
     "@astrojs/sitemap": "^3.6.0",
-    "@fontsource-variable/archivo": "^5.2.0",
-    "@fontsource-variable/source-serif-4": "^5.2.0"
+    "@fontsource-variable/libre-franklin": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.2.0",
+    "@protomaps/basemaps": "^5.7.2",
+    "astro": "^5.14.0",
+    "maplibre-gl": "^6.15.0",
+    "pmtiles": "^4.5.0"
+  },
+  "devDependencies": {
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   }
 }

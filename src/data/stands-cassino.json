@@ -1,0 +1,19 @@
+{
+  "status": "draft",
+  "note": "Approximate positions drafted from place names in the itinerary. Every point needs checking by Frank before go-live.",
+  "outside": "Day 4 (36 Division at Velletri and Monte Artemisio, 29–30 May 1944) lies outside this map, in the Alban Hills south-east of Rome.",
+  "stands": [
+    { "id": "trocchio", "day": 1, "name": "Monte Trocchio", "lat": 41.4766, "lng": 13.8731, "text": "Orientation to the ground and the four battles, January–May 1944." },
+    { "id": "rapido", "day": 2, "name": "Rapido crossings, Sant’Angelo", "lat": 41.4545, "lng": 13.8405, "text": "36 (Texas) Infantry Division’s crossing sites on the River Rapido, 20–23 January 1944." },
+    { "id": "hove", "day": 2, "name": "Hove Dump", "lat": 41.5125, "lng": 13.8270, "text": "34 (Red Bulls) Infantry Division’s advance across the Rapido and break-in onto the ridges, 24 January–12 February 1944." },
+    { "id": "monastery", "day": 2, "name": "Monastery Hill", "lat": 41.4903, "lng": 13.8139, "text": "Why this position dominated the battlefield, and the decision to bomb the Monastery on 15 February 1944." },
+    { "id": "causeway", "day": 2, "name": "Railway causeway and station", "lat": 41.4795, "lng": 13.8315, "text": "5 New Zealand Infantry Brigade’s attack along the causeway, 17–18 February 1944." },
+    { "id": "town", "day": 2, "name": "Castle Hill and Cassino town", "lat": 41.4925, "lng": 13.8257, "text": "II (NZ) Corps’ attack up Monastery Hill and into the town in the third battle, 15–23 March 1944." },
+    { "id": "amazon", "day": 2, "name": "Amazon Bridge", "lat": 41.4660, "lng": 13.8390, "text": "4 British Infantry Division’s crossing of the Rapido, 12–13 May 1944, and the Royal Engineers’ challenge." },
+    { "id": "caira", "day": 3, "name": "Caira and the supply route", "lat": 41.5208, "lng": 13.8250, "text": "Resupplying troops on the ridges, and the start of the Cavendish Road." },
+    { "id": "albaneta", "day": 3, "name": "Cavendish Road and Albaneta Farm", "lat": 41.5015, "lng": 13.7975, "text": "The tank attack behind the Monastery, 19 March 1944." },
+    { "id": "p593", "day": 3, "name": "Snakeshead Ridge and Point 593", "lat": 41.5000, "lng": 13.8020, "text": "Fought over by 34 US Division, 4 Indian Division and II Polish Corps in turn." },
+    { "id": "polish", "day": 3, "name": "Polish Cemetery", "lat": 41.4975, "lng": 13.8083, "text": "The Poles at Monte Cassino, and the fourth and final battle that broke the Gustav Line." },
+    { "id": "hitler", "day": 3, "name": "The Hitler Line, Pontecorvo–Aquino", "lat": 41.4760, "lng": 13.6900, "text": "1 (Canadian) Corps’ assault on the Hitler Line, 23 May 1944." }
+  ]
+}
