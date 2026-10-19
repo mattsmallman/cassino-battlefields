@@ -2,8 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
-import G from '../data/galleries.json';
-const [lead, ...rest] = G.about;
+import { getGalleries } from '../lib/content';
+const { G } = await getGalleries();
+const [lead, ...rest] = G.about ?? [];
 ---
 <Base title="About Frank de Planta" description="Frank de Planta, former Royal Anglian Regiment officer and author of A Walking Tour of Italy’s WWII Battlefields, has led battlefield studies of the Italian Campaign for more than fifteen years." image={lead.id}>
   <section class="band"><div class="wrap split">

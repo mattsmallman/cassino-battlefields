@@ -22,6 +22,8 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
 - **Maps.**
   - Every tour page has a build-time SVG overview map.
   - Cassino has an interactive 3D stand map using self-hosted tiles and terrain, with no third-party requests.
+- **Site editor (Sveltia CMS) built and tested locally.** Content now lives in `src/content/` and is checked at build time. Tested end to end: a date change, a price change and a new testimonial all saved and showed on the rebuilt site, and an invalid price failed the build. See [CMS.md](CMS.md).
+- **Migration bug fixed.** Four photo captions on the Cassino and Gothic Line pages had been imported as itinerary stands. They're back on their photos.
 - **Competitor and best-practice sweep done.** Its findings shaped the key-facts box, the military and family pages, and putting testimonials on each tour page.
 
 ## Still to do
@@ -62,7 +64,12 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
 - **Overview maps** show town centres only. Rivers, such as the Rapido, Garigliano, Sangro and Marecchia, would help. They aren't in the Natural Earth 1:10m data used now.
 
 ### Editing and forms
-- **Self-editing for Frank.** The recommended route is a git-backed CMS (Sveltia CMS or Keystatic) over the existing data files: tours, dates and prices, testimonials, stands. Each save commits to this repo and triggers a rebuild. The alternative is a small Laravel and Filament app, which means running a database.
+- **Taking the editor live:** sign-in helper, rebuild-on-commit webhook, and Cloudflare Access in front of `/admin/`. The steps are in [CMS.md](CMS.md).
+- **Editor follow-ups:**
+  - a map pin-picker for stand positions in place of typing latitude and longitude;
+  - an icon/type field on itinerary stands, when iconography is done;
+  - moving the FAQs and About text into collections;
+  - a preview template so the editor's preview pane looks like the real page.
 - **Enquiry form.** At the moment it opens the visitor's email app with the details pre-filled. It needs a real handler, for example a small endpoint sending through SES with the domain verified, plus spam protection such as Cloudflare Turnstile.
 - **Newsletter or register-interest capture** is not built.
 
@@ -74,6 +81,6 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
 
 ### Technical
 - The `tools/` scripts expect the original working layout (`src-scrape/`, `assets-src/`). They're kept as a record of how the migration was done, not as a one-command rebuild. The raw WordPress export is in `archive/wordpress-export/`.
-- `public/maps/lib/` is copied from `node_modules/maplibre-gl` on each build (`npm run copy-maplibre`) and is git-ignored.
+- `public/maps/lib/`, `public/admin/sveltia-cms.js`, `public/img/u/` and `src/data/uploadmeta.json` are generated on each build (`npm run prepare-assets`) and are git-ignored.
 - The nginx CSP allows `'unsafe-inline'` scripts because Astro inlines small page scripts. Tighten it with hashes if this goes live.
 - The repo is about 70 MB, mostly photos and map tiles. Consider Git LFS before adding more map areas.

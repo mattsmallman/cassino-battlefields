@@ -1,0 +1,12 @@
+{
+  "quote": "I have been taking organized tours of battlefields for over 25 years and, truthfully, have never had a finer guide. Frank led our group for eight days and covered Salerno, Cassino and Anzio. Each time, he found stands from which we could survey the overall terrain and understand the challenges for the Allied assaults. He laid out the various strategic, operational and tactical options so that we could understand decision making at every level. He then led us to critical spots on each battlefield, explaining the actions with particular emphasis on the human cost. This was my second group visit to these battlefields, but the first where I really understood what happened, where and why. Frank unfolded the whole story cheerfully, patiently, and with great humor and entertainment. I recommend Frank de Planta in the highest possible way.",
+  "name": "Bill Vodra",
+  "from": "Alexandria, USA",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano",
+    "salerno"
+  ],
+  "order": 1
+}

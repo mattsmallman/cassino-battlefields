@@ -1,0 +1,72 @@
+{
+  "name": "Anzio & the Garigliano",
+  "short": "The landings, the salient and the breakout",
+  "period": "January – May 1944",
+  "days": 4,
+  "summary": "X Corps crossed the Garigliano in January 1944, and days later VI Corps landed at Anzio to turn the Gustav Line. Neither went to plan. We study the British battalions on the Minturno ridges, the drive on Campoleone and the collapse of the salient, the defence of Buonriposo Ridge and the wadis, and the May breakout that ended with Mark Clark turning for Rome.",
+  "next_label": "Anzio",
+  "next_start": "2027-05-09",
+  "next_end": "2027-05-12",
+  "next_note": "",
+  "price_twin": 394,
+  "price_single": 535,
+  "price_basis": "B&B",
+  "excludes": "Flights, lunch and evening meals",
+  "arrive": "Rome (Ciampino or Fiumicino)",
+  "depart": "Rome",
+  "base": "",
+  "hero_image": "/img/anzio-3-us-inf-div-ashore-at-anzio-a7e2d5-1280.webp",
+  "hero_caption": "3 US Infantry Division coming ashore at Anzio",
+  "itinerary": [
+    {
+      "stands": [
+        "Meet at Airport in Rome and drive to Cassino.",
+        "Study the strategic background to the Italian Campaign and set the scene for the battles to break the Gustav Line and reach Rome from Jan-May 44."
+      ]
+    },
+    {
+      "stands": [
+        "Study the X (BR) Corps plan to cross the Garigliano and get into the Ausente valley.",
+        "Study the 10th Battalion Royal Berkshire Regiment attack on 11 January 1944 to secure the near bank of the Garigliano in preparation for the 56 British Infantry Division’s assault river crossing on 17 January 1944.",
+        "Study the 56 British Infantry Division’s struggle to capture and hold Monte Damiano and San Salvatito in January to March 1944.",
+        "Study the 5 British Infantry Division’s battle to capture and hold the Minturno-Tufo Ridge on 17-22 January 1944.",
+        "Visit to Minturno CWGC Cemetery.",
+        "Visit to the American Sicily to Rome War Cemetery.",
+        "Study the challenges of the landings at Anzio on 22 January 1944 and the controversies of the first two months of the operation.",
+        "Study the logistical challenges of operating Anzio port January-June 1944 and the VI (US) Corps AA defences that were established to protect the flow of stores into the beachhead.",
+        "Study 24 Guards Brigade’s initial breakout towards Carroceto and the Factory on 28 January 1944.",
+        "Study the 1st Battalion Irish Guards and 1st Battalion Scot Guards night attack on 29-30 January 1944 to establish a Line of Departure for 3 Infantry Brigade to reach Campoleone.",
+        "Study the attack by 3 British Infantry Brigade on 30-31 January 1944 to seize the major road and railway junction at Campoleone as a prelude to a 1 British Infantry Division operation to reach Albano and Genzano.",
+        "Study the catastrophic Rangers’ infiltration up the Pantano Ditch on 30 January 1944 as the spearhead of 3 (Rock of the Marne) Infantry Division’s assault on Cisterna",
+        "Study the collapse of 6th Battalion Gordon Highlanders’ position on 4 February 1944 and its impact on the security of the Campoleone Salient.",
+        "Study the defensive position of 10th Battalion Royal Berkshire Regiment on the right of the base of the Campoleone Salient over 2-11 February 1944."
+      ]
+    },
+    {
+      "stands": [
+        "Study the defensive positions of 2nd Battalion North Staffordshire Regiment and 5th Battalion Grenadier Guards on Buonriposo Ridge on the left of the base of the Campoleone Salient over 5-10 February 1944 including Major Philip Sidney’s Victoria Cross action.",
+        "Study the desperate establishment of 1 British Infantry Division’s and 45 (Thunderbird) Infantry Division’s Final Defence Line and the defence activities in the British Sector 15 February-1 March 1944.",
+        "Study the defensive positions of 10th Battalion Royal Berkshire Regiment, 1st Battalion London Irish Rifles and 1st Battalion Irish Guards in the ‘wadis’ during February 1944.",
+        "Study the defensive positions in wadis on the left of the defensive line in front of Buonriposo Ridge as an example of the conditions endured by British and US troops Feb-May 44.",
+        "Study the four options drawn up by HQ VI (US) Corps for the breakout from Anzio and the breakout itself on 23 May 1944.",
+        "Study the outcome of Op BUFFALO and the initial success of the US breakout towards Valmontone 23-25 May 44.",
+        "Study the progress of Op BUFFALO after General Mark Clark’s controversial decision to switch to Op TURTLE on 25 May 1944.",
+        "Study the brilliant 36 (Texas) Infantry Division plan to slip between the inter-Corps boundary for LXXVI Panzer Corps and I Parachute Corps and break the Fourteenth Army’s defence on 29-30 May 1944."
+      ]
+    },
+    {
+      "stands": [
+        "Return to Airport in Rome."
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "image": "/img/ashby-by-kimmo-095574-1280.webp",
+      "caption": "Private James Ashby. 10th Battalion Berkshire Regiment. Killed in Action on 25 February 1944. Buried in the Beachhead CWGC Cemetery at Anzio. Kimmo Veikkolainen"
+    }
+  ],
+  "gallery": "anzio",
+  "coords": "41°27′N 12°37′E",
+  "order": 2
+}

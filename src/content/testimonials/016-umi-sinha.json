@@ -1,0 +1,10 @@
+{
+  "quote": "I am doing research for my second novel, set in Italy and India during and after the Second World War and needed to do some military research at Monte Cassino. Frank is an inspirational tour guide who is passionate about his subject, and really knows and understands the army, military strategy and history. What I learnt exceeded my wildest expectations. His knowledge and energy is second to none and I found the trip both enjoyable and informative. ​He also knows about the Indian Army and added an extra trip in for me to where the regiment I was researching crossed the Rapido river. Frank also went out of his way to make sure that, as an older person, I could keep up with the rest of the group. The trip exceeded my expectations in every way​ and ​I can highly recommend Frank’s tours to anyone who wants to learn more about the war in Italy.",
+  "name": "Umi Sinha",
+  "from": "Eastbourne",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 16
+}

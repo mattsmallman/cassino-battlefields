@@ -1,5 +1,6 @@
 ---
-import { tours } from '../lib/tours';
+import { getTours } from '../lib/content';
+const tours = await getTours();
 interface Props { kind?: 'tour' | 'military' | 'relative' }
 const { kind = 'tour' } = Astro.props;
 const opts = [...tours.map((t) => t.next?.label && t.next.start ? `${t.next.label} (${t.next.dates})` : t.name), 'Private group', 'Not sure yet'];

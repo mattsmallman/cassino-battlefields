@@ -2,7 +2,7 @@
 
 A rebuild of [cassinobattlefields.co.uk](https://www.cassinobattlefields.co.uk) as a static Astro site. It was built in October 2026 and then **archived**: Frank isn't ready to move off the current WordPress site, so nothing here is deployed and all staging infrastructure has been removed.
 
-See [NOTES.md](NOTES.md) for what's done and what still needs doing.
+See [NOTES.md](NOTES.md) for what's done and what still needs doing, and [CMS.md](CMS.md) for the site editor, including how to try it locally.
 
 ## Run it locally
 
@@ -20,9 +20,12 @@ The Cassino 3D map loads its tiles with HTTP range requests. `python3 -m http.se
 | Path | What it is |
 | --- | --- |
 | `src/pages/` | Pages. `[tour].astro` renders all six tour pages at their original URLs (`/cassino/`, `/salerno/` …) |
-| `src/lib/tours.ts` | Tour names, summaries, dates, prices, airports, hero images |
+| `src/content/` | **All editable content**: tours (dates, prices, itineraries), testimonials, galleries, reading lists, stand maps. Edited through the CMS at `/admin` |
+| `src/content.config.ts` | Build-time rules for that content; a bad edit fails the build |
+| `src/lib/content.ts` | Reads the content for the pages; formats dates and drops past departures |
+| `public/admin/` | The site editor (Sveltia CMS) and its form configuration |
 | `src/lib/places.ts` | Places drawn on each tour's overview map |
-| `src/data/` | Content migrated from WordPress: itineraries, testimonials (tagged military/private and by tour), books, galleries, image sizes; Cassino stand positions (`stands-cassino.json`, **draft**) |
+| `src/data/imagemeta.json` | Sizes of the migrated photos (uploads get theirs at build time) |
 | `src/components/` | Image, gallery, departures table, enquiry form, overview map (build-time SVG), stand map (MapLibre) |
 | `src/styles/global.css` | All styling; colour and type tokens at the top |
 | `public/img/` | 195 photos re-encoded as WebP at 640/1280/2000px |

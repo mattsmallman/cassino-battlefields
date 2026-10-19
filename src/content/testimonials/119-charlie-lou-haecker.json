@@ -1,0 +1,10 @@
+{
+  "quote": "Frank de Planta’s tour of Cassino battlefield is simply superb. His encyclopaedic knowledge of Allied and German strategies, operations and tactics is imparted in an enthusiastic manner that vividly re-creates in one’s mind various horrific battle actions that occurred where one is standing. Thank you, Frank.",
+  "name": "Charlie & Lou Haecker",
+  "from": "Cerrillos, USA",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 119
+}

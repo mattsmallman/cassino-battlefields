@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
-import G from '../data/galleries.json';
-const hero = G.faqs[0];
+import { getGalleries } from '../lib/content';
+const { G } = await getGalleries();
+const hero = (G.faqs ?? [])[0];
 ---
 <Base title="FAQs" description="Booking, deposits, what is included, insurance, cancellations and walking on Cassino Battlefields tours.">
   <section class="band"><div class="wrap split">

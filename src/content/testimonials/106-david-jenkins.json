@@ -1,0 +1,10 @@
+{
+  "quote": "Frank de Planta’s Monte Cassino tour clearly illustrates how determined German paratroopers, with Wehrmacht support, perfect terrain for defence and the vaguries of the Italian climate, were able to turn the so called ‘soft underbelly of Europe’ into something reminiscent of the Allied strategy and manpower losses of the Great War 1914-18. A fantastic experience for me.",
+  "name": "David Jenkins",
+  "from": "Caen, France",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 106
+}

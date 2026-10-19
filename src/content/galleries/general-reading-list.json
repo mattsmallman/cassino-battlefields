@@ -1,0 +1,15 @@
+{
+  "title": "Reading list (general)",
+  "show_on_gallery_page": false,
+  "order": 99,
+  "photos": [
+    {
+      "image": "/img/view-of-castle-hill-and-monastery-fdep-db5376-1280.webp",
+      "caption": "View of Monastery and Castle Hill from Cassino town"
+    },
+    {
+      "image": "/img/bombing-of-rome-compressed-bcc4b7-1280.webp",
+      "caption": "Aerial photograph of the targets in Rome in 1944. Colonel Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    }
+  ]
+}

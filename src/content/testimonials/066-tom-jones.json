@@ -1,0 +1,11 @@
+{
+  "quote": "As a civilian, it is often not readily apparent how the ground of a battlefield could or should be used. Frank’s training and former career as an infantry officer, combine with a charismatic and easily delivered narrative, to let you see the ground the way it would have been viewed through the eyes of a 1944 Infantryman or of a 1944 General. This gives a much easier and more empathetic understanding of why the battles were fought the way they were. Having previously done a tour of Anzio with Frank in 2013, I must say that this Cassino tour was a great follow up to that and I would implore others to do both tours, in that order. I’m looking forward to the next one.",
+  "name": "Tom Jones",
+  "from": "Widnes",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano"
+  ],
+  "order": 66
+}

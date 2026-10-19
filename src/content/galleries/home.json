@@ -1,0 +1,55 @@
+{
+  "title": "Home page strip",
+  "show_on_gallery_page": false,
+  "order": 99,
+  "photos": [
+    {
+      "image": "/img/mcs-logo-jpeg-c3daa9-1280.webp",
+      "caption": ""
+    },
+    {
+      "image": "/img/book-salerno-resized-f39abf-1280.webp",
+      "caption": "A Walking Tour of Italy's WWII Battlefields. From the Salerno Landings to San Pietro Infine"
+    },
+    {
+      "image": "/img/book-cassino-resized-cc0bd4-1280.webp",
+      "caption": "A Walking Tour of Italy's WWII Battlefields. Breaking the Gustav and Hitler Lines"
+    },
+    {
+      "image": "/img/book-anzio-resized-1a68c0-1280.webp",
+      "caption": "A Walking Tour of Italy's WWII Battlefields. From the Anzio Landings to Rome"
+    },
+    {
+      "image": "/img/monte-cassino-54d468-1280.webp",
+      "caption": "The Monastery as seen from the Rapido valley in October 1944"
+    },
+    {
+      "image": "/img/img-2028-edited-1-3fe6a7-1280.webp",
+      "caption": "The 18 gravestones of the Jewish corner in the Polish Cemetery. In all, 838 Jewish soldiers served in II (PO) Corps of which 28 were killed and 52 were wounded"
+    },
+    {
+      "image": "/img/cartoon-caroline-deput-2-bdc64b-1280.webp",
+      "caption": "Frank de Planta at Monte Cassino in full flow. Sketch by Caroline Deput 2019"
+    },
+    {
+      "image": "/img/lt-gh-wright-re-8c1c25-1280.webp",
+      "caption": "The original grave of Lt George Wright 38 Field Company RE before being moved to Minturno CWGC cemetery. Victor Wright"
+    },
+    {
+      "image": "/img/russell-92-arty-regt-ra-postcard-6bdbd9-1280.webp",
+      "caption": "Postcard sent home from 92 Field Regiment RA whilst in Italy by Bombardier Russell to his son. Bombardier Russell was a keen cyclist. Adam Tunningley"
+    },
+    {
+      "image": "/img/padre-47-regt-ra-holding-a-service-of-remembrance-in-the-cwg-7e3df7-1280.webp",
+      "caption": "Padre 47 Regt RA leads a Service of Remembrance at the CWGC Cemetery in Cassino in 2022. Tim Ventham"
+    },
+    {
+      "image": "/img/a-tribute-to-3rd-battalion-8th-punjabis-on-the-kingsmill-mem-dd5f77-1280.webp",
+      "caption": "A tribute to the 3/8 Punjabis at the Kingsmill Memorial. Sue Hughes"
+    },
+    {
+      "image": "/img/polish-cemetery-karl-byatt-2017-compressed-0838ee-1280.webp",
+      "caption": "The Polish Cemetery at Cassino in 2017. Karl Byatt"
+    }
+  ]
+}

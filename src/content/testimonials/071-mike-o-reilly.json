@@ -1,0 +1,10 @@
+{
+  "quote": "A fascinating, informative tour by Frank de Planta, a passionate and very knowledgeable guide, who goes beyond the norm, to put you in there with those who were there at the time. His description of the ground and the conditions at the time, can only make you think, just what were they doing! He also highlights the excellence and inadequacies of the commanders, which now gives me a new meaning of the quote, “Lions Lead by Donkeys”. Frank also fitted time into his programme to allow us to be on site at 0500 on 13th May 14 for the 70th anniversary of the opening of “Amazon Bridge”, which led to the breakout and the subsequent taking of Monte Cassino. A tour thoroughly well worth doing, and in the words of Gen MacArthur: ‘I shall return’.",
+  "name": "Mike O’Reilly",
+  "from": "Ripon",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 71
+}

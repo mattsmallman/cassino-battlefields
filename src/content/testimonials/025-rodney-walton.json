@@ -1,0 +1,12 @@
+{
+  "quote": "I was deeply impressed by Frank de Planta’s tour of the Salerno, Cassino and Anzio battlefields. The observation points (stands) were carefully selected to demonstrate the enormous challenges posed by the terrain of Southern Italy. Frank had impressive knowledge of both the strategic overview (big picture) of World War II and the tactical details of the battles. Frank demonstrated both excellent tour management skills and superb historical presentation abilities. You will come away from the tour appreciating why Italy proved to be such a ‘hard gut’ rather than the ‘soft underbelly’ of Europe.",
+  "name": "Rodney Walton",
+  "from": "Miami, USA",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano",
+    "salerno"
+  ],
+  "order": 25
+}

@@ -1,0 +1,11 @@
+{
+  "quote": "The depth of knowledge and understanding that Frank de Planta has acquired is truly awesome. His mastery of the plans and the events for both Cassino and Anzio: from Rifle Companies to Army Group, is impressive. The study was executed with constant good humour, in a relaxed, friendly atmosphere and paced to the needs of the client.",
+  "name": "Douglas and Eric Dee",
+  "from": "Shrewsbury",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano"
+  ],
+  "order": 32
+}

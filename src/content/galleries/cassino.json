@@ -1,0 +1,623 @@
+{
+  "title": "Cassino",
+  "show_on_gallery_page": true,
+  "order": 1,
+  "photos": [
+    {
+      "image": "/img/1-r-sussex-on-snakeshead-632993-1280.webp",
+      "caption": "2 CAMERONS on Snakeshead Ridge on 18 March 1944"
+    },
+    {
+      "image": "/img/5-nz-arty-regt-25-pdr-7b5c5a-1280.webp",
+      "caption": "25 pounder from 5 NZ Field Regiment behind Monte Trocchio"
+    },
+    {
+      "image": "/img/9-army-commando-cairn-with-monte-ornito-in-the-background-6--02f071-1280.webp",
+      "caption": "The 9 (Army) Commando cairn below Monte Ornito in 2021"
+    },
+    {
+      "image": "/img/99-laa-regt-ra-panther-turret-on-the-hitler-line-jul-44-3c1e8c-1280.webp",
+      "caption": "Destroyed German tank turret on the Hitler Line. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/aerial-photo-op-dickens-740b7f-1280.webp",
+      "caption": "Aerial photograph issued by HQ II (NZ) Corps in March 1944"
+    },
+    {
+      "image": "/img/aerial-photo-of-cassino-town-d4c6ff-1280.webp",
+      "caption": "Aerial Photo of Cassino town"
+    },
+    {
+      "image": "/img/aerial-view-of-the-monastery-after-the-15-feb-44-bombing-f2b8bb-1280.webp",
+      "caption": "Aerial view of the Monastery after the bombing in February 1944. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/bombing-of-cassino-town-mar-44-890f9b-1280.webp",
+      "caption": "The bombing of Cassino town on 15 March 1944"
+    },
+    {
+      "image": "/img/cassino-abbey-bombed-out-shell-f1c051-1280.webp",
+      "caption": "The Monastery in May 1944"
+    },
+    {
+      "image": "/img/the-benedictine-monastery-at-cassino-during-its-reconstructi-813a27-1280.webp",
+      "caption": "The Benedictine Monastery at Cassino during its reconstruction - Aug 54"
+    },
+    {
+      "image": "/img/the-monastery-after-the-bombing-aug-44-aa84dd-1280.webp",
+      "caption": "The Monastery after the bombing on 15 February 1944"
+    },
+    {
+      "image": "/img/the-monastery-at-cassino-c8f873-1280.webp",
+      "caption": "The Monastery from Snakeshead Ridge and the lower slopes of Point 444 in May 1944"
+    },
+    {
+      "image": "/img/the-start-of-the-cavendish-road-may-44-74f159-1280.webp",
+      "caption": "4 Indian Division&#039;s Cavendish Road supply route from Caira to Jeep&#039;s Head in March 1944"
+    },
+    {
+      "image": "/img/view-of-castle-hill-from-the-railway-station-aug-44-ffbbb4-1280.webp",
+      "caption": "Castle Hill and Cassino town from Cassino Railway Station in 1944"
+    },
+    {
+      "image": "/img/view-of-colosseum-from-barons-court-with-route-6-aug-44-13c5bb-1280.webp",
+      "caption": "View of the Colosseum from just below Route 6. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-destroyed-railway-station-at-cassino-jul-44-84119c-1280.webp",
+      "caption": "The destroyed Railway Station at Cassino in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/view-of-monte-cassino-monte-cairo-from-cevaro-area-mar-44-0fd7ec-1280.webp",
+      "caption": "View of smoke in front of Monte Cassino and Monte Cairo in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/view-of-the-area-around-the-hotel-continental-at-cassino-aug-fe3f28-1280.webp",
+      "caption": "The area around the Hotel Continental in August 1944. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-the-castle-from-route-6-aug-44-e15064-1280.webp",
+      "caption": "View of the Castle from Route 6. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-the-monastery-in-the-morning-mist-apr-14-7d4b99-1280.webp",
+      "caption": "View of the Monastery in the early morning mist from the Caruso Road in April 2014"
+    },
+    {
+      "image": "/img/1view-of-monatery-from-point-593-25f708-1280.webp",
+      "caption": "The Monastery in 2010 from Point 593"
+    },
+    {
+      "image": "/img/1wwii-mout-cassinoapr44b-4fcecc-1280.webp",
+      "caption": "Cassino town in June 1944"
+    },
+    {
+      "image": "/img/99-laa-regt-ra-capt-ic-williamson-driving-german-pws-at-cass-ea1180-1280.webp",
+      "caption": "Capt IC Williamson, OC R Tp 329 LAA Bty RA driving two German PWs at Cassino in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/99-laa-regt-ra-participate-in-op-goldflake-smoke-on-amazon-m-b06d4b-1280.webp",
+      "caption": "Men of 99 LAA Regt RA deploying smoke pots in Op GOLDFLAKE at Amazon Bridge in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/359-pack-mule-coy-rasc-mules-in-north-africa-733b98-1280.webp",
+      "caption": "Mules from 359 Pack Transport Company RASC being loaded in Tunis on SS Mount Everest in January 1944 for deployment at Cassino. Mary Berridge"
+    },
+    {
+      "image": "/img/cassino-memorial-national-arboretum-628c30-1280.webp",
+      "caption": "The Cassino Memorial at the National Arboretum in January 2016"
+    },
+    {
+      "image": "/img/cassino-town-in-1950s-f5cb5a-1280.webp",
+      "caption": "Cassino town in the 1950s"
+    },
+    {
+      "image": "/img/engineers-at-cassino-1944-3438e0-1280.webp",
+      "caption": "Engineers near the Cassino church in 1944. Getty."
+    },
+    {
+      "image": "/img/monastery-hangman-s-hill-78329a-1280.webp",
+      "caption": "The Monastery and Hangman&#039;s Hill on 23 June 2011"
+    },
+    {
+      "image": "/img/monastery-from-rocca-7-dec-21-small-c51ffd-1280.webp",
+      "caption": "The Benedictine Abbey on Monte Cassino in 2021"
+    },
+    {
+      "image": "/img/monte-cassino-after-the-battle-c03531-1280.webp",
+      "caption": "The Monastery from Route 6 in June 1944. IWM."
+    },
+    {
+      "image": "/img/monte-cassino-after-the-battle-3-pws-c4670f-1280.webp",
+      "caption": "Three German Prisoners of War on Route 6 below the Monastery in June 1944. IWM."
+    },
+    {
+      "image": "/img/monte-cassino-from-edra-palace-6-dec-21-small-6ea738-1280.webp",
+      "caption": "The Benedictine Abbey on Monte Cassino with the Apennines in Winter in the background in 2021"
+    },
+    {
+      "image": "/img/new-zealanders-in-third-battle-57df0a-1280.webp",
+      "caption": "Troops from 2 NZ Div advancing into Cassino town in Mar 44"
+    },
+    {
+      "image": "/img/san-pietro-rotondo-on-left-lungo-is-low-wooded-hill-centre-c-ba0780-1280.webp",
+      "caption": "View of Monte Rotondo, Monte Lungo and Monte Maggiore from San Pietro Infine. BCMH."
+    },
+    {
+      "image": "/img/the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b-1280.webp",
+      "caption": "The Monastery from Monte Cairo"
+    },
+    {
+      "image": "/img/trocchio-4d8a3d-1280.webp",
+      "caption": "View of Monte Cassino and the Liri valley from the top of Monte Trocchio in 2008. R Bexley."
+    },
+    {
+      "image": "/img/view-of-a-panzerstrum-overlooking-aquino-airfield-1944-b3d0d2-1280.webp",
+      "caption": "German panzerstrum overlooking Aquino Airfield on the Hitler Line in May 1944"
+    },
+    {
+      "image": "/img/view-of-cassino-town-from-monastery-hill-1944-84d9e4-1280.webp",
+      "caption": "View of Cassino town from Monastery Hill in May 1951"
+    },
+    {
+      "image": "/img/view-of-monastery-from-36-us-inf-div-crossing-point-may-2013-5053ff-1280.webp",
+      "caption": "View of the Monastery and Monte Cairo from just above the 36 US Inf Div crossing points in May 2013. James Gould."
+    },
+    {
+      "image": "/img/view-of-monastery-from-snakeshead-ridge-c411c5-1280.webp",
+      "caption": "View of the Monastery in 2014 from Snakeshead Ridge. Lydia Sielicka."
+    },
+    {
+      "image": "/img/view-of-monte-trocchio-from-cevaro-1944-f88a18-1280.webp",
+      "caption": "View of the smokescreen over Amazon Bridge in front of Monte Trocchio in May 1944"
+    },
+    {
+      "image": "/img/view-of-rapido-valley-from-hove-dump-ace584-1280.webp",
+      "caption": "View of Portella and the Rapido Valley in 2014. Lydia Sielicka."
+    },
+    {
+      "image": "/img/view-of-the-castle-and-town-jun-44-042af6-1280.webp",
+      "caption": "View of Cassino town and the Castle in May 1944"
+    },
+    {
+      "image": "/img/view-of-the-monastery-from-point-593-d3d97e-1280.webp",
+      "caption": "View of the monastery from Point 593 in June 2014"
+    },
+    {
+      "image": "/img/cassino-monte-damiano-2-inch-mortar-3e0e7b-1280.webp",
+      "caption": "Live 2 inch mortar on Monte Damiano in 2019"
+    },
+    {
+      "image": "/img/abbey-and-polish-cemetery-6a2141-1280.webp",
+      "caption": "Abbey and Polish Cemetery"
+    },
+    {
+      "image": "/img/aerial-view-of-monastery-hill-jul-44-14f2e8-1280.webp",
+      "caption": "Aerial view of Monastery Hill - Jul 1944"
+    },
+    {
+      "image": "/img/aerial-view-of-monte-cassino-and-monte-trocchio-e52bb2-1280.webp",
+      "caption": "Aerial view of Monte Cassino and Monte Trocchio"
+    },
+    {
+      "image": "/img/armour-stuck-at-cassino-4de8c2-1280.webp",
+      "caption": "Armour stuck at Cassino"
+    },
+    {
+      "image": "/img/british-cemetery-near-cassino-4719ed-1280.webp",
+      "caption": "British cemetery near Cassino"
+    },
+    {
+      "image": "/img/cassino-castle-7bcff8-1280.webp",
+      "caption": "Cassino Castle"
+    },
+    {
+      "image": "/img/convoy-heading-towards-the-castle-at-cassino-jul-44-6cdff1-1280.webp",
+      "caption": "Convoy heading towards the Castle at Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/indian-army-memorial-at-cassino-3bbd95-1280.webp",
+      "caption": "Indian Army Memorial at Cassino"
+    },
+    {
+      "image": "/img/military-policeman-at-cassino-jul-44-c94770-1280.webp",
+      "caption": "Military Policeman at Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/one-plinth-of-the-cassino-memorial-85107b-1280.webp",
+      "caption": "One plinth of the Cassino Memorial"
+    },
+    {
+      "image": "/img/point-593-and-the-benedictine-monastery-at-cassino-6-dec-21-d5dd79-1280.webp",
+      "caption": "Point 593 and the Benedictine monastery at Cassino - 6 Dec 2021"
+    },
+    {
+      "image": "/img/post-war-view-of-cassino-town-from-monte-cassino-bd4e74-1280.webp",
+      "caption": "Post war view of Cassino town from Monte Cassino"
+    },
+    {
+      "image": "/img/route-6-through-cassino-jul-44-bf4ca0-1280.webp",
+      "caption": "Route 6 through Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/the-benedictine-monastery-at-cassino-77e21a-1280.webp",
+      "caption": "The Benedictine monastery at Cassino"
+    },
+    {
+      "image": "/img/the-cassino-cwgc-cemetery-at-cassino-fd3821-1280.webp",
+      "caption": "The Cassino CWGC Cemetery at Cassino"
+    },
+    {
+      "image": "/img/the-german-war-cemetery-at-cassino-3b819a-1280.webp",
+      "caption": "The German War Cemetery at Cassino"
+    },
+    {
+      "image": "/img/the-main-door-at-the-benedictine-monastery-at-cassino-7ae43b-1280.webp",
+      "caption": "The main door at the Benedictine monastery at Cassino"
+    },
+    {
+      "image": "/img/the-polish-tank-near-albaneta-farm-at-cassino-bd0644-1280.webp",
+      "caption": "The Polish tank near Albaneta Farm at Cassino"
+    },
+    {
+      "image": "/img/the-sword-of-peace-at-cassino-cwgc-cemetery-488cf9-1280.webp",
+      "caption": "The Sword of Peace at Cassino CWGC Cemetery"
+    },
+    {
+      "image": "/img/view-of-castle-hill-at-cassino-post-war-f221a6-1280.webp",
+      "caption": "View of Castle Hill at Cassino Post war"
+    },
+    {
+      "image": "/img/view-of-monte-cairo-from-snakeshead-ridge-16efa0-1280.webp",
+      "caption": "View of Monte Cairo from Snakeshead Ridge"
+    },
+    {
+      "image": "/img/view-of-monte-cassino-may-44-95009e-1280.webp",
+      "caption": "View of Monte Cassino - May 1944"
+    },
+    {
+      "image": "/img/view-of-the-rapido-river-from-monte-trocchio-jan-44-cb4830-1280.webp",
+      "caption": "View of the Rapido river from Monte Trocchio - Jan 1944"
+    },
+    {
+      "image": "/img/view-of-the-rapido-valley-from-monte-cifalco-603dfa-1280.webp",
+      "caption": "View of the Rapido valley from Monte Cifalco"
+    },
+    {
+      "image": "/img/view-of-the-river-gari-the-round-house-hummock-may-44-752daa-1280.webp",
+      "caption": "View of the River Gari, the Round House &amp;amp; Hummock - May 1944"
+    },
+    {
+      "image": "/img/post-war-view-of-cassino-ntown-from-monte-cassino-c3a32d-1280.webp",
+      "caption": "Post war view of a rebuilt Cassino town from Monte Cassino"
+    },
+    {
+      "image": "/img/cassino-cemetery-sam-mackie-dd8595-1280.webp",
+      "caption": "Cassino CWGC Cemetery. Sam Mackie"
+    },
+    {
+      "image": "/img/dscf0045-b5893d-1280.webp",
+      "caption": "The Abbey on Monte Cassino as seen from Monte Camino"
+    },
+    {
+      "image": "/img/1-9gr-on-hangmans-hill-18-mar-44-59f56c-1280.webp",
+      "caption": "1st Battalion 9th Gurkha Rifles on Hangman&#039;s Hill during the Third Battle of Cassino in March 1944"
+    },
+    {
+      "image": "/img/french-expeditionary-corps-photograph-taken-above-valvori-lo-d1463a-1280.webp",
+      "caption": "French Expeditionary Corps photograph taken above Valvori looking at the monastery at Cassino in January 1944"
+    },
+    {
+      "image": "/img/abbot-gregorius-diamare-left-preparing-to-say-farewell-to-th-943912-1280.webp",
+      "caption": "Abbot Gregorius Diamare (left wearing the crucifix) preparing to say farewell to the art treasures removed by the Germans to Rome in October 1943"
+    },
+    {
+      "image": "/img/1-r-sussex-on-snakeshead-632993-1280.webp",
+      "caption": "2 CAMERONS on Snakeshead Ridge on 18 March 1944"
+    },
+    {
+      "image": "/img/5-nz-arty-regt-25-pdr-7b5c5a-1280.webp",
+      "caption": "25 pounder from 5 NZ Field Regiment behind Monte Trocchio"
+    },
+    {
+      "image": "/img/9-army-commando-cairn-with-monte-ornito-in-the-background-6--02f071-1280.webp",
+      "caption": "The 9 (Army) Commando cairn below Monte Ornito in 2021"
+    },
+    {
+      "image": "/img/99-laa-regt-ra-panther-turret-on-the-hitler-line-jul-44-3c1e8c-1280.webp",
+      "caption": "Destroyed German tank turret on the Hitler Line. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/aerial-photo-op-dickens-740b7f-1280.webp",
+      "caption": "Aerial photograph issued by HQ II (NZ) Corps in March 1944"
+    },
+    {
+      "image": "/img/aerial-photo-of-cassino-town-d4c6ff-1280.webp",
+      "caption": "Aerial Photo of Cassino town"
+    },
+    {
+      "image": "/img/aerial-view-of-the-monastery-after-the-15-feb-44-bombing-f2b8bb-1280.webp",
+      "caption": "Aerial view of the Monastery after the bombing in February 1944. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/bombing-of-cassino-town-mar-44-890f9b-1280.webp",
+      "caption": "The bombing of Cassino town on 15 March 1944"
+    },
+    {
+      "image": "/img/cassino-abbey-bombed-out-shell-f1c051-1280.webp",
+      "caption": "The Monastery in May 1944"
+    },
+    {
+      "image": "/img/the-benedictine-monastery-at-cassino-during-its-reconstructi-813a27-1280.webp",
+      "caption": "The Benedictine Monastery at Cassino during its reconstruction - Aug 54"
+    },
+    {
+      "image": "/img/the-monastery-after-the-bombing-aug-44-aa84dd-1280.webp",
+      "caption": "The Monastery after the bombing on 15 February 1944"
+    },
+    {
+      "image": "/img/the-monastery-at-cassino-c8f873-1280.webp",
+      "caption": "The Monastery from Snakeshead Ridge and the lower slopes of Point 444 in May 1944"
+    },
+    {
+      "image": "/img/the-start-of-the-cavendish-road-may-44-74f159-1280.webp",
+      "caption": "4 Indian Division's Cavendish Road supply route from Caira to Jeep's Head in March 1944"
+    },
+    {
+      "image": "/img/view-of-castle-hill-from-the-railway-station-aug-44-ffbbb4-1280.webp",
+      "caption": "Castle Hill and Cassino town from Cassino Railway Station in 1944"
+    },
+    {
+      "image": "/img/view-of-colosseum-from-barons-court-with-route-6-aug-44-13c5bb-1280.webp",
+      "caption": "View of the Colosseum from just below Route 6. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-destroyed-railway-station-at-cassino-jul-44-84119c-1280.webp",
+      "caption": "The destroyed Railway Station at Cassino in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/view-of-monte-cassino-monte-cairo-from-cevaro-area-mar-44-0fd7ec-1280.webp",
+      "caption": "View of smoke in front of Monte Cassino and Monte Cairo in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/view-of-the-area-around-the-hotel-continental-at-cassino-aug-fe3f28-1280.webp",
+      "caption": "The area around the Hotel Continental in August 1944. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-the-castle-from-route-6-aug-44-e15064-1280.webp",
+      "caption": "View of the Castle from Route 6. Col Heydon Buchanan US Army. 15th Army Group Intelligence Staff"
+    },
+    {
+      "image": "/img/view-of-the-monastery-in-the-morning-mist-apr-14-7d4b99-1280.webp",
+      "caption": "View of the Monastery in the early morning mist from the Caruso Road in April 2014"
+    },
+    {
+      "image": "/img/1view-of-monatery-from-point-593-25f708-1280.webp",
+      "caption": "The Monastery in 2010 from Point 593"
+    },
+    {
+      "image": "/img/1wwii-mout-cassinoapr44b-4fcecc-1280.webp",
+      "caption": "Cassino town in June 1944"
+    },
+    {
+      "image": "/img/99-laa-regt-ra-capt-ic-williamson-driving-german-pws-at-cass-ea1180-1280.webp",
+      "caption": "Capt IC Williamson, OC R Tp 329 LAA Bty RA driving two German PWs at Cassino in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/99-laa-regt-ra-participate-in-op-goldflake-smoke-on-amazon-m-b06d4b-1280.webp",
+      "caption": "Men of 99 LAA Regt RA deploying smoke pots in Op GOLDFLAKE at Amazon Bridge in May 44. Capt Ian Williamson."
+    },
+    {
+      "image": "/img/359-pack-mule-coy-rasc-mules-in-north-africa-733b98-1280.webp",
+      "caption": "Mules from 359 Pack Transport Company RASC being loaded in Tunis on SS Mount Everest in January 1944 for deployment at Cassino. Mary Berridge"
+    },
+    {
+      "image": "/img/cassino-memorial-national-arboretum-628c30-1280.webp",
+      "caption": "The Cassino Memorial at the National Arboretum in January 2016"
+    },
+    {
+      "image": "/img/cassino-town-in-1950s-f5cb5a-1280.webp",
+      "caption": "Cassino town in the 1950s"
+    },
+    {
+      "image": "/img/engineers-at-cassino-1944-3438e0-1280.webp",
+      "caption": "Engineers near the Cassino church in 1944. Getty."
+    },
+    {
+      "image": "/img/monastery-hangman-s-hill-78329a-1280.webp",
+      "caption": "The Monastery and Hangman's Hill on 23 June 2011"
+    },
+    {
+      "image": "/img/monastery-from-rocca-7-dec-21-small-c51ffd-1280.webp",
+      "caption": "The Benedictine Abbey on Monte Cassino in 2021"
+    },
+    {
+      "image": "/img/monte-cassino-after-the-battle-c03531-1280.webp",
+      "caption": "The Monastery from Route 6 in June 1944. IWM."
+    },
+    {
+      "image": "/img/monte-cassino-after-the-battle-3-pws-c4670f-1280.webp",
+      "caption": "Three German Prisoners of War on Route 6 below the Monastery in June 1944. IWM."
+    },
+    {
+      "image": "/img/monte-cassino-from-edra-palace-6-dec-21-small-6ea738-1280.webp",
+      "caption": "The Benedictine Abbey on Monte Cassino with the Apennines in Winter in the background in 2021"
+    },
+    {
+      "image": "/img/new-zealanders-in-third-battle-57df0a-1280.webp",
+      "caption": "Troops from 2 NZ Div advancing into Cassino town in Mar 44"
+    },
+    {
+      "image": "/img/san-pietro-rotondo-on-left-lungo-is-low-wooded-hill-centre-c-ba0780-1280.webp",
+      "caption": "View of Monte Rotondo, Monte Lungo and Monte Maggiore from San Pietro Infine. BCMH."
+    },
+    {
+      "image": "/img/the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b-1280.webp",
+      "caption": "The Monastery from Monte Cairo"
+    },
+    {
+      "image": "/img/trocchio-4d8a3d-1280.webp",
+      "caption": "View of Monte Cassino and the Liri valley from the top of Monte Trocchio in 2008. R Bexley."
+    },
+    {
+      "image": "/img/view-of-a-panzerstrum-overlooking-aquino-airfield-1944-b3d0d2-1280.webp",
+      "caption": "German panzerstrum overlooking Aquino Airfield on the Hitler Line in May 1944"
+    },
+    {
+      "image": "/img/view-of-cassino-town-from-monastery-hill-1944-84d9e4-1280.webp",
+      "caption": "View of Cassino town from Monastery Hill in May 1951"
+    },
+    {
+      "image": "/img/view-of-monastery-from-36-us-inf-div-crossing-point-may-2013-5053ff-1280.webp",
+      "caption": "View of the Monastery and Monte Cairo from just above the 36 US Inf Div crossing points in May 2013. James Gould."
+    },
+    {
+      "image": "/img/view-of-monastery-from-snakeshead-ridge-c411c5-1280.webp",
+      "caption": "View of the Monastery in 2014 from Snakeshead Ridge. Lydia Sielicka."
+    },
+    {
+      "image": "/img/view-of-monte-trocchio-from-cevaro-1944-f88a18-1280.webp",
+      "caption": "View of the smokescreen over Amazon Bridge in front of Monte Trocchio in May 1944"
+    },
+    {
+      "image": "/img/view-of-rapido-valley-from-hove-dump-ace584-1280.webp",
+      "caption": "View of Portella and the Rapido Valley in 2014. Lydia Sielicka."
+    },
+    {
+      "image": "/img/view-of-the-castle-and-town-jun-44-042af6-1280.webp",
+      "caption": "View of Cassino town and the Castle in May 1944"
+    },
+    {
+      "image": "/img/view-of-the-monastery-from-point-593-d3d97e-1280.webp",
+      "caption": "View of the monastery from Point 593 in June 2014"
+    },
+    {
+      "image": "/img/cassino-monte-damiano-2-inch-mortar-3e0e7b-1280.webp",
+      "caption": "Live 2 inch mortar on Monte Damiano in 2019"
+    },
+    {
+      "image": "/img/abbey-and-polish-cemetery-6a2141-1280.webp",
+      "caption": "Abbey and Polish Cemetery"
+    },
+    {
+      "image": "/img/aerial-view-of-monastery-hill-jul-44-14f2e8-1280.webp",
+      "caption": "Aerial view of Monastery Hill - Jul 1944"
+    },
+    {
+      "image": "/img/aerial-view-of-monte-cassino-and-monte-trocchio-e52bb2-1280.webp",
+      "caption": "Aerial view of Monte Cassino and Monte Trocchio"
+    },
+    {
+      "image": "/img/armour-stuck-at-cassino-4de8c2-1280.webp",
+      "caption": "Armour stuck at Cassino"
+    },
+    {
+      "image": "/img/british-cemetery-near-cassino-4719ed-1280.webp",
+      "caption": "British cemetery near Cassino"
+    },
+    {
+      "image": "/img/cassino-castle-7bcff8-1280.webp",
+      "caption": "Cassino Castle"
+    },
+    {
+      "image": "/img/convoy-heading-towards-the-castle-at-cassino-jul-44-6cdff1-1280.webp",
+      "caption": "Convoy heading towards the Castle at Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/indian-army-memorial-at-cassino-3bbd95-1280.webp",
+      "caption": "Indian Army Memorial at Cassino"
+    },
+    {
+      "image": "/img/military-policeman-at-cassino-jul-44-c94770-1280.webp",
+      "caption": "Military Policeman at Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/one-plinth-of-the-cassino-memorial-85107b-1280.webp",
+      "caption": "One plinth of the Cassino Memorial"
+    },
+    {
+      "image": "/img/point-593-and-the-benedictine-monastery-at-cassino-6-dec-21-d5dd79-1280.webp",
+      "caption": "Point 593 and the Benedictine monastery at Cassino - 6 Dec 2021"
+    },
+    {
+      "image": "/img/post-war-view-of-cassino-town-from-monte-cassino-bd4e74-1280.webp",
+      "caption": "Post war view of Cassino town from Monte Cassino"
+    },
+    {
+      "image": "/img/route-6-through-cassino-jul-44-bf4ca0-1280.webp",
+      "caption": "Route 6 through Cassino - Jul 1944"
+    },
+    {
+      "image": "/img/the-benedictine-monastery-at-cassino-77e21a-1280.webp",
+      "caption": "The Benedictine monastery at Cassino"
+    },
+    {
+      "image": "/img/the-cassino-cwgc-cemetery-at-cassino-fd3821-1280.webp",
+      "caption": "The Cassino CWGC Cemetery at Cassino"
+    },
+    {
+      "image": "/img/the-german-war-cemetery-at-cassino-3b819a-1280.webp",
+      "caption": "The German War Cemetery at Cassino"
+    },
+    {
+      "image": "/img/the-main-door-at-the-benedictine-monastery-at-cassino-7ae43b-1280.webp",
+      "caption": "The main door at the Benedictine monastery at Cassino"
+    },
+    {
+      "image": "/img/the-polish-tank-near-albaneta-farm-at-cassino-bd0644-1280.webp",
+      "caption": "The Polish tank near Albaneta Farm at Cassino"
+    },
+    {
+      "image": "/img/the-sword-of-peace-at-cassino-cwgc-cemetery-488cf9-1280.webp",
+      "caption": "The Sword of Peace at Cassino CWGC Cemetery"
+    },
+    {
+      "image": "/img/view-of-castle-hill-at-cassino-post-war-f221a6-1280.webp",
+      "caption": "View of Castle Hill at Cassino Post war"
+    },
+    {
+      "image": "/img/view-of-monte-cairo-from-snakeshead-ridge-16efa0-1280.webp",
+      "caption": "View of Monte Cairo from Snakeshead Ridge"
+    },
+    {
+      "image": "/img/view-of-monte-cassino-may-44-95009e-1280.webp",
+      "caption": "View of Monte Cassino - May 1944"
+    },
+    {
+      "image": "/img/view-of-the-rapido-river-from-monte-trocchio-jan-44-cb4830-1280.webp",
+      "caption": "View of the Rapido river from Monte Trocchio - Jan 1944"
+    },
+    {
+      "image": "/img/view-of-the-rapido-valley-from-monte-cifalco-603dfa-1280.webp",
+      "caption": "View of the Rapido valley from Monte Cifalco"
+    },
+    {
+      "image": "/img/view-of-the-river-gari-the-round-house-hummock-may-44-752daa-1280.webp",
+      "caption": "View of the River Gari, the Round House & Hummock - May 1944"
+    },
+    {
+      "image": "/img/post-war-view-of-cassino-ntown-from-monte-cassino-c3a32d-1280.webp",
+      "caption": "Post war view of a rebuilt Cassino town from Monte Cassino"
+    },
+    {
+      "image": "/img/cassino-cemetery-sam-mackie-dd8595-1280.webp",
+      "caption": "Cassino CWGC Cemetery. Sam Mackie"
+    },
+    {
+      "image": "/img/dscf0045-b5893d-1280.webp",
+      "caption": "The Abbey on Monte Cassino as seen from Monte Camino"
+    },
+    {
+      "image": "/img/1-9gr-on-hangmans-hill-18-mar-44-59f56c-1280.webp",
+      "caption": "1st Battalion 9th Gurkha Rifles on Hangman's Hill during the Third Battle of Cassino in March 1944"
+    },
+    {
+      "image": "/img/french-expeditionary-corps-photograph-taken-above-valvori-lo-d1463a-1280.webp",
+      "caption": "French Expeditionary Corps photograph taken above Valvori looking at the monastery at Cassino in January 1944"
+    },
+    {
+      "image": "/img/abbot-gregorius-diamare-left-preparing-to-say-farewell-to-th-943912-1280.webp",
+      "caption": "Abbot Gregorius Diamare (left wearing the crucifix) preparing to say farewell to the art treasures removed by the Germans to Rome in October 1943"
+    }
+  ]
+}

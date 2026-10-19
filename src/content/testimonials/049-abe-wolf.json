@@ -1,0 +1,12 @@
+{
+  "quote": "We will relive our tour of Salerno, Cassino and Anzio for a long time. It was refreshing to be guided by someone who not only knew the battles in intimate detail but who also could, and did, candidly comment with intensity and occasional humor about the character, brilliance or lack of it, and the strategic and tactical ability of the commanders. His personal viewpoints both challenged us and brought a very human dimension to our experience.",
+  "name": "Abe Wolf",
+  "from": "New Jersey, USA",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano",
+    "salerno"
+  ],
+  "order": 49
+}

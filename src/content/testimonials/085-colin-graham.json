@@ -1,0 +1,10 @@
+{
+  "quote": "Frank de Planta says that he only does his tours of the Cassino battlefields as a hobby but, when it comes to organising, leading and explaining the events on the ground, he is a consummate professional. Whether it be in arranging accommodation, surface transport or preparing a comprehensive pre-tour briefing dossier, everything is taken care of: down to the last detail. But Frank is not only a superb organiser, he presents the phases of the campaign and the problems facing the commanders with in-depth knowledge, passion and humour that keep one riveted throughout. I would recommend his tour to anyone, whether they have some knowledge of military strategy, tactics and organisation, or none!",
+  "name": "Colin Graham",
+  "from": "Doune by Stirling",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 85
+}

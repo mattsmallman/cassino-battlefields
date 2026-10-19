@@ -1,6 +1,7 @@
 ---
 import { upcoming, gbp } from '../lib/tours';
-const list = upcoming();
+import { getTours } from '../lib/content';
+const list = upcoming(await getTours());
 ---
 <div class="departures">
   {list.map((t) => (

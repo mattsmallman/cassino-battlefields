@@ -3,13 +3,16 @@ import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Quote from '../components/Quote.astro';
 import Enquiry from '../components/Enquiry.astro';
-import T from '../data/testimonials.json';
-import G from '../data/galleries.json';
+import { getTestimonials, getGalleries, picker } from '../lib/content';
+const T = await getTestimonials();
+const { G } = await getGalleries();
 const mil = T.filter((t) => t.military);
-const pick = (n: string) => T.find((t) => t.name === n)!;
-const feature = [pick('Lt Cmdr Matt Feeney RN'), pick('Maj Andy Bishop'), pick('Maj Chin Thapa MVO RGR')];
+const pick = picker(T);
+let feature = [pick('Lt Cmdr Matt Feeney RN'), pick('Maj Andy Bishop'), pick('Maj Chin Thapa MVO RGR')].filter((x) => !!x) as typeof T;
+if (feature.length < 3) feature = mil.filter((q) => q.quote.length < 520).slice(0, 3);
 const units = [...new Set(mil.map((t) => t.from).filter(Boolean))];
-const photo = G.about.find((g) => g.id.startsWith('photo-16-06-2023')) ?? G.about[0];
+const about = G.about ?? [];
+const photo = about.find((g) => g.id.startsWith('photo-16-06-2023')) ?? about[0];
 ---
 <Base title="Military battlefield studies" description="Battlefield studies and staff rides in Italy for military units, led by former infantry officer Frank de Planta and tailored to your training objectives." image={photo.id}>
   <section class="band"><div class="wrap split">

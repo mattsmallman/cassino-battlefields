@@ -1,9 +1,9 @@
 ---
 import Img from './Img.astro';
-import meta from '../data/imagemeta.json';
+import { metaFor } from '../lib/images';
 interface Props { items: { id: string; cap: string }[]; strip?: boolean }
 const { items, strip = false } = Astro.props;
-const big = (id: string) => { const s = (meta as any)[id].sizes; return `/img/${id}-${s[s.length - 1]}.webp`; };
+const big = (id: string) => { const m = metaFor(id); return m ? `/img/${id}-${m.sizes[m.sizes.length - 1]}.webp` : id; };
 ---
 <div class={strip ? 'strip' : 'gal'}>
   {items.map((i) => (

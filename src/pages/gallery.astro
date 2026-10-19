@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import Gallery from '../components/Gallery.astro';
-import G from '../data/galleries.json';
-const sets = [
-  ['cassino', 'Cassino'], ['anzio', 'Anzio & the Garigliano'], ['salerno', 'Salerno'], ['gothic-line', 'The Gothic Line'],
-] as const;
+import { getGalleries } from '../lib/content';
+const { G: GG, sections } = await getGalleries();
+const G: any = GG;
+const sets = sections.map((s) => [s.slug, s.title] as const);
 ---
 <Base title="Gallery" description="Wartime photographs, maps and present-day views of the battlefields at Cassino, Anzio, Salerno and the Gothic Line.">
   <section class="band"><div class="wrap">

@@ -1,0 +1,10 @@
+{
+  "quote": "Frank de Planta’s thoroughly researched study is complemented by his presentation style – serious as befits the subject, but lightened by plenty of anecdotes. An excellent guided tour of Garigliano and Anzio, and made especially personal for those with a particular interest.",
+  "name": "Nigel Clark",
+  "from": "Wakefield",
+  "military": false,
+  "tours": [
+    "anzio-and-the-garigliano"
+  ],
+  "order": 129
+}

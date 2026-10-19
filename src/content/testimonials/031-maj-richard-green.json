@@ -1,0 +1,11 @@
+{
+  "quote": "Frank de Planta was awesome and provided not only a comprehensive study, with detailed history and modern interpretation, but also invaluable advice in getting the tour off the ground. I would highly recommend using him if you want to study Monte Cassino and Anzio.",
+  "name": "Maj Richard Green",
+  "from": "1st Battalion Grenadier Guards",
+  "military": true,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano"
+  ],
+  "order": 31
+}

@@ -1,6 +1,7 @@
 ---
 import Img from './Img.astro';
-import { tours } from '../lib/tours';
+import { getTours } from '../lib/content';
+const tours = await getTours();
 ---
 <div class="campaigns">
   {tours.map((t) => (

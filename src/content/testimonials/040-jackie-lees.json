@@ -1,0 +1,10 @@
+{
+  "quote": "It was amazing being able to walk in my father’s footsteps where, for part of his service, he served at Monte Cassino. Frank’s knowledge was exceptional, his enthusiasm infectious and he made you feel as if you were actually there at the time of the battles. Everything was well planned down to the finest detail and I would recommend this tour to experts and novices alike. There is something for everyone. We would most certainly like to go on another trip.",
+  "name": "Jackie Lees",
+  "from": "Nottingham",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 40
+}

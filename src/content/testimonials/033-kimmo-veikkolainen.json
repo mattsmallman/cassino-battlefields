@@ -1,0 +1,11 @@
+{
+  "quote": "Frank de Planta provided us with all the information that we needed, starting from the landings at Anzio/Nettuno through to the battles at Cassino. He is a great guide with an in-depth knowledge of these WW2 battles. I highly recommend him to anyone planning a battlefield tour in Italy. A big thumbs up.",
+  "name": "Kimmo Veikkolainen",
+  "from": "Helsinki, Finland",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano"
+  ],
+  "order": 33
+}

@@ -1,0 +1,10 @@
+{
+  "quote": "If you are looking for a battlefield tour full of passion and enthusiasm, Frank’s Monte Cassino could be the one for you! The maelstrom that was the Cassino battlefield is expertly explained by Frank, such that you can vividly imagine the described events unfolding before your eyes. I suggest that you sign up for one of his battlefield tours at the double!",
+  "name": "Gareth Davis",
+  "from": "Zurich, Switzerland",
+  "military": false,
+  "tours": [
+    "cassino"
+  ],
+  "order": 123
+}

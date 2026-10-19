@@ -3,15 +3,18 @@ import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Gallery from '../components/Gallery.astro';
 import Quote from '../components/Quote.astro';
-import { tours, gbp } from '../lib/tours';
+import { gbp } from '../lib/tours';
+import { getTours, getGalleries, getTestimonials, getStands } from '../lib/content';
+import { overview } from '../lib/places';
 import OverviewMap from '../components/OverviewMap.astro';
 import StandMap from '../components/StandMap.astro';
-import standsCassino from '../data/stands-cassino.json';
-import G from '../data/galleries.json';
-import T from '../data/testimonials.json';
-export function getStaticPaths() { return tours.map((t) => ({ params: { tour: t.slug } })); }
-const t = tours.find((x) => x.slug === Astro.params.tour)!;
-const gal = t.gallery ? (G as any)[t.gallery] as { id: string; cap: string }[] : [];
+export async function getStaticPaths() { return (await getTours()).map((t) => ({ params: { tour: t.slug } })); }
+const t = (await getTours()).find((x) => x.slug === Astro.params.tour)!;
+const { G } = await getGalleries();
+const T = await getTestimonials();
+const stands = await getStands(t.slug);
+const hasOverview = !!overview[t.slug];
+const gal = t.gallery ? G[t.gallery] ?? [] : [];
 const used = new Set([t.hero, ...t.images.map((i) => i.id)]);
 const strip = gal.filter((g) => !used.has(g.id)).slice(0, 10);
 const quotes = T.filter((q) => q.tours.includes(t.slug) && q.quote.length < 520).slice(0, 3);
@@ -40,9 +43,9 @@ const enquire = `/contact/?tour=${encodeURIComponent(t.next?.label ?? t.name)}`;
     <div class="wrap tour-grid">
       <div>
         <p class="lede">{t.summary}</p>
-        <OverviewMap slug={t.slug} name={t.name} />
-        {t.slug === 'cassino' && (
-          <StandMap data={standsCassino} tiles="/maps/cassino.pmtiles" terrain="/maps/cassino-terrain.pmtiles" bounds={[13.55, 41.33, 14.02, 41.66]} title="The stands on the ground" />
+        {hasOverview && <OverviewMap slug={t.slug} name={t.name} />}
+        {stands && stands.stands.length > 0 && (
+          <StandMap data={stands} tiles={stands.tiles} terrain={stands.terrain} bounds={stands.bounds} title="The stands on the ground" />
         )}
         {t.itinerary.length > 0 ? (
           <>

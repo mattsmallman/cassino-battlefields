@@ -3,11 +3,13 @@ import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Quote from '../components/Quote.astro';
 import Enquiry from '../components/Enquiry.astro';
-import T from '../data/testimonials.json';
-import G from '../data/galleries.json';
-const pick = (n: string) => T.find((t) => t.name === n)!;
+import { getTestimonials, getGalleries, picker } from '../lib/content';
+const T = await getTestimonials();
+const { G } = await getGalleries();
+const pick = picker(T);
+const sally = pick('Sally Low');
 const fam = T.filter((t) => /father|grandfather|uncle|grandad|dad\b/i.test(t.quote) && t.quote.length < 520).slice(0, 3);
-const grave = G.home.find((g) => g.id.startsWith('lt-gh-wright'))!;
+const grave = (G.home ?? []).find((g) => g.id.startsWith('lt-gh-wright')) ?? (G.home ?? [])[0];
 ---
 <Base title="Tracing a relative" description="Follow the footsteps of a father, grandfather or uncle who fought in Italy. Frank de Planta builds their unit’s actions, cemeteries and memorials into your tour.">
   <section class="band"><div class="wrap split">
@@ -16,7 +18,7 @@ const grave = G.home.find((g) => g.id.startsWith('lt-gh-wright'))!;
       <h1>Following a relative’s war</h1>
       <p class="lede">Many people come on a tour because someone in their family served in Italy. With a name and a unit, Frank can usually place them on the battlefield.</p>
       <p>He works through the war diaries and regimental histories, then builds the right actions into your tour, along with the cemetery or memorial where your relative is remembered. On a scheduled tour this happens alongside the main study. On a private tour, it can be the whole point.</p>
-      <Quote t={pick('Sally Low')} />
+      {sally && <Quote t={sally} />}
     </div>
   </div></section>
   <section class="band alt"><div class="wrap split">

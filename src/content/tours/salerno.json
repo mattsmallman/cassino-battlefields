@@ -1,0 +1,55 @@
+{
+  "name": "Salerno",
+  "short": "Operation AVALANCHE",
+  "period": "September 1943",
+  "days": 4,
+  "summary": "The first Allied landing on the Italian mainland came close to being thrown back into the sea. We study the British and American beaches, the Commandos at La Molina and Piegolello, the Guards at the Tobacco Factory, the crisis of 13 September in the Sele–Calore corridor, and the breakout towards Naples.",
+  "next_label": "",
+  "next_start": "",
+  "next_end": "",
+  "next_note": "",
+  "price_twin": null,
+  "price_single": null,
+  "price_basis": "B&B",
+  "excludes": "Flights, lunch and evening meals",
+  "arrive": "Naples (Capodichino)",
+  "depart": "Naples",
+  "base": "Salerno",
+  "hero_image": "/img/panoramic-view-of-the-vi-us-corps-beaches-from-trentinara-in-dfd70f-1280.webp",
+  "hero_caption": "The VI (US) Corps beaches from Trentinara",
+  "itinerary": [
+    {
+      "stands": [
+        "Meet at Airport in Naples and drive to Salerno.",
+        "Study the strategic background to the Italian Campaign, orientate to the ground and set the scene for the battle for Salerno in September 1943."
+      ]
+    },
+    {
+      "stands": [
+        "Study the 2 Commando Brigade battle to secure and then hold the La Molina defile from 9-13 September 1943.",
+        "Study the 36 (Texas) Infantry Division landing and their advance into the foothills from 9-11 September 1943.",
+        "Study the consequences of the VI (US) Corps plan to expand the beachhead and close the inter-Corps boundary using its reserve from 45 (Thunderbird) Infantry Division from 11-12 September 1943.",
+        "Study 142 Infantry Regiment’s attack on, and defence of, Altavilla and Point 424 on 11-12 September 1943 and 143 Infantry Regiment’s failed attack on 13 September 1943.",
+        "Study 45 (Thunderbird) Infantry Division’s dramatic defence of the beachhead at Borgo San Cesareo when the Germans attempted to breakthrough down the Sele-Calore Corridor on 13 September 1943."
+      ]
+    },
+    {
+      "stands": [
+        "Study the 56 British Infantry Division landings north of the River Sele on 9-10 September 1943 and their battles for Montecorvino Airfield and Battipaglia.",
+        "Study 201 Guards Brigade’s actions in and around the ‘Tobacco Factory’ on 10-13 September 1943.",
+        "Study the 2 (Army) Commando and 41 RM Commando raid on Piegolello and its subsequent defence from 15-17 September 1943.",
+        "Study the 46 British Infantry Division’s landings in and around Salerno town on 9-10 September 1943 and their battles to secure the exit routes through the Sorrento Peninsula to Naples."
+      ]
+    },
+    {
+      "stands": [
+        "Study the X (BR) Corps and VI (US) Corps breakout from the Salerno Plain towards Naples and Avellino from 16 September-1 October 1943.",
+        "Return to Airport in Naples."
+      ]
+    }
+  ],
+  "photos": [],
+  "gallery": "salerno",
+  "coords": "40°31′N 14°59′E",
+  "order": 5
+}

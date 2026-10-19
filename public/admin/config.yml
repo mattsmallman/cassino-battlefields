@@ -1,0 +1,216 @@
+# Sveltia CMS configuration for the Cassino Battlefields site.
+# Every save is a Git commit; the site rebuilds from the commit. Field rules are
+# enforced again at build time by src/content.config.ts, so a bad save fails the
+# build instead of breaking the live site.
+
+backend:
+  name: github
+  repo: mattsmallman/cassino-battlefields
+  branch: main
+  # For sign-in on the live site, deploy Sveltia's OAuth helper (a Cloudflare Worker,
+  # github.com/sveltia/sveltia-cms-auth) and set its URL here:
+  # base_url: https://cassino-cms-auth.<your-subdomain>.workers.dev
+  commit_messages:
+    create: 'Add {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: 'Upload “{{path}}”'
+    deleteMedia: 'Delete “{{path}}”'
+
+site_url: https://www.cassinobattlefields.co.uk
+display_url: https://www.cassinobattlefields.co.uk
+
+# Photos uploaded here are converted to fast web sizes when the site builds.
+media_folder: public/img/uploads
+public_folder: /img/uploads
+
+collections:
+  # ---------------------------------------------------------------- Tours
+  - name: tours
+    label: Tours, dates & prices
+    label_singular: Tour
+    description: One entry per tour. Change dates and prices here; past departures drop off the site automatically.
+    folder: src/content/tours
+    format: json
+    extension: json
+    create: false
+    delete: false
+    identifier_field: name
+    summary: '{{name}}: {{next_start}}'
+    sortable_fields: [order, name]
+    fields:
+      - { name: name, label: Tour name, widget: string }
+      - { name: short, label: One-line description, widget: string }
+      - { name: period, label: Period of the war, widget: string, hint: 'For example: January – May 1944' }
+      - { name: days, label: Length (days), widget: number, value_type: int, min: 1, max: 21 }
+      - { name: summary, label: Summary paragraph, widget: text }
+
+      - { name: next_label, label: Next departure – name shown, widget: string, required: false, hint: 'Leave blank to use the tour name' }
+      - name: next_start
+        label: Next departure – first day
+        widget: datetime
+        time_format: false
+        format: YYYY-MM-DD
+        required: false
+      - name: next_end
+        label: Next departure – last day
+        widget: datetime
+        time_format: false
+        format: YYYY-MM-DD
+        required: false
+      - { name: next_note, label: Text when there is no date, widget: string, required: false, hint: 'For example: On request. Used only when no date is set.' }
+
+      - { name: price_twin, label: Price per person sharing (£), widget: number, value_type: int, required: false }
+      - { name: price_single, label: Price per person in a single room (£), widget: number, value_type: int, required: false }
+      - { name: price_basis, label: Board, widget: select, options: ['B&B', 'half board', 'full board'], default: 'B&B' }
+      - { name: excludes, label: Not included, widget: string }
+
+      - { name: arrive, label: Fly into, widget: string }
+      - { name: depart, label: Fly home from, widget: string }
+      - { name: base, label: Where you stay, widget: string, required: false }
+
+      - { name: hero_image, label: Main photo, widget: image, required: false }
+      - { name: hero_caption, label: Main photo caption, widget: string, required: false }
+
+      - name: itinerary
+        label: Day-by-day itinerary
+        label_singular: Day
+        widget: list
+        required: false
+        summary: '{{fields.stands}}'
+        fields:
+          - name: stands
+            label: Stands and visits
+            label_singular: Stand
+            widget: list
+            field: { name: stand, label: Stand, widget: text }
+
+      - name: photos
+        label: Photos within the itinerary
+        label_singular: Photo
+        widget: list
+        required: false
+        summary: '{{fields.caption}}'
+        fields:
+          - { name: image, label: Photo, widget: image }
+          - { name: caption, label: Caption, widget: string, required: false }
+
+      - { name: gallery, label: Gallery shown on this tour page, widget: relation, collection: galleries, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+      - { name: coords, label: Map reference shown on the photo, widget: string, hint: 'For example: 41°29′N 13°48′E' }
+      - { name: order, label: Position in tour lists, widget: number, value_type: int }
+
+  # ---------------------------------------------------------------- Testimonials
+  - name: testimonials
+    label: Testimonials
+    label_singular: Testimonial
+    description: Newest first is not automatic; use “Position” to choose where a quote appears.
+    folder: src/content/testimonials
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{fields.name}}'
+    identifier_field: name
+    summary: '{{name}}, {{from}}'
+    sortable_fields: [order, name]
+    fields:
+      - { name: quote, label: Quote, widget: text, hint: 'Without quotation marks; the site adds them.' }
+      - { name: name, label: Name (with rank if military), widget: string }
+      - { name: from, label: Unit or home town, widget: string, required: false }
+      - { name: military, label: From a military unit, widget: boolean, default: false }
+      - name: tours
+        label: Tours this quote is about
+        widget: relation
+        collection: tours
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
+        multiple: true
+        required: false
+      - { name: order, label: Position, widget: number, value_type: int, default: 999 }
+
+  # ---------------------------------------------------------------- Galleries
+  - name: galleries
+    label: Photo galleries
+    label_singular: Gallery
+    folder: src/content/galleries
+    format: json
+    extension: json
+    create: true
+    delete: false
+    identifier_field: title
+    summary: '{{title}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: show_on_gallery_page, label: Show as a section on the Gallery page, widget: boolean, default: false }
+      - { name: order, label: Position on the Gallery page, widget: number, value_type: int, default: 99 }
+      - name: photos
+        label: Photos
+        label_singular: Photo
+        widget: list
+        summary: '{{fields.caption}}'
+        fields:
+          - { name: image, label: Photo, widget: image }
+          - { name: caption, label: Caption and credit, widget: string, required: false }
+
+  # ---------------------------------------------------------------- Reading lists
+  - name: books
+    label: Reading lists
+    label_singular: Reading list
+    folder: src/content/books
+    format: json
+    extension: json
+    create: false
+    delete: false
+    identifier_field: title
+    fields:
+      - { name: title, label: List title, widget: string }
+      - { name: order, label: Position, widget: number, value_type: int }
+      - name: books
+        label: Books
+        label_singular: Book
+        widget: list
+        summary: '{{fields.title}} – {{fields.author}}'
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: author, label: Author, widget: string, required: false }
+
+  # ---------------------------------------------------------------- Stand maps
+  - name: stands
+    label: Stand maps
+    label_singular: Stand map
+    description: Positions of each stand on the interactive tour maps.
+    folder: src/content/stands
+    format: json
+    extension: json
+    create: false
+    delete: false
+    identifier_field: status
+    summary: '{{slug}} ({{status}})'
+    fields:
+      - name: status
+        label: Status
+        widget: select
+        options:
+          - { label: 'Draft – shows a warning on the page', value: draft }
+          - { label: 'Confirmed by Frank', value: confirmed }
+      - { name: note, label: Internal note, widget: text, required: false }
+      - { name: outside, label: Note below the map, widget: text, required: false }
+      - name: stands
+        label: Stands
+        label_singular: Stand
+        widget: list
+        summary: 'Day {{fields.day}}: {{fields.name}}'
+        fields:
+          - { name: day, label: Day, widget: number, value_type: int, min: 1 }
+          - { name: name, label: Name, widget: string }
+          - { name: lat, label: Latitude, widget: number, value_type: float, hint: 'Decimal degrees, e.g. 41.4903. In Google Maps, right-click a spot to copy its coordinates.' }
+          - { name: lng, label: Longitude, widget: number, value_type: float }
+          - { name: text, label: What is studied here, widget: text, required: false }
+      - name: bounds
+        label: Map area (technical – do not change)
+        widget: list
+        field: { name: v, label: Value, widget: number, value_type: float }
+      - { name: tiles, label: Map tiles file (technical), widget: string }
+      - { name: terrain, label: Terrain file (technical), widget: string }

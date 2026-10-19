@@ -1,0 +1,11 @@
+{
+  "quote": "I have just returned from a fabulous trip to Monte Cassino with Frank. We were a group of 9 who have been visiting battlefield sites around Europe for the past 16 years, some with tour guides, others not. This was by far the best organised and interesting one yet. All we had to do was fly to and from Rome, the rest was sorted. Hotels, airport transfers, transport to and from sites and, most importantly, first class battle information. Frank said he does these trips because he loves it and not for the money – yea heard that before I thought. Well for under £300 per person sharing a room, I now know he meant it – what incredible value for money. Keep it up Frank and hopefully will see you next year on your Anzio trip.",
+  "name": "Bruce Davidson",
+  "from": "Stowmarket",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano"
+  ],
+  "order": 117
+}

@@ -1,0 +1,466 @@
+{
+  "title": "Regiments and corps",
+  "order": 2,
+  "books": [
+    {
+      "title": "History of the King’s Dragoon Guards",
+      "author": "D McCorquodale, B Hutchings & A Woozley"
+    },
+    {
+      "title": "A History of the 17th/21st Lancers 1922-1959",
+      "author": "RLV Blake"
+    },
+    {
+      "title": "Second to None. History of the Royal Scots Greys 1919-45",
+      "author": "RMP Carver"
+    },
+    {
+      "title": "The Grenadier Guards in the war of 1939-1945",
+      "author": "N Nicholson & P Forbes"
+    },
+    {
+      "title": "Why the Grenadiers? A chaplain’s memoirs of the Fifth Battalion Grenadier Guards, 1942-1945",
+      "author": "D Browning"
+    },
+    {
+      "title": "The Coldstream Guards 1920-1946",
+      "author": "M Howard & J Sparrow"
+    },
+    {
+      "title": "History of the Irish Guards in the Second World War",
+      "author": "D Fitzgerald"
+    },
+    {
+      "title": "Welsh Guards at War",
+      "author": "LF Ellis"
+    },
+    {
+      "title": "Historical Records of the Buffs, Royal East Kent Regiment 1919-1948",
+      "author": "CRB Knight"
+    },
+    {
+      "title": "History of the Royal Northumberland Fusiliers in the Second World War",
+      "author": "CN Barclay"
+    },
+    {
+      "title": "Always a Fusilier – the war history of the Royal Fusiliers (City of London Regiment), 1939-1945",
+      "author": "CN Parkinson"
+    },
+    {
+      "title": "The Story of the King’s Regiment, 1914-1948",
+      "author": "JJB Gaffney"
+    },
+    {
+      "title": "The History of the Tenth Foot 1919-1945",
+      "author": "LC Gates"
+    },
+    {
+      "title": "History of the Somerset Light Infantry (Prince Albert’s) 1919-1945",
+      "author": "G Molesworth"
+    },
+    {
+      "title": "Suspended animation – a short history of the 2nd Battalion the Bedfordshire and Hertfordshire Regiment",
+      "author": "AC Young"
+    },
+    {
+      "title": "The Royal Leicestershire Regiment, 17th Foot, a history of the years 1928 to 1956",
+      "author": "W Underhill"
+    },
+    {
+      "title": "The Story of the Green Howards 1939-1945",
+      "author": "WAT Synge"
+    },
+    {
+      "title": "The History of the Lancashire Fusiliers 1939-1945",
+      "author": "J Hallam"
+    },
+    {
+      "title": "The History of the Royal Scots Fusiliers 1919-1959",
+      "author": "JC Kemp"
+    },
+    {
+      "title": "The History of the Cheshire Regiment in the Second World War",
+      "author": "A Crookenden"
+    },
+    {
+      "title": "The History of the Cameronians (Scottish Rifles) 26th and 90th Volume 3. 1933-1946",
+      "author": "CN Barclay"
+    },
+    {
+      "title": "The Royal Inniskilling Fusiliers in the Second World War",
+      "author": "F Fox"
+    },
+    {
+      "title": "History of the East Surrey Regiment. Volume 4. 1920-1952",
+      "author": "DS Daniell"
+    },
+    {
+      "title": "The Surreys in Italy",
+      "author": "GLA Squire & PGE Hill"
+    },
+    {
+      "title": "The History of the Duke of Cornwall’s Light Infantry 1939-45",
+      "author": "E Godfrey & R Goldsmith"
+    },
+    {
+      "title": "History of the Duke of Wellington’s Regiment 1919-1952",
+      "author": "CN Barclay"
+    },
+    {
+      "title": "A History of the Royal Sussex Regiment 1701-1953",
+      "author": "GD Martineau"
+    },
+    {
+      "title": "History of The Queen’s Royal Regiment – Vol VIII 1924-1948",
+      "author": "Foster."
+    },
+    {
+      "title": "History of 2/6th Bn The Queen’s Royal Regiment in the Italian Campaign",
+      "author": "Anon"
+    },
+    {
+      "title": "History of 2/7th Bn The Queen’s Royal Regiment 1939-1946",
+      "author": "R Bullen"
+    },
+    {
+      "title": "History of 2/5th Bn The Queen’s Royal Regiment 1939-1945",
+      "author": "PN Tregonnring"
+    },
+    {
+      "title": "Regimental History of the Royal Hampshire Regiment. Volume 3. 1918-1954",
+      "author": "DS Daniell"
+    },
+    {
+      "title": "The Black Watch and the King’s Enemies",
+      "author": "B Fergusson"
+    },
+    {
+      "title": "The Essex Regiment 1929-1950",
+      "author": "TA Martin"
+    },
+    {
+      "title": "1/4 Essex – a Battalion of the Eighth Army",
+      "author": "D Beckett"
+    },
+    {
+      "title": "The History of the Sherwood Foresters (Nottinghamshire & Derbyshire Regiment) 1919-1957",
+      "author": "CN Barclay"
+    },
+    {
+      "title": "The story of the 2nd Battalion The Sherwood Foresters 1939-1945",
+      "author": "JWA Masters"
+    },
+    {
+      "title": "The Loyal Regiment (North Lancashire) 1919-1953",
+      "author": "CGT Dean"
+    },
+    {
+      "title": "The History of the Northamptonshire Regiment, 1934-1948",
+      "author": "WJ Jervois"
+    },
+    {
+      "title": "The 5th Battalion Northamptonshire Regiment in Italy",
+      "author": "I McKee"
+    },
+    {
+      "title": "History of the Royal Berkshire Regiment (Princess Charlotte of Wales’s) 1920-1947",
+      "author": "G Blight"
+    },
+    {
+      "title": "The Fighting Tenth – A short history of the 10th Battalion The Royal Berkshire Regiment",
+      "author": "DRC West"
+    },
+    {
+      "title": "The",
+      "author": "Queen’s Own Royal West Kent Regiment 1920-1950. HD Chaplin"
+    },
+    {
+      "title": "History of the King’s Own Yorkshire Light Infantry 1939-1948. Volume 6",
+      "author": "GF Ellenberger"
+    },
+    {
+      "title": "The History of the Corps of the King’s Shropshire Light Infantry. Volume 3. 1881-1968",
+      "author": "J Moulsdale"
+    },
+    {
+      "title": "The Middlesex Regiment (Duke of Cambridge’s Own) 1919-1952",
+      "author": "PK Kemp"
+    },
+    {
+      "title": "The Annals of the King’s Royal Rifle Corps. Volume 7. 1943-1965",
+      "author": "GH Mills & RF Nixon"
+    },
+    {
+      "title": "The Story of the Wiltshire Regiment (Duke of Edinburgh’s) the 62nd and 99th Foot (1756-1959)",
+      "author": "NCE Kendrick"
+    },
+    {
+      "title": "The North Staffordshire Regiment",
+      "author": "H Cook"
+    },
+    {
+      "title": "The York and Lancaster Regiment volume 3 1919-1953",
+      "author": "OF Shepherd"
+    },
+    {
+      "title": "The DLI at War – the history of the Durham Light Infantry 1939-1945",
+      "author": "D Rissik"
+    },
+    {
+      "title": "Seaforth Highlanders",
+      "author": "J Sym"
+    },
+    {
+      "title": "6th Gordons. 1939-45",
+      "author": "CGT Dean"
+    },
+    {
+      "title": "Historical Records of the Queen’s Own Cameron Highlanders. Volumes 5 and 6",
+      "author": "Anon"
+    },
+    {
+      "title": "Charlie Company – in service with C Company 2nd Queen’s Own Cameron Highlanders, 1940-44",
+      "author": "P Cochrane"
+    },
+    {
+      "title": "History of the Royal Irish Rifles volume 3",
+      "author": "C Graves"
+    },
+    {
+      "title": "The Royal Irish Rifles 1793-1957",
+      "author": "MJ Corbally"
+    },
+    {
+      "title": "London Irish Rifles 1859-1959",
+      "author": "MJ Corbally"
+    },
+    {
+      "title": "London Irish at War – A History of the Battalions of the London Irish Rifles in World War II",
+      "author": "Anon"
+    },
+    {
+      "title": "Fling Our Banner to the Wind",
+      "author": "J Horsfall"
+    },
+    {
+      "title": "The Royal Irish Fusiliers, 1793-1968",
+      "author": "M Cunliffe"
+    },
+    {
+      "title": "History of the Argyll and Sutherland Highlanders – 1st Battalion, 1939-1954",
+      "author": "RCB Anderson"
+    },
+    {
+      "title": "The Rifle Brigade in the Second World War, 1939-1945",
+      "author": "R Hastings"
+    },
+    {
+      "title": "History of the Corps of Royal Engineers 1938-1948. Volume 9 Sicily & Italy",
+      "author": "R Pakenham-Walsh"
+    },
+    {
+      "title": "The Tiger Triumphs – The Story of Three Great Divisions in Italy",
+      "author": "GR Stevens"
+    },
+    {
+      "title": "The 51st Royal Tank Regiment: Morley, Tunisia and Italy, 1939-1945",
+      "author": "R Addyman"
+    },
+    {
+      "title": "A Short History of 3rd Field Regiment, Royal Artillery, from the outbreak of the war",
+      "author": "GR Brocklebank"
+    },
+    {
+      "title": "The 4th Indian Division",
+      "author": "GR Stevens"
+    },
+    {
+      "title": "They Did What Was Asked of Them. 41 (Royal Marines) Commando, 1942-1946",
+      "author": "R Mitchell"
+    },
+    {
+      "title": "The Heat of Battle. 16 DLI in WW2",
+      "author": "P Hart"
+    },
+    {
+      "title": "History of the Commandos in the Mediterranean Sep 43-May 45",
+      "author": "Anon"
+    },
+    {
+      "title": "Commandos and Rangers of World War II",
+      "author": "JD Ladd"
+    },
+    {
+      "title": "War Chronicles. Oxfordshire and Buckinghamshire LI. Volume 3. July 1942-May 1944",
+      "author": "JEH Neville"
+    },
+    {
+      "title": "Darby’s Rangers",
+      "author": "JJ Altieri"
+    },
+    {
+      "title": "Battleaxe Division. From Africa to Italy with the 78th Division 1942-45",
+      "author": "K Ford"
+    },
+    {
+      "title": "The Rock of Anzio. A History of the US 45th Infantry Division",
+      "author": "F Whitlock"
+    },
+    {
+      "title": "The Blue Devils in Italy",
+      "author": "JP Delaney"
+    },
+    {
+      "title": "History of the 85th Infantry Division in World War II",
+      "author": "P Schultz"
+    },
+    {
+      "title": "The Seaforth Highlanders of Canada, 1919–1965",
+      "author": "RH Roy"
+    },
+    {
+      "title": "North Irish Horse Battle Report, North Africa-Italy 1943-1945",
+      "author": "Anon"
+    },
+    {
+      "title": "North Irish Horse",
+      "author": "R Docherty"
+    },
+    {
+      "title": "History of the First Division : Anzio Campaign",
+      "author": ", January-June 1944"
+    },
+    {
+      "title": "British Army Communications in the Second World War: Lifting the Fog of Battle",
+      "author": "S Godfrey"
+    },
+    {
+      "title": "Larkhill’s Wartime Locators – RA Survey in the Second Wold War’",
+      "author": "M Mangilli-Climpson"
+    },
+    {
+      "title": "“The Kensingtons” Princess Louise’s Kensington Regiment Second World War",
+      "author": "Anon"
+    },
+    {
+      "title": "The Army Medical Services, Campaigns, Volume 3: Sicily, Italy, Greece (1944-45)",
+      "author": "FAE Crew"
+    },
+    {
+      "title": "Allied Military Administration in Italy 1943-45",
+      "author": "CRS Harris"
+    },
+    {
+      "title": "A History of the Fifth Army",
+      "author": "CG Starr"
+    },
+    {
+      "title": "Front of the Line. Adventures with the Irish Brigade",
+      "author": "C Gunner"
+    },
+    {
+      "title": "The First Divisional Artillery at Anzio",
+      "author": "Anon"
+    },
+    {
+      "title": "The Fourth Division 1939 to 1945",
+      "author": "H Williamson"
+    },
+    {
+      "title": "The Black Cats at War",
+      "author": "D Williams"
+    },
+    {
+      "title": "The London Scottish in the Second World War",
+      "author": "CN Barclay"
+    },
+    {
+      "title": "The Fifth British Division",
+      "author": "G Aris"
+    },
+    {
+      "title": "The Royal Artillery Commemoration Book, 1939-1945",
+      "author": "WE Duncan"
+    },
+    {
+      "title": "The Rajputana Rifles; a History of the Regiment 1775-1947",
+      "author": "MG Abhayankar"
+    },
+    {
+      "title": "History of the 7th Duke of Edinburgh’s Own Gurkha Rifles",
+      "author": "JN Mackay"
+    },
+    {
+      "title": "Allied Fighting Effectiveness in North Africa and Italy 1942-1945",
+      "author": "AL Hargreaves, PJ Rose and MC Ford"
+    },
+    {
+      "title": "A Bloody Road Home. World War Two and New Zealand’s Historic Second Division",
+      "author": "C Pugsley"
+    },
+    {
+      "title": "8th Battalion Argyll and Sutherland Highlanders 1939-47",
+      "author": "AD Malcolm"
+    },
+    {
+      "title": "Letters from a Soldier",
+      "author": "W Robson"
+    },
+    {
+      "title": "Shabash 149",
+      "author": "The war story of the 149th Regiment RA 1939-1945. EW Capleton"
+    },
+    {
+      "title": "The Army Medical Services. Campaigns Volume 3",
+      "author": "FA Crew"
+    },
+    {
+      "title": "History of the Queen’s Bays 1929-1945",
+      "author": "WR Beddington"
+    },
+    {
+      "title": "The Raiders. The Army Commandos 1940-46",
+      "author": "R Neillands"
+    },
+    {
+      "title": "Nothing Much to Lose – 43 Commando Royal Marines",
+      "author": "M McConville"
+    },
+    {
+      "title": "The Galloping Third. The story of the 3rd King’s Own Hussars",
+      "author": "H Bolitho"
+    },
+    {
+      "title": "9 Gurkha Rifles: A Regimental History (1817-1947)",
+      "author": "P Chaudhuri"
+    },
+    {
+      "title": "Seaforth Highlanders: a fighting soldier remembers",
+      "author": "J Stockman"
+    },
+    {
+      "title": "A History of the 7th Field Company RE 1939-1945",
+      "author": "TMJ Riordan"
+    },
+    {
+      "title": "The Seventh and Three Enemies. The Story of WW2 and the 7th Queen’s Own Hussa",
+      "author": "rs. GMO Davy"
+    },
+    {
+      "title": "From Tack to Track. The 16th/5th Lancers from 1925 to 1945",
+      "author": "S Haines"
+    },
+    {
+      "title": "Memories of a Young Sergeant",
+      "author": "A Pittacchio"
+    },
+    {
+      "title": "The 1st Household Cavalry 1943-44: in the shadow of Monte Amaro",
+      "author": "G O’Connor"
+    },
+    {
+      "title": "With the 6th Div",
+      "author": "WL Fielding"
+    }
+  ]
+}

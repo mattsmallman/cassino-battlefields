@@ -1,0 +1,12 @@
+{
+  "quote": "Frank certainly knows his stuff when it comes to the battles of Salerno, Cassino and Anzio and, as a result, he is a great guide. The banter was brilliant and made the whole trip very enjoyable.",
+  "name": "Ian Walton and the Betley Chums",
+  "from": "Betley",
+  "military": false,
+  "tours": [
+    "cassino",
+    "anzio-and-the-garigliano",
+    "salerno"
+  ],
+  "order": 110
+}

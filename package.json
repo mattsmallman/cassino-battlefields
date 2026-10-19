@@ -3,16 +3,19 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "npm run copy-maplibre && astro dev",
-    "build": "npm run copy-maplibre && astro build",
+    "dev": "npm run prepare-assets && astro dev",
+    "build": "npm run prepare-assets && astro build",
     "preview": "astro preview",
-    "copy-maplibre": "mkdir -p public/maps/lib && cp node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs public/maps/lib/"
+    "copy-maplibre": "mkdir -p public/maps/lib && cp node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs node_modules/maplibre-gl/dist/maplibre-gl-shared.mjs public/maps/lib/",
+    "prepare-assets": "npm run copy-maplibre && npm run copy-cms && node scripts/optimise-uploads.mjs",
+    "copy-cms": "mkdir -p public/admin && cp node_modules/@sveltia/cms/dist/sveltia-cms.js public/admin/"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/libre-franklin": "^5.3.0",
     "@fontsource-variable/source-serif-4": "^5.2.0",
     "@protomaps/basemaps": "^5.7.2",
+    "@sveltia/cms": "^0.248.0",
     "astro": "^5.14.0",
     "maplibre-gl": "^6.15.0",
     "pmtiles": "^4.5.0"

@@ -1,0 +1,67 @@
+{
+  "name": "Cassino",
+  "short": "The four battles for Monte Cassino",
+  "period": "January – May 1944",
+  "days": 4,
+  "summary": "Monte Cassino held up the Allied advance on Rome for five months. We follow the American, British, Indian, New Zealand, Polish and Canadian formations through all four battles: the Rapido crossings, the bombing of the Monastery, Snakeshead Ridge and Point 593, the Cavendish Road, and the final break through the Gustav and Hitler Lines in May 1944.",
+  "next_label": "Camino, Garigliano & Cassino",
+  "next_start": "2027-05-12",
+  "next_end": "2027-05-16",
+  "next_note": "",
+  "price_twin": 432,
+  "price_single": 579,
+  "price_basis": "B&B",
+  "excludes": "Flights, lunch and evening meals",
+  "arrive": "Rome (Ciampino or Fiumicino)",
+  "depart": "Rome",
+  "base": "Cassino",
+  "hero_image": "/img/abbey-and-polish-cemetery-6a2141-1280.webp",
+  "hero_caption": "The Abbey from the Polish Cemetery",
+  "itinerary": [
+    {
+      "stands": [
+        "Meet at Airport in Rome and drive to Cassino.",
+        "Study the strategic background to the Italian Campaign, orientate to the ground and set the scene for the four battles January-May 44."
+      ]
+    },
+    {
+      "stands": [
+        "Study and view of the crossing sites on the River Rapido by 36 (Texas) Infantry Division in the first battle 20-23 January 1944.",
+        "Study and view the ground over which 34 (Red Bulls) Infantry Division advanced in 24 January-12 February 1944 in the first battle across the River Rapido and their break-in onto the ridges behind the Monastery. Visit Hove Dump.",
+        "Study the ground on Monastery Hill and appreciate why this position dominated the battlefield. Examine the controversial decision to bomb the Benedictine Monastery on 15 February 1944.",
+        "Study and view the ground over which part of 5 New Zealand Infantry Brigade attacked up the railway causeway on 17-18 February 1944 in an attempt to get armour into the Liri valley during the second battle and the concurrent attack by 5 Indian Brigade up on Snakeshead Ridge towards Point 593.",
+        "Study and view the terrain over which II (NZ) Corps attacked up Monastery Hill and into Cassino town during the third battle on 15-23 March 1944.",
+        "Study the Amazon Bridge, the crossing point on the River Rapido for 4 British Infantry Division on 12-13 May 1944, and appreciate the enormity of the challenge that the soldiers from the Corps of Royal Engineers faced at this site."
+      ]
+    },
+    {
+      "stands": [
+        "Walk and study the route of the Cavendish Road tank attack behind the Monastery on 19 March 1944.",
+        "Study the enormous logistical problems of resupplying troops on the ridges from Caira and the Allied efforts to meet this challenge.",
+        "Study the ground on Snakeshead Ridge, Point 593 and Point 575 over which the 34 (Red Bulls) Infantry Division fought in the first battle, 4 Indian Infantry Division in the second battle and II (PO) Corps in the fourth battle.",
+        "Examine the role of the Poles in the battle and the circumstances that led them to Monte Cassino.",
+        "Study the fourth and final battle and appreciate the efforts and gallantry of the Eighth Army in finally breaking the Gustav Line in May 1944.",
+        "Study the 1 (Canadian) Corps assault on the Hitler Line on 23 May 1944 – the day of the Anzio breakout."
+      ]
+    },
+    {
+      "stands": [
+        "Study the 36 (Texas) Infantry Division plan to slip between the inter-Corps boundary for LXXVI Panzer Corps and I Parachute Corps and break the Fourteenth Army’s defence on 29-30 May 1944.",
+        "Return to Airport in Rome."
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "image": "/img/1monte-cassino-5a88b7-1280.webp",
+      "caption": "View of the Monastery from the Polish Cemetery"
+    },
+    {
+      "image": "/img/photo-15-06-2023-11-26-15-276bc5-1280.webp",
+      "caption": "The 3rd Carpathian Infantry Division monument on Point 593 at Cassino"
+    }
+  ],
+  "gallery": "cassino",
+  "coords": "41°29′N 13°48′E",
+  "order": 1
+}
