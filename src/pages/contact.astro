@@ -1,16 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import Enquiry from '../components/Enquiry.astro';
+import { getSettings } from '../lib/content';
+const site = await getSettings();
 ---
 <Base title="Contact and booking" description="Book a place or ask Frank de Planta a question about Cassino Battlefields tours. Phone, email and post details.">
   <section class="band"><div class="wrap split">
     <div>
       <h1>Book or ask a question</h1>
-      <p class="lede">Tell Frank which tour you’re interested in and he’ll send a booking form, or answer any question about the battles, the itinerary or a relative who served.</p>
-      <h3 style="margin-top:32px">Email</h3><p><a href="mailto:enquiries@cassinobattlefields.co.uk">enquiries@cassinobattlefields.co.uk</a></p>
-      <h3>Telephone</h3><p><a href="tel:+441347811104">+44 (0)1347 811104</a><br /><a href="tel:+447768278464">+44 (0)7768 278464</a></p>
-      <h3>Post</h3><p>West Winds, The Gowans<br />Sutton on the Forest<br />York YO61 1DL</p>
-      <h3>Facebook</h3><p><a href="https://www.facebook.com/frank.deplanta" rel="noopener">Frank de Planta</a></p>
+      {site.contact_intro && <p class="lede">{site.contact_intro}</p>}
+      <h3 style="margin-top:32px">Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      {site.phones.length > 0 && <><h3>Telephone</h3><p>{site.phones.map((p, i) => <>{i > 0 && <br />}<a href={p.href}>{p.number}</a>{p.label && <span class="muted"> ({p.label.toLowerCase()})</span>}</>)}</p></>}
+      {site.addressLines.length > 0 && <><h3>Post</h3><p>{site.addressLines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p></>}
+      {site.facebook_url && <><h3>Facebook</h3><p><a href={site.facebook_url} rel="noopener">{site.facebook_label || 'Facebook'}</a></p></>}
     </div>
     <div><h2>Send an enquiry</h2><Enquiry /></div>
   </div></section>

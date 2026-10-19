@@ -80,4 +80,48 @@ const stands = defineCollection({
   }),
 });
 
-export const collections = { tours, testimonials, galleries, books, stands };
+const settings = defineCollection({
+  loader: glob({ pattern: 'site.json', base: './src/content/settings' }),
+  schema: z.object({
+    business_name: z.string().min(1),
+    tagline: opt,
+    footer_blurb: opt,
+    email: z.string().email('Enter a valid email address'),
+    phones: z.array(z.object({ label: opt, number: z.string().regex(/^[+\d][\d ()]{6,}$/, 'Use digits, spaces, brackets and an optional leading +') })).default([]),
+    address: opt,
+    facebook_url: z.string().url().or(z.literal('')).nullish().transform((v) => v ?? ''),
+    facebook_label: opt,
+    company_name: z.string().min(1),
+    company_number: opt,
+    footer_note: opt,
+    contact_intro: opt,
+  }),
+});
+
+const about = defineCollection({
+  loader: glob({ pattern: 'about.json', base: './src/content/pages' }),
+  schema: z.object({
+    heading: z.string().min(1),
+    seo_description: z.string().min(1).max(300),
+    lead_image: imagePath,
+    lead_caption: opt,
+    lede: z.string().min(1),
+    body: opt,
+    research: z.array(z.object({ year: z.string().min(1), text: z.string().min(1) })).default([]),
+    gallery_heading: opt,
+    gallery: opt,
+  }),
+});
+
+const faqs = defineCollection({
+  loader: glob({ pattern: 'faqs.json', base: './src/content/pages' }),
+  schema: z.object({
+    heading: z.string().min(1),
+    seo_description: z.string().min(1).max(300),
+    image: imagePath.or(z.literal('')).nullish().transform((v) => v ?? ''),
+    image_caption: opt,
+    faqs: z.array(z.object({ question: z.string().min(1), answer: z.string().min(1) })).min(1),
+  }),
+});
+
+export const collections = { tours, testimonials, galleries, books, stands, settings, about, faqs };

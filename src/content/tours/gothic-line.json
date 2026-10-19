@@ -15,7 +15,7 @@
   "arrive": "Ancona",
   "depart": "Ancona",
   "base": "Montefabbri, near Rimini",
-  "hero_image": "/img/view-of-monte-pulito-from-san-marino-nov-17-922507-1280.webp",
+  "hero_image": "/img/library/view-of-monte-pulito-from-san-marino-nov-17-922507.webp",
   "hero_caption": "Monte Pulito from San Marino",
   "itinerary": [
     {
@@ -65,19 +65,19 @@
   ],
   "photos": [
     {
-      "image": "/img/gothic-line-gr-memorial-at-faetano-9bd2af-1280.webp",
+      "image": "/img/library/gothic-line-gr-memorial-at-faetano-9bd2af.webp",
       "caption": "Gothic Line group at the Rifleman Sher Bahadur Thapa VC memorial in San Marino in April 2018"
     },
     {
-      "image": "/img/gothic-line-4-7-oct-25-a75364-1280.webp",
+      "image": "/img/library/gothic-line-4-7-oct-25-a75364.webp",
       "caption": "Members of the Monte Cassino Society in San Marino whilst studying the Gothic Line on 6 October 2025"
     },
     {
-      "image": "/img/gothic-line-4-7-oct-25-san-savino-cemetery-3b96bc-1280.webp",
+      "image": "/img/library/gothic-line-4-7-oct-25-san-savino-cemetery-3b96bc.webp",
       "caption": "Frank de Planta explaining the 4 & 5 September 1944 2 Armoured Brigade advance towards the San Savino-Passano Ridge"
     },
     {
-      "image": "/img/gothic-line-4-7-oct-25-view-of-tavoleto-4618a4-1280.webp",
+      "image": "/img/library/gothic-line-4-7-oct-25-view-of-tavoleto-4618a4.webp",
       "caption": "View of Tavoleto from Gemmano"
     }
   ],

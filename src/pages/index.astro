@@ -13,13 +13,13 @@ let quotes = [pick('Bill Vodra'), pick('Lt Col Guy Stone WG'), pick('Steve Deput
 if (quotes.length < 3) quotes = T.filter((q) => q.quote.length < 400).slice(0, 3);
 const unitQuote = pick('Maj Fletch Fletcher') ?? T.find((q) => q.military);
 import meta from '../data/imagemeta.json';
-const bookImg = (k: string) => Object.keys(meta).find((x) => x.startsWith(k))!;
+const bookImg = (k: string) => Object.keys(meta).find((x) => x.startsWith('u/' + k))!;
 const pubs = [
   { img: bookImg('book-salerno'), t: 'From the Salerno Landings to San Pietro Infine', isbn: '978-1-53618-572-0' },
   { img: bookImg('book-cassino'), t: 'Breaking the Gustav and Hitler Lines', isbn: '978-1-53619-076-2' },
   { img: bookImg('book-anzio'), t: 'From the Anzio Landings to Rome', isbn: '978-1-53619-077-9' },
 ];
-const strip = (G.home ?? []).filter((g) => !g.id.startsWith('book-') && !g.id.startsWith('mcs-logo'));
+const strip = (G.home ?? []).filter((g) => !g.id.includes('book-') && !g.id.includes('mcs-logo'));
 ---
 <Base title="Cassino Battlefields" description="Small-group battlefield studies of the Italian Campaign 1943–45 at Cassino, Anzio, Salerno, the Sangro and the Gothic Line, led by former infantry officer and author Frank de Planta." image="the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b">
   <section class="hero mapframe">

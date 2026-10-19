@@ -15,7 +15,7 @@
   "arrive": "Rome (Ciampino or Fiumicino)",
   "depart": "Rome",
   "base": "Cassino",
-  "hero_image": "/img/abbey-and-polish-cemetery-6a2141-1280.webp",
+  "hero_image": "/img/library/abbey-and-polish-cemetery-6a2141.webp",
   "hero_caption": "The Abbey from the Polish Cemetery",
   "itinerary": [
     {
@@ -53,11 +53,11 @@
   ],
   "photos": [
     {
-      "image": "/img/1monte-cassino-5a88b7-1280.webp",
+      "image": "/img/library/1monte-cassino-5a88b7.webp",
       "caption": "View of the Monastery from the Polish Cemetery"
     },
     {
-      "image": "/img/photo-15-06-2023-11-26-15-276bc5-1280.webp",
+      "image": "/img/library/photo-15-06-2023-11-26-15-276bc5.webp",
       "caption": "The 3rd Carpathian Infantry Division monument on Point 593 at Cassino"
     }
   ],

@@ -23,6 +23,7 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
   - Every tour page has a build-time SVG overview map.
   - Cassino has an interactive 3D stand map using self-hosted tiles and terrain, with no third-party requests.
 - **Site editor (Sveltia CMS) built and tested locally.** Content now lives in `src/content/` and is checked at build time. Tested end to end: a date change, a price change and a new testimonial all saved and showed on the rebuilt site, and an invalid price failed the build. See [CMS.md](CMS.md).
+- **FAQs, About and contact details editable.** Contact details live in one Site settings record that feeds the header, footer, contact page and enquiry form. All photos now sit once in a single photo library (`public/img/library/`), which the editor uses as its media folder, so every photo shows as a thumbnail. Web sizes are generated at build.
 - **Migration bug fixed.** Four photo captions on the Cassino and Gothic Line pages had been imported as itinerary stands. They're back on their photos.
 - **Competitor and best-practice sweep done.** Its findings shaped the key-facts box, the military and family pages, and putting testimonials on each tour page.
 
@@ -68,7 +69,6 @@ Status at archive (19 October 2026): the full site is built and reviewed locally
 - **Editor follow-ups:**
   - a map pin-picker for stand positions in place of typing latitude and longitude;
   - an icon/type field on itinerary stands, when iconography is done;
-  - moving the FAQs and About text into collections;
   - a preview template so the editor's preview pane looks like the real page.
 - **Enquiry form.** At the moment it opens the visitor's email app with the details pre-filled. It needs a real handler, for example a small endpoint sending through SES with the domain verified, plus spam protection such as Cloudflare Turnstile.
 - **Newsletter or register-interest capture** is not built.

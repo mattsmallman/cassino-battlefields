@@ -15,7 +15,7 @@
   "arrive": "Rome (Ciampino or Fiumicino)",
   "depart": "Rome",
   "base": "",
-  "hero_image": "/img/anzio-3-us-inf-div-ashore-at-anzio-a7e2d5-1280.webp",
+  "hero_image": "/img/library/anzio-3-us-inf-div-ashore-at-anzio-a7e2d5.webp",
   "hero_caption": "3 US Infantry Division coming ashore at Anzio",
   "itinerary": [
     {
@@ -62,7 +62,7 @@
   ],
   "photos": [
     {
-      "image": "/img/ashby-by-kimmo-095574-1280.webp",
+      "image": "/img/library/ashby-by-kimmo-095574.webp",
       "caption": "Private James Ashby. 10th Battalion Berkshire Regiment. Killed in Action on 25 February 1944. Buried in the Beachhead CWGC Cemetery at Anzio. Kimmo Veikkolainen"
     }
   ],

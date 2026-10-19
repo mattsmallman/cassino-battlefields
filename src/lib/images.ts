@@ -1,17 +1,14 @@
-// Image keys: a key K is served as /img/K-{640,1280,2000}.webp.
-// Migrated photos: /img/<id>-1280.webp  -> key <id>
-// CMS uploads:     /img/uploads/<file>   -> key u/<name> (variants made by scripts/optimise-uploads.mjs)
-import legacy from '../data/imagemeta.json';
-import uploads from '../data/uploadmeta.json';
+// Every photo lives once in the CMS media library, public/img/library/<name>.<ext>.
+// The build (scripts/optimise-uploads.mjs) makes /img/u/<name>-{640,1280,2000}.webp
+// and records sizes in src/data/imagemeta.json. Image keys are 'u/<name>'.
+import meta from '../data/imagemeta.json';
 export type Meta = { w: number; h: number; sizes: number[] };
-const all: Record<string, Meta> = { ...(legacy as any), ...(uploads as any) };
+const all = meta as Record<string, Meta>;
 export const keyFor = (path: string): string => {
-  const m = path.match(/^\/img\/(.+)-(640|1280|2000)\.webp$/);
-  if (m) return m[1];
-  const u = path.match(/^\/img\/uploads\/(.+)\.[a-z0-9]+$/i);
+  const u = path.match(/^\/img\/library\/(.+)\.[a-z0-9]+$/i);
   if (u) {
     const key = 'u/' + u[1].toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    return all[key] ? key : path; // not optimised yet: keep the original path
+    return all[key] ? key : path; // not optimised yet (dev server running): use the original
   }
   return path;
 };

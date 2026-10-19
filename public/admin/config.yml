@@ -20,9 +20,10 @@ backend:
 site_url: https://www.cassinobattlefields.co.uk
 display_url: https://www.cassinobattlefields.co.uk
 
-# Photos uploaded here are converted to fast web sizes when the site builds.
-media_folder: public/img/uploads
-public_folder: /img/uploads
+# The photo library. Every photo on the site lives here once; the build makes
+# fast web sizes from it.
+media_folder: public/img/library
+public_folder: /img/library
 
 collections:
   # ---------------------------------------------------------------- Tours
@@ -214,3 +215,84 @@ collections:
         field: { name: v, label: Value, widget: number, value_type: float }
       - { name: tiles, label: Map tiles file (technical), widget: string }
       - { name: terrain, label: Terrain file (technical), widget: string }
+
+  # ---------------------------------------------------------------- Pages
+  - name: pages
+    label: Pages
+    label_singular: Page
+    description: The About and FAQs pages.
+    files:
+      - name: about
+        label: About Frank
+        file: src/content/pages/about.json
+        format: json
+        fields:
+          - { name: heading, label: Heading, widget: string }
+          - { name: seo_description, label: Search engine description, widget: text, hint: 'One or two sentences shown in Google results. Under 300 characters.' }
+          - { name: lead_image, label: Main photo, widget: image }
+          - { name: lead_caption, label: Main photo caption, widget: string, required: false }
+          - { name: lede, label: Opening paragraph (shown larger), widget: text }
+          - { name: body, label: Further text, widget: markdown, required: false, buttons: [bold, italic, link, bulleted-list, numbered-list] }
+          - name: research
+            label: Research projects by year
+            label_singular: Project
+            widget: list
+            required: false
+            summary: '{{fields.year}}: {{fields.text}}'
+            fields:
+              - { name: year, label: Year or years, widget: string, hint: 'For example: 2015–16' }
+              - { name: text, label: Project, widget: string, hint: 'Put a book or programme title between *asterisks* for italics.' }
+          - { name: gallery_heading, label: Heading above the photos, widget: string, required: false }
+          - { name: gallery, label: Photo gallery shown at the bottom, widget: relation, collection: galleries, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+
+      - name: faqs
+        label: FAQs
+        file: src/content/pages/faqs.json
+        format: json
+        fields:
+          - { name: heading, label: Heading, widget: string }
+          - { name: seo_description, label: Search engine description, widget: text }
+          - { name: image, label: Photo, widget: image, required: false }
+          - { name: image_caption, label: Photo caption, widget: string, required: false }
+          - name: faqs
+            label: Questions
+            label_singular: Question
+            widget: list
+            summary: '{{fields.question}}'
+            fields:
+              - { name: question, label: Question, widget: string }
+              - name: answer
+                label: Answer
+                widget: markdown
+                hint: 'Lists, links and bold work as normal. The cancellation charges are a table: in the editor’s source view, keep each row on its own line between | marks.'
+
+  # ---------------------------------------------------------------- Settings
+  - name: settings
+    label: Site settings
+    description: Contact details and business information used in the header, footer, contact page and enquiry form.
+    files:
+      - name: site
+        label: Contact details and business information
+        file: src/content/settings/site.json
+        format: json
+        fields:
+          - { name: business_name, label: Business name, widget: string }
+          - { name: tagline, label: Tagline under the name, widget: string, required: false }
+          - { name: email, label: Enquiries email address, widget: string, hint: 'Enquiries from the website go to this address.' }
+          - name: phones
+            label: Phone numbers
+            label_singular: Phone number
+            widget: list
+            required: false
+            summary: '{{fields.label}}: {{fields.number}}'
+            fields:
+              - { name: label, label: Label, widget: string, required: false, hint: 'For example: Office or Mobile' }
+              - { name: number, label: Number, widget: string, hint: 'International format, for example +44 (0)1347 811104' }
+          - { name: address, label: Postal address, widget: text, required: false, hint: 'One line per line of the address.' }
+          - { name: facebook_url, label: Facebook page link, widget: string, required: false }
+          - { name: facebook_label, label: Facebook link text, widget: string, required: false }
+          - { name: contact_intro, label: Introduction on the contact page, widget: text, required: false }
+          - { name: footer_blurb, label: One-line description in the footer, widget: string, required: false }
+          - { name: footer_note, label: Note at the very bottom of every page, widget: string, required: false }
+          - { name: company_name, label: Registered company name, widget: string }
+          - { name: company_number, label: Company number, widget: string, required: false }

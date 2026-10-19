@@ -20,15 +20,14 @@ The Cassino 3D map loads its tiles with HTTP range requests. `python3 -m http.se
 | Path | What it is |
 | --- | --- |
 | `src/pages/` | Pages. `[tour].astro` renders all six tour pages at their original URLs (`/cassino/`, `/salerno/` …) |
-| `src/content/` | **All editable content**: tours (dates, prices, itineraries), testimonials, galleries, reading lists, stand maps. Edited through the CMS at `/admin` |
+| `src/content/` | **All editable content**: tours (dates, prices, itineraries), testimonials, galleries, reading lists, stand maps, the About and FAQs pages, and site settings (contact details). Edited through the CMS at `/admin` |
 | `src/content.config.ts` | Build-time rules for that content; a bad edit fails the build |
 | `src/lib/content.ts` | Reads the content for the pages; formats dates and drops past departures |
 | `public/admin/` | The site editor (Sveltia CMS) and its form configuration |
 | `src/lib/places.ts` | Places drawn on each tour's overview map |
-| `src/data/imagemeta.json` | Sizes of the migrated photos (uploads get theirs at build time) |
 | `src/components/` | Image, gallery, departures table, enquiry form, overview map (build-time SVG), stand map (MapLibre) |
 | `src/styles/global.css` | All styling; colour and type tokens at the top |
-| `public/img/` | 195 photos re-encoded as WebP at 640/1280/2000px |
+| `public/img/library/` | The photo library (195 photos, one file each) and the editor's media folder. Web sizes are generated into `public/img/u/` at build |
 | `public/maps/` | Self-hosted Protomaps vector tiles and terrain for the Cassino area, plus map label fonts |
 | `deploy/nginx.conf`, `Dockerfile`, `compose.yaml` | Production container: nginx serving `dist/`, old-URL redirects, security headers, a dedicated `cloudflared` sidecar |
 | `archive/wordpress-export/` | Raw WordPress REST export (`pages.json`) and the structured blocks extracted from it (`content.json`) |

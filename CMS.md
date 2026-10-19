@@ -23,24 +23,28 @@ Things worth trying:
 
 - **Tours, dates & prices → The Gothic Line:** change the dates or the price, then look at the home page "Next departures" table. Set an end date in the past and the departure drops off the site.
 - **Testimonials → New:** add a quote, then tick "From a military unit". It appears on the Testimonials page and in its "Military units" filter.
-- **Photo galleries → Cassino:** drag photos to reorder them, edit a caption, or upload a new photo. Uploads go to `public/img/uploads/`. The next `npm run dev` or build turns them into web-sized WebP files. Until then the original is shown.
+- **Site settings:** change a phone number or the enquiries email. It updates the header, footer, contact page and the address the enquiry form sends to.
+- **Pages → FAQs:** add a question or reword an answer. The cancellation charges are a table; edit it in the editor's source view so the rows stay intact.
+- **Photo galleries → Cassino:** drag photos to reorder them, edit a caption, or upload a new photo. Every photo, old and new, lives once in the photo library (`public/img/library/`). The next `npm run dev` or build makes web-sized versions of it; until then the original is shown.
 - **Stand maps → cassino:** change a stand's latitude and longitude, or set the status to "Confirmed by Frank" to remove the draft warning from the Cassino page.
 - **Safety net:** in the raw file, set a price to some text, or an end date before the start date, then run `npm run build`. It fails with a message naming the field.
 
-Run `git restore src/content public/img/uploads` to throw away test edits.
+Run `git restore src/content public/img/library && git clean -fd public/img/library` to throw away test edits.
 
 ## What can and can't be edited
 
 | Editable in the CMS | Still needs a developer |
 | --- | --- |
 | Tour names, summaries, dates, prices, board, airports, base | Adding a brand-new tour (needs an overview-map entry in `src/lib/places.ts`) |
-| Day-by-day itineraries and the photos within them | Page layouts and the About, FAQs, Military and Tracing pages' text |
-| Testimonials (add, edit, delete, reorder, tag by tour) | Navigation, footer and contact details |
+| Day-by-day itineraries and the photos within them | Page layouts, and the Home, Military and Tracing-a-relative page text |
+| Testimonials (add, edit, delete, reorder, tag by tour) | Navigation menu |
 | Galleries (photos, captions, order, which appear on the Gallery page) | Map tiles for a new area (see NOTES.md) |
 | Reading lists | |
 | Stand positions and draft/confirmed status | |
+| **About** page: heading, photo, text, research projects by year, gallery | |
+| **FAQs**: questions and answers (with links, lists and tables), photo | |
+| **Site settings**: email, phone numbers, address, Facebook, tagline, footer text, company details. These feed the header, footer, contact page and enquiry form | |
 
-The FAQs, About and contact text were left as page templates to keep this first version small. Moving them into collections works the same way.
 
 ## Going live
 
@@ -56,5 +60,5 @@ The FAQs, About and contact text were left as page templates to keep this first 
 - `src/content/<collection>/*.json` holds the content. The keys are kept in the same order as the form, so saves produce small diffs.
 - `src/content.config.ts` holds the build-time rules (zod schemas). It also tolerates empty optional fields, whether the CMS saves them as `''`, `null` or leaves them out.
 - `src/lib/content.ts` reads the collections and gives pages the shapes they expect. It also formats date ranges ("12–15 March 2027") and drops departures whose end date has passed.
-- `scripts/optimise-uploads.mjs` makes responsive WebP versions of CMS uploads at build time.
+- `public/img/library/` is the photo library and the CMS media folder. `scripts/optimise-uploads.mjs` makes the 640, 1280 and 2000px WebP versions at build time (about 45 seconds from cold, cached after that) into `public/img/u/`, which is git-ignored.
 - `tools/cms-e2e.mjs` is a headless end-to-end test. It loads the editor, edits a tour, adds a testimonial and saves.

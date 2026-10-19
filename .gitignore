@@ -5,4 +5,4 @@ dist
 public/maps/lib
 public/img/u
 public/admin/sveltia-cms.js
-src/data/uploadmeta.json
+src/data/imagemeta.json

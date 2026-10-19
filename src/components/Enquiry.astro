@@ -1,11 +1,12 @@
 ---
-import { getTours } from '../lib/content';
+import { getTours, getSettings } from '../lib/content';
+const site = await getSettings();
 const tours = await getTours();
 interface Props { kind?: 'tour' | 'military' | 'relative' }
 const { kind = 'tour' } = Astro.props;
 const opts = [...tours.map((t) => t.next?.label && t.next.start ? `${t.next.label} (${t.next.dates})` : t.name), 'Private group', 'Not sure yet'];
 ---
-<form class="enquiry" data-kind={kind} novalidate>
+<form class="enquiry" data-kind={kind} data-to={site.email} novalidate>
   <div class="row2">
     <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
     <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
@@ -39,7 +40,7 @@ const opts = [...tours.map((t) => t.next?.label && t.next.start ? `${t.next.labe
   )}
   <div class="field"><label for="msg">{kind === 'military' ? 'Training objectives and anything else Frank should know' : kind === 'relative' ? 'What you know so far' : 'Anything else'}</label><textarea id="msg" name="msg" rows="5"></textarea></div>
   <button class="btn" type="submit">Send to Frank</button>
-  <p class="muted form-status" role="status" style="font-size:0.95rem;margin-top:12px">This opens your email app with the details filled in, ready to send to enquiries@cassinobattlefields.co.uk.</p>
+  <p class="muted form-status" role="status" style="font-size:0.95rem;margin-top:12px">This opens your email app with the details filled in, ready to send to {site.email}.</p>
 </form>
 <script>
   document.querySelectorAll<HTMLFormElement>('form.enquiry').forEach((f) => {
@@ -58,8 +59,8 @@ const opts = [...tours.map((t) => t.next?.label && t.next.start ? `${t.next.labe
       });
       const kind = f.dataset.kind;
       const subj = kind === 'military' ? 'Military battlefield study enquiry' : kind === 'relative' ? 'Tracing a relative' : `Tour enquiry: ${sel?.value ?? ''}`;
-      location.href = `mailto:enquiries@cassinobattlefields.co.uk?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join('\n'))}`;
-      st.textContent = 'Your email app should now be open. If it isn’t, email enquiries@cassinobattlefields.co.uk directly.';
+      location.href = `mailto:${f.dataset.to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join('\n'))}`;
+      st.textContent = `Your email app should now be open. If it isn’t, email ${f.dataset.to} directly.`;
     });
   });
 </script>

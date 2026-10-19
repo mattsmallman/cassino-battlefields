@@ -9,7 +9,7 @@ const { G } = await getGalleries();
 const pick = picker(T);
 const sally = pick('Sally Low');
 const fam = T.filter((t) => /father|grandfather|uncle|grandad|dad\b/i.test(t.quote) && t.quote.length < 520).slice(0, 3);
-const grave = (G.home ?? []).find((g) => g.id.startsWith('lt-gh-wright')) ?? (G.home ?? [])[0];
+const grave = (G.home ?? []).find((g) => g.id.includes('lt-gh-wright')) ?? (G.home ?? [])[0];
 ---
 <Base title="Tracing a relative" description="Follow the footsteps of a father, grandfather or uncle who fought in Italy. Frank de Planta builds their unit’s actions, cemeteries and memorials into your tour.">
   <section class="band"><div class="wrap split">

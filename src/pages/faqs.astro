@@ -1,43 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
-import { getGalleries } from '../lib/content';
-const { G } = await getGalleries();
-const hero = (G.faqs ?? [])[0];
+import { getFaqs, md } from '../lib/content';
+const f = await getFaqs();
 ---
-<Base title="FAQs" description="Booking, deposits, what is included, insurance, cancellations and walking on Cassino Battlefields tours.">
+<Base title="FAQs" description={f.seo_description}>
   <section class="band"><div class="wrap split">
     <div>
-      <h1>Questions before you book</h1>
-      <figure style="margin-top:24px"><Img id={hero.id} alt={hero.cap} sizes="(max-width: 860px) 100vw, 40vw" /><figcaption>{hero.cap}</figcaption></figure>
+      <h1>{f.heading}</h1>
+      {f.img && <figure style="margin-top:24px"><Img id={f.img.id} alt={f.img.cap} sizes="(max-width: 860px) 100vw, 40vw" /><figcaption>{f.img.cap}</figcaption></figure>}
     </div>
     <div class="faq">
-      <details open><summary>How do I book and pay the deposit?</summary><div class="a">
-        <p>A non-refundable deposit of £80 per person holds your place. Pay in pounds sterling by bank transfer or cheque, made payable to Cassino Battlefields. The balance is due seven weeks before departure. <a href="/contact/">Ask Frank for a booking form</a>.</p></div></details>
-      <details><summary>What happens to my money?</summary><div class="a">
-        <p>Your payment is held in a trust account and is not paid to Cassino Battlefields until after the tour has taken place.</p></div></details>
-      <details><summary>How large are the groups?</summary><div class="a"><p>Between 8 and 50 people.</p></div></details>
-      <details><summary>What is included?</summary><div class="a"><ul>
-        <li>Minibus or coach transport from Rome (Ciampino or Fiumicino), Naples (Capodichino) or Ancona airport to every location on the tour. The vehicle stays with the group throughout.</li>
-        <li>Bed and continental breakfast each day in Cassino, Anzio, Rimini or Salerno. All rooms are en-suite with wifi, TV and telephone.</li>
-        <li>A comprehensive briefing pack for each room booked, covering the background to and an overview of the battles.</li>
-      </ul></div></details>
-      <details><summary>What is not included?</summary><div class="a"><ul>
-        <li>Flights or other travel to and from the airport. You arrange these yourself, which makes it easy to arrive early or stay on in Rome.</li>
-        <li>Lunch, snacks and evening meals.</li>
-        <li>Travel insurance.</li>
-      </ul></div></details>
-      <details><summary>Do I need a passport?</summary><div class="a"><p>Yes, a valid passport. <a href="https://www.gov.uk/browse/abroad/passports" rel="noopener">Check yours on GOV.UK</a>.</p></div></details>
-      <details><summary>Do I need travel insurance?</summary><div class="a"><p>Yes. You will not be able to travel without it, and we need proof of insurance with your booking form. UK residents should also carry a UK Global Health Insurance Card (GHIC), which is free to apply for on the NHS website.</p></div></details>
-      <details><summary>What if I need to cancel?</summary><div class="a">
-        <p>Cancellations must be made in writing. These charges apply:</p>
-        <table class="plain"><thead><tr><th>Notice before departure</th><th>Charge</th></tr></thead><tbody>
-          <tr><td>56 to 21 days</td><td>30%</td></tr><tr><td>20 to 14 days</td><td>75%</td></tr>
-          <tr><td>13 to 7 days</td><td>90%</td></tr><tr><td>Less than 7 days</td><td>No refund</td></tr></tbody></table>
-        <p>If we have to cancel a tour, we will tell you in writing and offer an alternative. If that does not suit you, we will refund everything you have paid.</p></div></details>
-      <details><summary>I’m already in Italy. Can I just join the study?</summary><div class="a"><p>Yes. If you have your own accommodation, the price is reduced, and it is reduced further if you also have your own transport.</p></div></details>
-      <details><summary>Do I have to share a room?</summary><div class="a"><p>No. Single and twin rooms are both available, at different prices.</p></div></details>
-      <details><summary>How much walking is there?</summary><div class="a"><p>Not much. Where there is walking, the minibus is never far away.</p></div></details>
+      {f.faqs.map((q, i) => (
+        <details open={i === 0}><summary>{q.question}</summary><div class="a" set:html={md(q.answer)} /></details>
+      ))}
     </div>
   </div></section>
 </Base>

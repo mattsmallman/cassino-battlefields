@@ -11,7 +11,7 @@ const files = {};
 const walk = (d) => fs.readdirSync(path.join(repo, d), { withFileTypes: true }).forEach((e) => {
   const rel = path.join(d, e.name); if (e.isDirectory()) walk(rel); else files[rel] = fs.readFileSync(path.join(repo, rel), 'utf8');
 });
-walk('src/content'); files['.git/HEAD'] = 'ref: refs/heads/main\n'; files['public/admin/config.yml'] = fs.readFileSync(repo + '/public/admin/config.yml', 'utf8'); files['public/img/uploads/.gitkeep'] = '';
+walk('src/content'); files['.git/HEAD'] = 'ref: refs/heads/main\n'; files['public/admin/config.yml'] = fs.readFileSync(repo + '/public/admin/config.yml', 'utf8'); 
 const b = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const ctx = await b.newContext({ viewport: { width: 1360, height: 900 } });
 const p = await ctx.newPage();

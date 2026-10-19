@@ -294,9 +294,9 @@ dialog.lb button { position: fixed; top: 16px; right: 16px; min-height: 44px; fo
 .faq summary::after { content: '+'; font-family: var(--sans); position: absolute; right: 6px; top: 14px; font-size: 1.6rem; font-weight: 400; color: var(--poppy); }
 .faq details[open] summary::after { content: '\2212'; }
 .faq .a { padding: 0 0 20px; }
-table.plain { border-collapse: collapse; font-family: var(--sans); font-size: 1.0625rem; margin: 8px 0 16px; font-variant-numeric: tabular-nums lining-nums; }
-table.plain th, table.plain td { text-align: left; padding: 10px 28px 10px 0; border-bottom: 1px solid var(--rule); }
-table.plain th { font-weight: 650; border-bottom: 2px solid var(--ink); }
+table.plain, .faq .a table { border-collapse: collapse; font-family: var(--sans); font-size: 1.0625rem; margin: 8px 0 16px; font-variant-numeric: tabular-nums lining-nums; }
+table.plain th, table.plain td, .faq .a th, .faq .a td { text-align: left; padding: 10px 28px 10px 0; border-bottom: 1px solid var(--rule); }
+table.plain th, .faq .a th { font-weight: 650; border-bottom: 2px solid var(--ink); }
 .books { list-style: none; padding: 0; margin: 0; columns: 2 380px; column-gap: 48px; }
 .books li { break-inside: avoid; padding: 12px 0; border-bottom: 1px solid var(--rule); line-height: 1.4; }
 .books cite { font-style: italic; }

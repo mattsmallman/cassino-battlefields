@@ -1,5 +1,6 @@
 // Reads the CMS-edited content collections and returns the shapes the pages use.
 import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 import { keyFor } from './images';
 import type { Tour } from './tours';
 
@@ -60,3 +61,25 @@ export async function getStands(slug: string) {
 
 // Featured quotes are chosen by name; if one is deleted in the CMS, fall back gracefully.
 export const picker = <T extends { name: string }>(list: T[]) => (name: string) => list.find((t) => t.name === name);
+
+// ---- Site settings, About and FAQs
+export async function getSettings() {
+  const s = (await getCollection('settings'))[0].data;
+  const tel = (n: string) => '+' + n.replace(/\(0\)/, '').replace(/[^\d]/g, '').replace(/^0/, '44');
+  return {
+    ...s,
+    phones: s.phones.map((p) => ({ ...p, href: 'tel:' + tel(p.number), short: p.number.replace(/^\+44 \(0\)/, '0') })),
+    addressLines: s.address.split('\n').map((l) => l.trim()).filter(Boolean),
+  };
+}
+// Markdown written in the CMS (links, lists, tables, emphasis). Content is trusted (site owner only).
+export const md = (s: string) => marked.parse(s, { async: false }) as string;
+export const mdInline = (s: string) => marked.parseInline(s, { async: false }) as string;
+export async function getAbout() {
+  const d = (await getCollection('about'))[0].data;
+  return { ...d, lead: { id: keyFor(d.lead_image), cap: d.lead_caption } };
+}
+export async function getFaqs() {
+  const d = (await getCollection('faqs'))[0].data;
+  return { ...d, img: d.image ? { id: keyFor(d.image), cap: d.image_caption } : undefined };
+}
