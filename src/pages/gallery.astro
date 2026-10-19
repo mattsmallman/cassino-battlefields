@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Gallery from '../components/Gallery.astro';
+import G from '../data/galleries.json';
+const sets = [
+  ['cassino', 'Cassino'], ['anzio', 'Anzio & the Garigliano'], ['salerno', 'Salerno'], ['gothic-line', 'The Gothic Line'],
+] as const;
+---
+<Base title="Gallery" description="Wartime photographs, maps and present-day views of the battlefields at Cassino, Anzio, Salerno and the Gothic Line.">
+  <section class="band"><div class="wrap">
+    <h1>Gallery</h1>
+    <p class="lede">Wartime photographs and maps alongside the same ground today, many of them contributed by people who have toured with Frank.</p>
+    <nav class="chips" aria-label="Gallery sections">{sets.map(([k, n]) => <a href={`#${k}`}>{n}</a>)}</nav>
+  </div></section>
+  {sets.map(([k, n], i) => (
+    <section class={`band${i % 2 ? '' : ' alt'}`} id={k}><div class="wrap">
+      <div class="section-head"><h2>{n}</h2><span class="muted">{(G as any)[k].length} photographs</span></div>
+      <Gallery items={(G as any)[k]} />
+    </div></section>
+  ))}
+</Base>

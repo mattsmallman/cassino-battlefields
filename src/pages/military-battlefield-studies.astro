@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Quote from '../components/Quote.astro';
+import Enquiry from '../components/Enquiry.astro';
+import T from '../data/testimonials.json';
+import G from '../data/galleries.json';
+const mil = T.filter((t) => t.military);
+const pick = (n: string) => T.find((t) => t.name === n)!;
+const feature = [pick('Lt Cmdr Matt Feeney RN'), pick('Maj Andy Bishop'), pick('Maj Chin Thapa MVO RGR')];
+const units = [...new Set(mil.map((t) => t.from).filter(Boolean))];
+const photo = G.about.find((g) => g.id.startsWith('photo-16-06-2023')) ?? G.about[0];
+---
+<Base title="Military battlefield studies" description="Battlefield studies and staff rides in Italy for military units, led by former infantry officer Frank de Planta and tailored to your training objectives." image={photo.id}>
+  <section class="band"><div class="wrap split">
+    <div>
+      <h1>Military battlefield studies</h1>
+      <p class="lede">Studies at Cassino, Anzio, Salerno and the Gothic Line, built around your training objectives and pitched to every rank in the group.</p>
+      <p>Frank is a former Royal Anglian Regiment officer. He reads the ground as an infantryman and links the tactical action back to the operational and strategic picture. Where it helps, he draws out parallels with contemporary doctrine.</p>
+      <p>He has run single-day and multi-day studies for all-rank audiences and for multinational senior staff, at OR-4 to OF-8.</p>
+    </div>
+    <figure><Img id={photo.id} alt={photo.cap} sizes="(max-width: 860px) 100vw, 55vw" eager /><figcaption>{photo.cap}</figcaption></figure>
+  </div></section>
+
+  <section class="band alt"><div class="wrap split">
+    <div><h2>How a unit study works</h2></div>
+    <div>
+      <ul class="stands" style="margin-top:6px">
+        <li><b>Objectives first.</b> Tell Frank what the study is for, such as combined arms, river crossings, command at brigade level, or regimental heritage. He will propose the campaign and stands that fit best.</li>
+        <li><b>Your dates and length.</b> One day to a full week, for small command teams or for groups of up to 50.</li>
+        <li><b>Preparation.</b> Briefing packs for the group, with a reading list for those who want to go further. Syndicate tasks can be set on request.</li>
+        <li><b>On the ground.</b> Frank leads every stand himself, and transport stays with the group throughout.</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="band dark"><div class="wrap">
+    <div class="section-head"><h2>From the units</h2><a href="/testimonials/" style="color:#fff">All {mil.length} unit testimonials</a></div>
+    <div class="quotes3">{feature.map((q) => <Quote t={q} max={480} />)}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div>
+      <h2>Units Frank has guided</h2>
+      <ul class="books" style="columns:1">{units.slice(0, 18).map((u) => <li>{u}</li>)}</ul>
+    </div>
+    <div><h2>Plan a study</h2><Enquiry kind="military" /></div>
+  </div></section>
+</Base>

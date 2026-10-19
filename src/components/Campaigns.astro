@@ -1,0 +1,18 @@
+---
+import Img from './Img.astro';
+import { tours } from '../lib/tours';
+---
+<div class="campaigns">
+  {tours.map((t) => (
+    <a class="campaign" href={`/${t.slug}/`}>
+      {t.hero ? (
+        <div class="ph"><Img id={t.hero} alt={t.heroCap || t.name} sizes="(max-width: 600px) 100vw, 33vw" /><span class="coord">{t.coords}</span></div>
+      ) : (
+        <div class="ph blank"><span>{t.name.replace(/^The /, '')}</span><span class="coord">{t.coords}</span></div>
+      )}
+      <div class="period">{t.period} · {t.days} days</div>
+      <h3>{t.name}</h3>
+      <p>{t.short}</p>
+    </a>
+  ))}
+</div>

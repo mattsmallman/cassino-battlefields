@@ -1,0 +1,64 @@
+---
+import { tours } from '../lib/tours';
+interface Props { kind?: 'tour' | 'military' | 'relative' }
+const { kind = 'tour' } = Astro.props;
+const opts = [...tours.map((t) => t.next?.label && t.next.start ? `${t.next.label} (${t.next.dates})` : t.name), 'Private group', 'Not sure yet'];
+---
+<form class="enquiry" data-kind={kind} novalidate>
+  <div class="row2">
+    <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+  </div>
+  <div class="row2">
+    <div class="field"><label for="tel">Phone (optional)</label><input id="tel" name="tel" type="tel" autocomplete="tel" /></div>
+    {kind === 'military'
+      ? <div class="field"><label for="unit">Unit</label><input id="unit" name="unit" type="text" /></div>
+      : <div class="field"><label for="tour">Tour</label><select id="tour" name="tour">{opts.map((o) => <option>{o}</option>)}</select></div>}
+  </div>
+  {kind === 'tour' && (
+    <div class="row2">
+      <div class="field"><label for="people">Number of people</label><input id="people" name="people" type="number" min="1" value="1" /></div>
+      <div class="field"><label for="room">Room</label><select id="room" name="room"><option>Twin or double, sharing</option><option>Single</option><option>Not sure yet</option></select></div>
+    </div>
+  )}
+  {kind === 'military' && (
+    <div class="row2">
+      <div class="field"><label for="size">Approximate group size</label><input id="size" name="size" type="number" min="1" /></div>
+      <div class="field"><label for="when">Preferred dates</label><input id="when" name="when" type="text" placeholder="e.g. May 2027" /></div>
+    </div>
+  )}
+  {kind === 'relative' && (
+    <>
+      <div class="row2">
+        <div class="field"><label for="rname">Relative’s name and rank</label><input id="rname" name="rname" type="text" /></div>
+        <div class="field"><label for="runit">Unit, if known</label><input id="runit" name="runit" type="text" placeholder="e.g. 2nd Bn Royal Fusiliers" /></div>
+      </div>
+      <div class="field"><label for="rnum">Service number, dates or where buried, if known</label><input id="rnum" name="rnum" type="text" /></div>
+    </>
+  )}
+  <div class="field"><label for="msg">{kind === 'military' ? 'Training objectives and anything else Frank should know' : kind === 'relative' ? 'What you know so far' : 'Anything else'}</label><textarea id="msg" name="msg" rows="5"></textarea></div>
+  <button class="btn" type="submit">Send to Frank</button>
+  <p class="muted form-status" role="status" style="font-size:0.95rem;margin-top:12px">This opens your email app with the details filled in, ready to send to enquiries@cassinobattlefields.co.uk.</p>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.enquiry').forEach((f) => {
+    const sel = f.querySelector<HTMLSelectElement>('#tour');
+    const want = new URLSearchParams(location.search).get('tour');
+    if (sel && want) { const o = [...sel.options].find((x) => x.text.startsWith(want)); if (o) sel.value = o.text; }
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = f.querySelector<HTMLInputElement>('#name')!; const email = f.querySelector<HTMLInputElement>('#email')!;
+      const st = f.querySelector('.form-status')!;
+      if (!name.value.trim() || !email.validity.valid || !email.value) { st.textContent = 'Add your name and a valid email address so Frank can reply.'; (name.value.trim() ? email : name).focus(); return; }
+      const lines: string[] = [];
+      f.querySelectorAll<HTMLInputElement>('input, select, textarea').forEach((el) => {
+        const lab = f.querySelector(`label[for="${el.id}"]`)?.textContent || el.name;
+        if (el.value) lines.push(`${lab}: ${el.value}`);
+      });
+      const kind = f.dataset.kind;
+      const subj = kind === 'military' ? 'Military battlefield study enquiry' : kind === 'relative' ? 'Tracing a relative' : `Tour enquiry: ${sel?.value ?? ''}`;
+      location.href = `mailto:enquiries@cassinobattlefields.co.uk?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join('\n'))}`;
+      st.textContent = 'Your email app should now be open. If it isn’t, email enquiries@cassinobattlefields.co.uk directly.';
+    });
+  });
+</script>

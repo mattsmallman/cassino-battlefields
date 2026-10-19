@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Departures from '../components/Departures.astro';
+import Campaigns from '../components/Campaigns.astro';
+import Quote from '../components/Quote.astro';
+import Gallery from '../components/Gallery.astro';
+import T from '../data/testimonials.json';
+import G from '../data/galleries.json';
+const pick = (n: string) => T.find((t) => t.name === n)!;
+const quotes = [pick('Bill Vodra'), pick('Lt Col Guy Stone WG'), pick('Steve Deput')];
+import meta from '../data/imagemeta.json';
+const bookImg = (k: string) => Object.keys(meta).find((x) => x.startsWith(k))!;
+const pubs = [
+  { img: bookImg('book-salerno'), t: 'From the Salerno Landings to San Pietro Infine', isbn: '978-1-53618-572-0' },
+  { img: bookImg('book-cassino'), t: 'Breaking the Gustav and Hitler Lines', isbn: '978-1-53619-076-2' },
+  { img: bookImg('book-anzio'), t: 'From the Anzio Landings to Rome', isbn: '978-1-53619-077-9' },
+];
+const strip = G.home.filter((g) => !g.id.startsWith('book-') && !g.id.startsWith('mcs-logo'));
+---
+<Base title="Cassino Battlefields" description="Small-group battlefield studies of the Italian Campaign 1943–45 at Cassino, Anzio, Salerno, the Sangro and the Gothic Line, led by former infantry officer and author Frank de Planta." image="the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b">
+  <section class="hero mapframe">
+    <Img id="the-abbey-of-monte-cassino-and-the-battlefields-from-the-low-56de7b" alt="The Abbey of Monte Cassino above the Liri valley" sizes="100vw" eager />
+    <span class="coord tl">Monte Cassino · 41°29′N 13°48′E</span>
+    <div class="wrap">
+      <h1>Stand on the ground and understand the battle.</h1>
+      <p>Battlefield studies of the Italian Campaign at Cassino, Anzio, Salerno, the Sangro and the Gothic Line. Led in person by Frank de Planta, former Royal Anglian officer and author of <em>A Walking Tour of Italy’s WWII Battlefields</em>.</p>
+      <div class="actions"><a class="btn" href="#departures">See 2027 dates</a><a class="btn ghost" href="/contact/">Ask Frank a question</a></div>
+    </div>
+  </section>
+
+  <section class="band" id="departures">
+    <div class="wrap">
+      <div class="section-head"><h2>Next departures</h2><a href="/tours/">All tours and itineraries</a></div>
+      <Departures />
+      <p class="muted" style="margin-top:16px;font-size:1rem">Prices exclude flights. Single rooms are available on every tour. A £80 deposit holds your place.</p>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap split">
+      <div>
+        <h2>Studied the way soldiers study a battle</h2>
+      </div>
+      <div>
+        <p class="lede">Each day is built around a series of stands: places with a clear view of the ground where Frank explains what each side planned, what happened, and why.</p>
+        <p>The detail goes down to battalion, brigade, division and corps level, so you see how a decision at corps headquarters played out for the men on Snakeshead Ridge or in the Anzio wadis. Groups are kept small, the pace is unhurried, and the minibus stays with you all day.</p>
+        <p>Many guests come because a father or grandfather served in Italy. Tell Frank the unit and he will build the relevant actions, cemeteries and memorials into your tour. <a href="/tracing-a-relative/">Tracing a relative</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head"><h2>The campaigns</h2></div>
+      <Campaigns />
+    </div>
+  </section>
+
+  <section class="band dark">
+    <div class="wrap">
+      <div class="section-head"><h2>What guests say</h2><a href="/testimonials/" style="color:#fff">Read all {T.length} testimonials</a></div>
+      <div class="quotes3">{quotes.map((q) => <Quote t={q} max={330} />)}</div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split">
+      <div>
+        <h2>For units and military groups</h2>
+        <p>Frank has led battlefield studies for Army Headquarters, NATO’s Joint Force Command Naples, the Royal Gurkha Rifles, the Royal Artillery and many more. Each is built around the training objectives you set.</p>
+        <a class="btn ghost" href="/military-battlefield-studies/">Military battlefield studies</a>
+      </div>
+      <div>
+        <Quote t={pick('Maj Fletch Fletcher')} max={420} />
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <div class="section-head"><h2>The guidebooks</h2></div>
+      <p class="lede" style="margin-bottom:32px">Frank’s three-volume <em>A Walking Tour of Italy’s WWII Battlefields</em> (Nova Science Publishers) takes you from the Salerno landings to the fall of Rome, stand by stand.</p>
+      <div class="books-pub">
+        {pubs.map((b) => (
+          <div><Img id={b.img} alt={`Book cover: ${b.t}`} sizes="(max-width: 700px) 50vw, 25vw" /><h3>{b.t}</h3><p>ISBN {b.isbn}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head"><h2>From the archive and the field</h2><a href="/gallery/">Full gallery</a></div>
+      <Gallery items={strip} strip />
+    </div>
+  </section>
+</Base>

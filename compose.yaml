@@ -1,0 +1,28 @@
+# Cassino Battlefields: static site + dedicated Cloudflare Tunnel.
+# web is reachable only through cloudflared; no published ports, no volumes.
+services:
+  web:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-https://www.cassinobattlefields.co.uk}
+        PUBLIC_NOINDEX: ${PUBLIC_NOINDEX:-0}
+    image: cassino-battlefields:latest
+    pull_policy: build
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/var/cache/nginx, /var/run, /tmp]
+    networks: [internal]
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CF_TUNNEL_TOKEN:?set CF_TUNNEL_TOKEN}
+    networks: [internal]
+    depends_on: [web]
+
+networks:
+  internal:
+    driver: bridge

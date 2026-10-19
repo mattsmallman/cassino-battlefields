@@ -1,0 +1,15 @@
+---
+import Img from './Img.astro';
+import meta from '../data/imagemeta.json';
+interface Props { items: { id: string; cap: string }[]; strip?: boolean }
+const { items, strip = false } = Astro.props;
+const big = (id: string) => { const s = (meta as any)[id].sizes; return `/img/${id}-${s[s.length - 1]}.webp`; };
+---
+<div class={strip ? 'strip' : 'gal'}>
+  {items.map((i) => (
+    <a href={big(i.id)} data-lb data-cap={i.cap}>
+      <Img id={i.id} alt={i.cap} sizes={strip ? '(max-width: 700px) 80vw, 30vw' : '(max-width: 700px) 100vw, 33vw'} />
+      {i.cap && <span>{i.cap}</span>}
+    </a>
+  ))}
+</div>

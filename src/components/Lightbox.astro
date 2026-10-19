@@ -1,0 +1,17 @@
+<dialog class="lb" id="lb" aria-label="Photo">
+  <button type="button" data-close>Close</button>
+  <img alt="" />
+  <p></p>
+</dialog>
+<script>
+  const d = document.getElementById('lb') as HTMLDialogElement;
+  const img = d.querySelector('img')!; const p = d.querySelector('p')!;
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest('a[data-lb]') as HTMLAnchorElement | null;
+    if (!a) return;
+    e.preventDefault();
+    img.src = a.href; img.alt = a.dataset.cap || ''; p.textContent = a.dataset.cap || '';
+    d.showModal();
+  });
+  d.addEventListener('click', (e) => { if (e.target === d || (e.target as HTMLElement).dataset.close !== undefined) d.close(); });
+</script>

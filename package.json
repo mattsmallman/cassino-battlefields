@@ -1,0 +1,12 @@
+{
+  "name": "cassino-battlefields",
+  "type": "module",
+  "private": true,
+  "scripts": { "dev": "astro dev", "build": "astro build", "preview": "astro preview" },
+  "dependencies": {
+    "astro": "^5.14.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/archivo": "^5.2.0",
+    "@fontsource-variable/source-serif-4": "^5.2.0"
+  }
+}

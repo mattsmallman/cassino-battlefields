@@ -1,0 +1,12 @@
+---
+import meta from '../data/imagemeta.json';
+interface Props { id: string; alt: string; sizes?: string; eager?: boolean; class?: string; }
+const { id, alt, sizes = '(max-width: 800px) 100vw, 50vw', eager = false, class: cls } = Astro.props;
+const m = (meta as Record<string, { w: number; h: number; sizes: number[] }>)[id];
+if (!m) throw new Error('Missing image ' + id);
+const srcset = m.sizes.map((s) => `/img/${id}-${s}.webp ${Math.min(s, m.w)}w`).join(', ');
+const def = m.sizes.includes(1280) ? 1280 : m.sizes[m.sizes.length - 1];
+const w = Math.min(def, m.w); const h = Math.round((m.h * w) / m.w);
+---
+<img src={`/img/${id}-${def}.webp`} srcset={srcset} sizes={sizes} width={w} height={h} alt={alt} class={cls}
+  loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />

@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import B from '../data/books.json';
+---
+<Base title="Reading list" description="Frank de Planta’s reading lists for the Italian Campaign: general histories and memoirs, and regimental and corps histories.">
+  <section class="band"><div class="wrap">
+    <h1>Reading list</h1>
+    <p class="lede">The books Frank recommends before you travel: {B.general.length} general histories and memoirs, and {B.regiments.length} regimental and corps histories for anyone following a particular unit.</p>
+    <div class="field" style="max-width:420px"><label for="q">Search by title, author or regiment</label><input id="q" type="search" placeholder="e.g. Gurkha, Majdalany, Anzio" autocomplete="off" /></div>
+    <nav class="chips" aria-label="Lists"><a href="#general">General</a><a href="#regiments">Regiments and corps</a></nav>
+  </div></section>
+  <section class="band alt" id="general" style="padding-top:48px"><div class="wrap">
+    <h2>General histories and memoirs</h2>
+    <ul class="books">{B.general.map((b) => <li><cite>{b.title}</cite><span class="by">{b.author}</span></li>)}</ul>
+  </div></section>
+  <section class="band" id="regiments"><div class="wrap">
+    <h2>Regiments and corps</h2>
+    <ul class="books">{B.regiments.map((b) => <li><cite>{b.title}</cite><span class="by">{b.author}</span></li>)}</ul>
+  </div></section>
+  <script>
+    const q = document.getElementById('q') as HTMLInputElement;
+    q.addEventListener('input', () => { const v = q.value.trim().toLowerCase();
+      document.querySelectorAll<HTMLElement>('.books li').forEach((li) => { li.hidden = !!v && !li.textContent!.toLowerCase().includes(v); }); });
+  </script>
+</Base>

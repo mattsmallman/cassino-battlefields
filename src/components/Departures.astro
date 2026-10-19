@@ -1,0 +1,14 @@
+---
+import { upcoming, gbp } from '../lib/tours';
+const list = upcoming();
+---
+<div class="departures">
+  {list.map((t) => (
+    <a class="dep" href={`/${t.slug}/`}>
+      <span class="when">{t.next!.dates}</span>
+      <span class="what">{t.next!.label}<small>{t.short} · {t.period}</small></span>
+      <span class="len">{t.days} days</span>
+      <span class="cost">{t.price ? <>from {gbp(t.price.twin)}<small>per person, sharing, {t.price.basis}</small></> : 'Price on request'}</span>
+    </a>
+  ))}
+</div>

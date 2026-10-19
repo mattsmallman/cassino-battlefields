@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import Lightbox from '../components/Lightbox.astro';
+interface Props { title: string; description: string; image?: string; }
+const { title, description, image } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  ['/tours/', 'Tours'], ['/about/', 'About Frank'], ['/testimonials/', 'Testimonials'],
+  ['/gallery/', 'Gallery'], ['/reading-list/', 'Reading'], ['/faqs/', 'FAQs'],
+];
+const full = title === 'Cassino Battlefields' ? 'Cassino Battlefields – WWII battlefield studies in Italy' : `${title} – Cassino Battlefields`;
+const canonical = new URL(path, Astro.site).href;
+const ogImg = image ? new URL(`/img/${image}-1280.webp`, Astro.site).href : undefined;
+const noindex = import.meta.env.PUBLIC_NOINDEX === '1';
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={full} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  {ogImg && <meta property="og:image" content={ogImg} />}
+  <meta name="theme-color" content="#1d2420" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <slot name="head" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="/"><b>Cassino Battlefields</b><span>Explaining the past today</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Main">
+        {nav.map(([href, label]) => (
+          <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>
+        ))}
+        <a class="btn" href="/contact/">Enquire</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <h4>Cassino Battlefields</h4>
+          <p>Battlefield studies of the Italian Campaign, 1943–45, led by Frank de Planta.</p>
+          <p>West Winds, The Gowans, Sutton on the Forest, York YO61 1DL</p>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:enquiries@cassinobattlefields.co.uk">enquiries@cassinobattlefields.co.uk</a></li>
+            <li><a href="tel:+441347811104">01347 811104</a></li>
+            <li><a href="tel:+447768278464">07768 278464</a></li>
+            <li><a href="https://www.facebook.com/frank.deplanta" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tours</h4>
+          <ul>
+            <li><a href="/cassino/">Cassino</a></li>
+            <li><a href="/anzio-and-the-garigliano/">Anzio & the Garigliano</a></li>
+            <li><a href="/gothic-line/">The Gothic Line</a></li>
+            <li><a href="/sangro/">The Sangro</a></li>
+            <li><a href="/salerno/">Salerno</a></li>
+            <li><a href="/rome-to-bologna/">Rome to Bologna</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">© Cassino Battlefields Limited {new Date().getFullYear()}. Registered in England No 8056935. Payments are held in a trust account until after your tour.</div>
+    </div>
+  </footer>
+  <Lightbox />
+  <script>
+    const b = document.querySelector('.menu-toggle')!; const n = document.getElementById('nav')!;
+    b.addEventListener('click', () => { const o = n.classList.toggle('open'); b.setAttribute('aria-expanded', String(o)); });
+  </script>
+</body>
+</html>
